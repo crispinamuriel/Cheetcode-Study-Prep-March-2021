@@ -4,15 +4,15 @@
 ```JavaScript 
 
 function twoSum(nums, target) {
-    const memo = {}
+    const hash = {}
     for (let i = 0; i < nums.length; i++) {
-        memo[nums[i]] = i
+        hash[nums[i]] = i
     }
 
     for (let i = 0; i < nums.length; i++) {
         const diff = target - nums[i]
-        if (memo[diff] && memo[diff] !== i) {
-            return [i, memo[diff]]
+        if (hash[diff] && hash[diff] !== i) {
+            return [i, hash[diff]]
         }
     }
 }
