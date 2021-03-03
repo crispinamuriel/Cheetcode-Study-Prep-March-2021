@@ -113,7 +113,7 @@ const backspaceCompare = function (S, T) {
 ## Question #5 Longest Substring Without Repeating Characters (Medium)
 
 ```javascript
-var lengthOfLongestSubstring = function (s) {
+const lengthOfLongestSubstring = function (s) {
   if (s.length <= 1) return s.length;
 
   let longest = 0;
