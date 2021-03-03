@@ -1,3 +1,7 @@
+ **to keep this repo updated before pull request complete the following:**
+
+ ```git pull --rebase upstream main```
+
 # Question #1 Google Interview Question Two Sum (Easy)
 
 ## JavaScript
