@@ -1,21 +1,27 @@
 ## Question #1 Google Interview Question Two Sum (Easy)
+# Time: O(n) --- Space: O(n)
 
-```JavaScript
+```JavaScript 
 
 function twoSum(nums, target) {
-    if (nums.length < 2) return nums
-    let storage = []
+    const hash = {}
     for (let i = 0; i < nums.length; i++) {
-        let diff = target - nums[i]
-        if (nums.includes(diff) === true) {
-            storage = [i, nums.indexOf(diff)]
+        hash[nums[i]] = i
+    }
+
+    for (let i = 0; i < nums.length; i++) {
+        const diff = target - nums[i]
+        if (hash[diff] && hash[diff] !== i) {
+            return [i, hash[diff]]
         }
-    } return storage
+    }
 }
+
 
 ```
 
 ## Question #2 Container With Most Water (Medium)
+# Time: O(n) --- Space: O(1)
 
 ```JavaScript
 
@@ -42,32 +48,35 @@ function maxArea(heights) {
 ```
 
 ## Question # 3 Trapping Rain Water (Hard)
+# Time: O(n) --- Space: O(1)
 
 ```JavaScript
 
 function trap(heights) {
-    let maxArea = 0
-    let maxHeight = 0
-    let current = i - 1
-    let next = i + 1
+    const maxLeft = 0
+    const maxRight = 0
 
-    while (heights[current] === null && heights[next] === null) {
-        const currentHeight = Math.max(heights[current], heights[next])
-        const maxHeight = Math.max(currentHeight, maxHeight)
-        if (heights[current] - heights[next] > 0) {
-            const diff = maxHeight - heights[next]
-            maxArea += diff
-            current++, next++
-        } 
-        else {
-            current++, next++
-        }  
-    } return maxArea 
+    if (heights.length < 3) return 0
+
+    for (let i = i; i < height.length; i++) {
+        if (maxLeft[i] < maxLeft[i - 1]) {
+            maxLeft[i] = maxLeft[i - 1]
+        }
+    }
+
+    for (let i = height.length - 2; i >= 0; i--) {
+        if (maxRight[i] < maxRight[i - 1]) {
+            maxRight[i] maxright[i - 1]
+        }
+    }
+
+    return heights.reduce((total, cur, idx) => total + Math.min(maxLeft[idx], maxRight[idx]) - cur, 0) 
 }
 
 ```
 
 ## Question #4 Backspace String Compare (Easy)
+# Time: O(n^2) --- Space: O(n)
 
 ```JavaScript
 
@@ -97,6 +106,7 @@ function backSpaceCompare(S, T) {
 ```
 
 ## Question #5 Longest Substring Without Repeating Characters (Medium)
+# Time: O(n) --- Space: O(n)
 
 ```JavaScript
 
@@ -108,22 +118,23 @@ function substringCheck(s) {
     for (let i = 0; i < s.length; i++) {
         const letter = s[i]
         if (letter in memo) {
-            start = Math.max(start, seen[letter] + 1)
+            start = Math.max(start, memo[letter] + 1)
         }
         if (longest[1] - longest[0] < i + 1 - start) {
             longest = [start, i + 1]
         }
-        seen[letter] = i
+        memo[letter] = i
     } return s.slice(longest[0], longest[1])
 }
 
 ```
 
 ## Question #6a Valid Palindrome (Easy) 
+# Time: O(n) --- Space: O(1)
 
 ```JavaScript
 
-function palindromeCheck(s) {
+function validPalindrome(s) {
     leftIndex = 0
 	rightIndex = string.length - 1
 	
@@ -141,10 +152,11 @@ function palindromeCheck(s) {
 ```
 
 ## Question #6b Almost Palindrome (Easy) 
+# Time: O(n) --- Space: O(1)
 
-```JavaScript
+```JavaScript 
 
-function validPalindrome(s) {
+function almostPalindrome(s) {
      let start = 0;
   let end = s.length - 1;
   while (start < end) {
@@ -169,3 +181,11 @@ const validSubPalindrome = function(s, start, end) {
 }
 
 ```
+
+
+
+
+
+
+
+
