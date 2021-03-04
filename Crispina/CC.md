@@ -1,3 +1,6 @@
+**Personal notes please ignore**
+
+
 # Clean Code Readme
 
 ## Two Sum

@@ -1,4 +1,9 @@
 
+**Personal notes please ignore**
+
+
+
+
 # Udemy Z2M Course Questions
 ## Twosum
 
