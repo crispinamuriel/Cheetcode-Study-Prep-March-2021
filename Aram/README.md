@@ -210,25 +210,7 @@ const reverseString = (str) => {
 # Time: O(n) --- Space: O(1)
 ```JavaScript
 function convertToInt(str) {
-    const intMax = 2147483647
-    const intMin = –2147483648
-    let sign = 1
-    let i = 0
-    let result = 0
-
-    while (str[i] === ' ') i++
-
-    if (str[i] === '-' || str[i] === '+') {
-        sign = str[i] === '-' ? -1 : 1
-        i++
-    }
-
-    while (str[i] >= '0' && str[i] <= '9') {
-        result = (result * 10) + (str[i] - 0)
-        if (sign === -1 && result < intMin) return intMin
-        if (sign === 1 && result > intMax) return intMax
-    }
-    return result * sign
+    
 }
 ```
 
