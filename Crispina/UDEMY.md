@@ -47,7 +47,9 @@ function twoSum = (arr, target) => {
   let p1 = arr[0];
   let p2 =  arr[1];
 
-  for(let i = 0; )
+// point p1 at first el
+// point p2 at second el
+// if
 
 }
 
