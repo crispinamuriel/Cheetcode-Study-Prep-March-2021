@@ -83,7 +83,40 @@ class Solution(object):
 
 ## Question #4 Backspace String Compare (Easy) 
 ```python
-    print("Todo")
+def backspace_compare(str1, str2):
+  # use two pointer approach to compare the strings
+  index1 = len(str1) - 1
+  index2 = len(str2) - 1
+  while (index1 >= 0 or index2 >= 0):
+    i1 = get_next_valid_char_index(str1, index1)
+    i2 = get_next_valid_char_index(str2, index2)
+    if i1 < 0 and i2 < 0:  # reached the end of both the strings
+      return True
+    if i1 < 0 or i2 < 0:  # reached the end of one of the strings
+      return False
+    if str1[i1] != str2[i2]:  # check if the characters are equal
+      return False
+
+    index1 = i1 - 1
+    index2 = i2 - 1
+
+  return True
+
+
+def get_next_valid_char_index(str, index):
+  backspace_count = 0
+  while (index >= 0):
+    if str[index] == '#':  # found a backspace character
+      backspace_count += 1
+    elif backspace_count > 0:  # a non-backspace character
+      backspace_count -= 1
+    else:
+      break
+
+    index -= 1  # skip a backspace or a valid character
+
+  return index
+
 ```
 
 ## Question #5 Longest Substring Without Repeating Characters (Medium) 
@@ -133,3 +166,14 @@ def is_palindrome(s: str) -> bool:
 
     return True
 ```
+
+
+
+# Question #7 M, N Reversals (Medium)
+# Question #8 Merge Multi-Level Doubly Linked List (Medium)
+# Question #9 Cycle Detection (Medium)
+# Question #10 Valid Parentheses (Easy)
+# Question #11 Minimum Brackets To Remove To Make Valid (Medium)
+# Question #12 Implement Queue With Stacks (Easy)
+# Question #13 Kth Largest Element (Medium)
+# Question #14 Start And End Of Target (Medium)

@@ -1,6 +1,11 @@
 ## Question #1 Google Interview Question Two Sum (Easy)
 # Time: O(n) --- Space: O(n)
-```JavaScript
+
+
+
+```JavaScript 
+
+
 function twoSum(nums, target) {
     const hash = {}
     for (let i = 0; i < nums.length; i++) {
@@ -14,10 +19,12 @@ function twoSum(nums, target) {
         }
     }
 }
+
 ```
 
 ## Question #2 Container With Most Water (Medium)
 # Time: O(n) --- Space: O(1)
+
 ```JavaScript
 function maxArea(heights) {
     let maxOne = 0
@@ -40,12 +47,30 @@ function maxArea(heights) {
 
 ## Question # 3 Trapping Rain Water (Hard)
 # Time: O(n) --- Space: O(1)
+
 ```JavaScript
 function trap(heights) {
     const maxLeft = 0
     const maxRight = 0
 
     if (heights.length < 3) return 0
+
+
+    for (let i = i; i < height.length; i++) {
+        if (maxLeft[i] < maxLeft[i - 1]) {
+            maxLeft[i] = maxLeft[i - 1]
+        }
+    }
+
+    for (let i = height.length - 2; i >= 0; i--) {
+        if (maxRight[i] < maxRight[i - 1]) {
+            maxRight[i] maxright[i - 1]
+        }
+    }
+
+    return heights.reduce((total, cur, idx) => total + Math.min(maxLeft[idx], maxRight[idx]) - cur, 0) 
+}
+
 
     for (let i = i; i < height.length; i++) {
         if (maxLeft[i] < maxLeft[i - 1]) {
@@ -64,7 +89,9 @@ function trap(heights) {
 ```
 
 ## Question #4 Backspace String Compare (Easy)
+
 # Time: O(n) --- Space: O(n)
+
 ```JavaScript
 function backSpaceCompare(S, T) {
     let s = []
@@ -91,6 +118,7 @@ function backSpaceCompare(S, T) {
 
 ## Question #5 Longest Substring Without Repeating Characters (Medium)
 # Time: O(n) --- Space: O(n)
+
 ```JavaScript
 function substringCheck(s) {
     const memo = {}
@@ -109,9 +137,17 @@ function substringCheck(s) {
 }
 ```
 
+
 ## Question #6a Valid Palindrome (Easy)
 # Time: O(n) --- Space: O(1)
 ```JavaScript
+
+## Question #6a Valid Palindrome (Easy) 
+# Time: O(n) --- Space: O(1)
+
+```JavaScript
+
+
 function validPalindrome(s) {
     leftIndex = 0
 	rightIndex = string.length - 1
@@ -126,6 +162,7 @@ function validPalindrome(s) {
 }
 ```
 
+
 ## Question #6b Almost Palindrome (Easy)
 # Time: O(n) --- Space: O(1)
 ```JavaScript
@@ -133,6 +170,17 @@ function almostPalindrome(s) {
     let start = 0;
     let end = s.length - 1;
     while (start < end) {
+
+## Question #6b Almost Palindrome (Easy) 
+# Time: O(n) --- Space: O(1)
+
+```JavaScript 
+
+function almostPalindrome(s) {
+     let start = 0;
+  let end = s.length - 1;
+  while (start < end) {
+
       if (s[start] !== s[end]) {
           return validSubPalindrome(s, start + 1, end) || validSubPalindrome(s, start, end - 1);
       }
@@ -255,4 +303,6 @@ function validNumber(str) {
   
 }
 
+
 ```
+
