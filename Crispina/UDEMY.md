@@ -48,11 +48,60 @@
 ### STEP 4: Code
 
 ```
-function twoSum = (arr, target) => {
-  let p1 = arr[0];
-  let p2 =  arr[1];
-
+const twoSum = (arr, target) => {
+  for(let i = 0; i < arr.length; i++) {
+    let p1 = arr[i];
+    for(let j = 1; j < arr.length; j++) {
+      let p2 = arr[j];
+      if(p1 + p2 === target) return [i,j]
+    }
+  }
+  return -1;
 }
 
+console.log(twoSum([1,2,3,4,5], 7));
+
 ```
+### STEP 4/5 : Review and Test Cases
+
+arrr = [1,3,7,9,2]
+target = 11
+
+Walk thorugh your code as the IDE would:
+
+Initialize our first loop at 0, second loop at 1
+the inner loop moves through the array checking to see if p1 + p2 adds to target, if it does then return the indices.
+
+
+i => 0
+p1 => 1
+j => 1
+p2 => 3
+
+does 1 + 3 = 11? no keep going
+
+i => 1
+p1 => 3
+j => 2
+p2 => 7
+
+does 3 + 7 = 11? no keep going
+
+i => 2
+p1 => 7
+j => 3
+p2 => 9
+
+does 7 + 9 = 11? no keep going
+
+i => 3
+p1 => 9
+j => 4
+p2 => 2
+
+does 9 + 2 = 11? YES! We can return [i, j] =>  [3, 4]
+
+Our solution here is [3,4]
+
+
 
