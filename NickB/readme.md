@@ -24,7 +24,10 @@ let right =height.length-1;
 let areaMax =0;
 
 while(left < right){
-  areaMax = Math.max(areaMax, Math.min(height[left], height[right]) * (right-left))
+  let width = right-left;
+  let length =  Math.min(height[left], height[right]);
+  let area =  length* width;
+  areaMax = Math.max(areaMax, area);
   if(height[left]<height[right]){
     left++;
   }
@@ -49,7 +52,7 @@ while(left < right){
  * @param {number[]} height
  * @return {number}
  */
-var trap = function (height) {
+var trap = function (heights) {
   let left = 0,
     right = heights.length - 1,
     totalWater = 0,
