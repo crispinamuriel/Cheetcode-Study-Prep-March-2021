@@ -2,7 +2,9 @@
 
  ```git pull --rebase upstream main```
 
-# Question #1 Google Interview Question Two Sum (Easy)
+# Crispina's Solutions
+
+## Question #1 Google Interview Question Two Sum (Easy)
 
 ## JavaScript
 
@@ -29,7 +31,7 @@ var twoSum = function(nums, target) {
 };
 ```
 
-# Question #2 Container With Most Water (Medium)
+## Question #2 Container With Most Water (Medium)
 
 ```
 var maxArea = function(height) {
@@ -67,32 +69,50 @@ console.log(maxArea([4,3,2,1,4] )=== 16)
 console.log(maxArea([1,2,1] )=== 2)
 ```
 
-# Question #3 Trapping Rainwater (Hard)
+## Question #3 Trapping Rainwater (Hard)
 
-```
-var trap = function(height) {
-    let count = 0;
-    //start from the first >0 number, go to the last >0 number
-    for(let i = 0; i < height.length; i++){
-        // look for lower numbers after initial non zero number
-        // if next number is lower, we count
-        const curr = height[i];
-        const next = height[i+1];
-        const diff = curr - next;
+```const elevationArray = [0, 1, 0, 2, 1, 0, 3, 1, 0, 1, 2]
 
-        // count the diff between current value and last
+/*
+1. Identify the pointer with the lesser value
+2. Is this pointer value greater than or equal to max on that side
+  yes -> update max on that side
+  no -> get water for pointer, add to total
+3. move pointer inwards
+4. repeat for other pointer
+ */
 
-        // add diff to count
-        if(diff > 0) count += diff;
+const getTrappedRainwater = function(heights) {
 
+  let left = 0, right = heights.length - 1, totalWater = 0, maxLeft = 0, maxRight = 0;
+
+  while(left < right) {
+    if(heights[left] <= heights[right]) {
+      if(heights[left] >= maxLeft) {
+        maxLeft = heights[left]
+      } else {
+        totalWater += maxLeft - heights[left];
+      }
+      left++;
+    } else {
+      if(heights[right] >= maxRight) {
+          maxRight = heights[right];
+      } else {
+          totalWater += maxRight - heights[right];
+      }
+
+      right--;
     }
-  // return count
-    return count;
+  }
 
-};
+  return totalWater;
+}
+
+
+console.log(getTrappedRainwater(elevationArray));
 ```
 
-# Question #4 Backspace String Compare (Easy)
+## Question #4 Backspace String Compare (Easy)
 ```
 var backspaceCompare = function(S, T) {
 
@@ -111,7 +131,7 @@ var backspaceCompare = function(S, T) {
 };
 ```
 
-# Question #5 Longest Substring Without Repeating Characters (Medium)
+## Question #5 Longest Substring Without Repeating Characters (Medium)
 ```
 var lengthOfLongestSubstring = function(s) {
     // s is a string
@@ -137,7 +157,7 @@ var lengthOfLongestSubstring = function(s) {
     return maxLength;
 };
 ```
-# Question #6a Valid Palindrome(Easy)
+## Question #6a Valid Palindrome(Easy)
 ```
 var isPalindrome = function(s) {
     // determine if string s is a palindrome ignoring cases, and spaces
@@ -160,7 +180,7 @@ var isPalindrome = function(s) {
     return true;
 };
 ```
-# Question #6b Almost Palindrome (Easy)
+## Question #6b Almost Palindrome (Easy)
 
 ```
 // create helper function that tests if given string is palindrome
