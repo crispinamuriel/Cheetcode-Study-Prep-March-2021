@@ -190,9 +190,19 @@ function reverseWords(str) {
 ## Question #8 Reverse Words in a String II (in-place)
 # Time: O(n) --- Space: O(1)
 ```JavaScript
-function reverseWordsII(str) {
+const reverseString = (str) => {
+    let strArr = str.split(' ')
+    let start = 0
+    let end = str.length - 1
 
-
+    while (start <= end) {
+        const temp = strArr[start]
+        strArr[start] = strArr[end]
+        strArr[end] = temp
+        start++
+        end--
+    }
+    return strArr.join(' ')
 }
 ```
 
@@ -220,3 +230,14 @@ function convertToInt(str) {
     }
     return result * sign
 }
+```
+
+## Question #10 Valid Number (Hard)
+# Time: --- Space: 
+```JavaScript
+
+function validNumber(str) {
+  
+}
+
+```
