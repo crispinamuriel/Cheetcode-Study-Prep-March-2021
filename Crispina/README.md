@@ -213,17 +213,35 @@ var lengthOfLongestSubstring = function(s) {
 };
 ```
 ## Question #6a Valid Palindrome(Easy)
+### This contains regex must keep note of it
 ```
 var isPalindrome = function(s) {
     // determine if string s is a palindrome ignoring cases, and spaces
+    //clean the string
+    s = s.split(/[^a-z0-9$]/gi).join("").toLowerCase();
+    //two pointer solution
+    let left = 0;
+    let right = s.length - 1;
+    while (left < right) {
+        if(s[left] === s[right]) {
+            left++;
+            right--;
+        } else {
+            return false;
+        }
+    }
+    return true;
+};
 
+// my first try
+var isPalindrome = function(s) {
+    // determine if string s is a palindrome ignoring cases, and spaces
     //clean the string
     s = s.split(' ').join('').split(',').join('').split(':').join('').toLowerCase();
     console.log(s);
     //two pointer solution
     let left = 0;
     let right = s.length - 1;
-
     while (left !== right) {
         if(s[left] === s[right]) {
             left++;
