@@ -331,4 +331,49 @@ var reverseBetween = function(head, left, right) {
     reversThem(head);
     return head;
 };
+
+
+
+// --------- Our solution -----------
+// MY EXPLAINATION:
+// we are taking apart the list and pointing the pointers backwards
+// Original LinkedList: 1=> 2=> 3=> 4=> 5=> null
+// Because we know null goes to the tail, and we want 1 to be the tail, we set 1.next to null
+
+// Returned LL: 5=> 4=> 3=> 2=> 1=> null
+
+
+// this is done by reassigning .next of each node
+// and traversing through the array  using a while loop, and reassigning the node we pass as a stoping condition to the while loop. The while loop  will stop once current is equal to null.
+
+// here are the steps
+
+// save the new next as prev
+// keep a pointer to the LL head
+// while we have a current,  it means we're still in the list
+// keep track of the next node
+// point our next to the newPrev
+// reassign prev to point at where we're at now (We're going backards so we want to remember current as a prev to assign the next node's next to this node)
+// FINALLY make current the next node in the OLD linked List
+// After the first iteration of the while loop our head and prev looks llike this
+// head : [1,2,3,4,5,null]
+// prev: [2,1,null]
+
+// WE ARE BUILDING a new linked list by traversing through the one we are passed
+
+
+var reverseList = function(head) {
+  let prev = null; // we need this to hold the node before us
+  let current = head; // hold the node we're on
+
+  while(current) {  // while we're in the list
+    let nextTemp = current.next; // create a temp var that holds next node
+    current.next = prev; // make the next node of the head null (this is now the tail)
+    prev = current;  // reassign prev to be the current node
+    current = nextTemp; //
+  }
+
+  return prev;
+};
 ```
+
