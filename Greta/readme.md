@@ -1,7 +1,7 @@
 ## Question #1 Google Interview Question Two Sum (Easy)
 
 ```javascript
-var twoSum = function (nums, target) {
+const twoSum = function (nums, target) {
   let hashTable = {};
 
   for (let [index, num] of nums.entries()) {
@@ -14,7 +14,7 @@ var twoSum = function (nums, target) {
 ## Question #2 Container With Most Water (Medium)
 
 ```javascript
-var maxArea = function (height) {
+const maxArea = function (height) {
   let maxArea = 0;
   let left = 0;
   let right = height.length - 1;
@@ -38,7 +38,7 @@ var maxArea = function (height) {
 ## Question #3 Trapping Rainwater (Hard)
 
 ```javascript
-var trap = function (height) {
+const trap = function (height) {
   let totalWater = 0;
   let left = 0;
   let right = height.length - 1;
@@ -63,5 +63,124 @@ var trap = function (height) {
     }
   }
   return totalWater;
+};
+```
+
+## Question #4 Backspace String Compare (Easy)
+
+```javascript
+const backspaceCompare = function (S, T) {
+  let sRight = S.length - 1;
+  let tRight = T.length - 1;
+
+  while (sRight >= 0 || tRight >= 0) {
+    if (S[sRight] === '#' || T[tRight] === '#') {
+      if (S[sRight] === '#') {
+        let backCount = 2;
+        while (backCount > 0) {
+          sRight--;
+          backCount--;
+          if (S[sRight] === '#') {
+            backCount += 2;
+          }
+        }
+      }
+
+      if (T[tRight] === '#') {
+        let backCount = 2;
+        while (backCount > 0) {
+          tRight--;
+          backCount--;
+          if (T[tRight] === '#') {
+            backCount += 2;
+          }
+        }
+      }
+    } else {
+      if (S[sRight] !== T[tRight]) {
+        return false;
+      } else {
+        sRight--;
+        tRight--;
+      }
+    }
+  }
+
+  return true;
+};
+```
+
+## Question #5 Longest Substring Without Repeating Characters (Medium)
+
+```javascript
+const lengthOfLongestSubstring = function (s) {
+  if (s.length <= 1) return s.length;
+
+  let longest = 0;
+  let left = 0;
+  let seen = {};
+
+  for (let right = 0; right < s.length; right++) {
+    let currChar = s[right];
+    let prevSeen = seen[currChar];
+
+    if (prevSeen >= left) {
+      left = prevSeen + 1;
+    }
+    seen[currChar] = right;
+    longest = Math.max(longest, right - left + 1);
+  }
+  return longest;
+};
+```
+
+## Question #6a Valid Palindrome(Easy)
+
+```javascript
+const isPalindrome = function (s) {
+  s = s.replace(/[^A-Za-z0-9]/g, '').toLowerCase();
+  let right = s.length - 1;
+  let left = 0;
+
+  while (left < right) {
+    if (s[left] !== s[right]) {
+      return false;
+    }
+    left++;
+    right--;
+  }
+  return true;
+};
+```
+
+## Question #6b Almost Palindrome(Easy)
+
+```javascript
+const validPalindrome = function (s) {
+  //s.replace(/[^A-Za-z0-9]/g, '').toLowerCase();
+  let left = 0;
+  let right = s.length - 1;
+
+  while (left < right) {
+    if (s[left] !== s[right]) {
+      return (
+        subPalindrome(s, left + 1, right) || subPalindrome(s, left, right - 1)
+      );
+    }
+    left++;
+    right--;
+  }
+  return true;
+};
+
+const subPalindrome = function (s, left, right) {
+  while (left < right) {
+    if (s[left] !== s[right]) {
+      return false;
+    }
+    left++;
+    right--;
+  }
+  return true;
 };
 ```
