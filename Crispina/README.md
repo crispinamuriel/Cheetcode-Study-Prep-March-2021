@@ -282,3 +282,53 @@ const validPalindrome = function(s) {
   return true;
 }
 ```
+
+
+-------------------------------------------------------
+
+## Homework 2nd set of problems
+
+## Question #7 M, N Reversals (Medium)
+
+```//  1 hour first try didn't look at solution
+var reverseBetween = function(head, left, right) {
+    let temp;
+    let temp2;
+
+    function findNodes (head) {
+        let currentNode = head
+        while (currentNode) {
+            if(currentNode.next.val === left) {
+                temp = currentNode.next;
+                currentNode = currentNode.next;
+            }
+            else if(currentNode.next.val === right) {
+                temp2 = currentNode.next
+                currentNode = currentNode.next;
+            }
+        }
+    }
+
+    findNodes(head);
+
+    function reversThem(head) {
+        let currentNode = head;
+        while(currentNode) {
+            if(currentNode.next.val === left) {
+                currentNode.next = temp2;
+                currentNode = currentNode.next;
+            }
+            if(currentNode.next.val === right) {
+                currentNode.next = temp;
+                currentNode = currentNode.next;
+            }
+            else {
+                currentNode = currentNode.next;
+            }
+        }
+    }
+
+    reversThem(head);
+    return head;
+};
+```
