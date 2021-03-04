@@ -133,3 +133,54 @@ const lengthOfLongestSubstring = function (s) {
   return longest;
 };
 ```
+
+## Question #6a Valid Palindrome(Easy)
+
+```javascript
+const isPalindrome = function (s) {
+  s = s.replace(/[^A-Za-z0-9]/g, '').toLowerCase();
+  let right = s.length - 1;
+  let left = 0;
+
+  while (left < right) {
+    if (s[left] !== s[right]) {
+      return false;
+    }
+    left++;
+    right--;
+  }
+  return true;
+};
+```
+
+## Question #6b Almost Palindrome(Easy)
+
+```javascript
+const validPalindrome = function (s) {
+  //s.replace(/[^A-Za-z0-9]/g, '').toLowerCase();
+  let left = 0;
+  let right = s.length - 1;
+
+  while (left < right) {
+    if (s[left] !== s[right]) {
+      return (
+        subPalindrome(s, left + 1, right) || subPalindrome(s, left, right - 1)
+      );
+    }
+    left++;
+    right--;
+  }
+  return true;
+};
+
+const subPalindrome = function (s, left, right) {
+  while (left < right) {
+    if (s[left] !== s[right]) {
+      return false;
+    }
+    left++;
+    right--;
+  }
+  return true;
+};
+```
