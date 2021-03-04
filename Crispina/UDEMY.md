@@ -105,3 +105,33 @@ Our solution here is [3,4]
 
 
 
+### STEP 6/7: Time / Space Complexity
+
+this solution uses a double for loop which is O(n^2) Time complexity. Space complexity ???
+
+#### Notes
+Constant
+O(1)  Constant time
+
+Polynomial
+
+O(LogN) - Logarrithmic
+O(N) - Linear
+O(NLogN) - Liearithmic
+O(N^2) - Quadratic
+O(N^3) - Cubic
+
+What makes these polynomial is what we can see inside of the brackets. We can see there is a base (N) and an exponent.
+
+Exponential
+O(2^N) - Exponential
+O(!N) - Factorial
+O(N^N) - Exponential
+
+The key here is that the dynamic variable is the exponent and not the base
+### SPACE complexity is O(1)
+
+### STEP 8: Can we optmize this solution? YES!
+
+We can use a hashmap to store, or remember values we've already seen.
+Hashmap Lookup is an O(1) operation.
