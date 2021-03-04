@@ -48,12 +48,16 @@ function twoSum = (arr, target) => {
   let p2 =  arr[1];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // point p1 at first el
 // point p2 at second el
 // if
 =======
   for(let i = 0; )
 >>>>>>> rebase
+=======
+  for(let i = 0; )
+>>>>>>> 26c37c6ff1e041dba31769068bad7cee1990c48b
 
 }
 
