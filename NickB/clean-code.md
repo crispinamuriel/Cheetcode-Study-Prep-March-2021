@@ -150,42 +150,50 @@ var reverseWords = function (s) {
 ## 8 STRING TO INTEGER (ATOI)
 
 ```javascript
-//TODO: need to revisit to many edge cases not passing
 var myAtoi = function (s) {
-  function isNumeric(num) {
-    return !isNaN(num);
-  }
-  let length = s.length;
-  let i = 0;
-  let number = 1;
-  let isNumber = false;
-  //ignore white space
-
-  while (i < length && s[i] === " ") {
-    i++;
-  }
-  //is next char pos or neg
-  if (i < length && (s[i] === "+" || s[i] === "-")) {
-    number *= `${s[i]}1`;
-    i++;
-  }
-  let start = i;
-  while (i < length && isNumeric(s[i])) {
-    isNumber = true;
-    i++;
-  }
-  if (isNumber) {
-    number = number * Number(s.substring(start, i));
-    console.log(number);
-  }
-  if (isNumber) {
-    if (-2147483648 <= number && number < 2147483648) return number;
-    else if (number < 0) {
-      return -2147483648;
-    } else return 2147483648 - 1;
+  const string = s.trim();
+  let sign = "+";
+  let start = 0;
+  if (string[0] === "-" || string[0] === "+") {
+    sign = string[0];
+    start++;
   }
 
-  return 0;
+  if (string.length - start < 1) {
+    return 0;
+  }
+  let zero = "0".charCodeAt(0);
+  let nine = "9".charCodeAt(0);
+
+  if (string.charCodeAt(start) < zero || string.charCodeAt(start) > nine)
+    return 0;
+
+  let result = 0;
+  let curr = start;
+
+  let currNumCharCode = string[curr].charCodeAt(0);
+  const OVERFLOW_MAX = Math.pow(2, 31);
+
+  while (
+    curr < string.length &&
+    currNumCharCode >= zero &&
+    currNumCharCode <= nine
+  ) {
+    result = 10 * result + Number(string[curr++]);
+
+    if (result >= OVERFLOW_MAX) {
+      if (sign === "-") {
+        return Number(-+OVERFLOW_MAX);
+      }
+      return OVERFLOW_MAX - 1;
+    }
+
+    if (curr < string.length) {
+      currNumCharCode = string[curr].charCodeAt(0);
+    }
+  }
+
+  return Number(sign + result);
 };
 ```
 
@@ -244,4 +252,31 @@ var lengthOfLongestSubstring = function (s) {
 
 ```javascript
 
+```
+
+## 20 Merge Two Sorted Lists
+
+```javascript
+var mergeTwoLists = function (l1, l2) {
+  let newList = new ListNode(0);
+  let head = newList;
+  while (l1 != null && l2 != null) {
+    if (l1.val <= l2.val) {
+      newList.next = l1;
+      l1 = l1.next;
+    } else {
+      newList.next = l2;
+      l2 = l2.next;
+    }
+    newList = newList.next;
+  }
+
+  if (l1 != null) {
+    newList.next = l1;
+  }
+  if (l2 != null) {
+    newList.next = l2;
+  }
+  return head.next;
+};
 ```
