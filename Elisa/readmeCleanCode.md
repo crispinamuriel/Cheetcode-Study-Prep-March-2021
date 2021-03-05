@@ -18,6 +18,51 @@ const twoSum = (nums, target) =>  {
 ```
 ## Question #2 Two sum II - Input array is sorted
 ``` Javascript
+Binary Search
+const twoSum = (array, target) => {
+  const binarySearch= (array, key, start)=>  {
+  let left=start;
+  let right=array.length -1;
+
+  while(left<right){
+    let middle= (left+right) /2;
+    if(array[middle]<key){
+      left=middle+1;
+    } else {
+      right=middle
+    }
+  }
+  return (left ===right && array[left]===key) ? left : -1
+}
+
+ for (let i=0; i<array.length; i++){
+   let j = binarySearch(array, target - array[i], i+1);
+   if(j !== -1) {
+     return [i, j];
+   }
+ }
+ throw Error('no two sum solution');
+}
+
+```
+```Javascript
+Two pointers
+const twoSum = (array, target) => {
+let left=0;
+let right= array.length-1;
+
+while(left<right){
+  let sum = array[left] + array[right];
+  if (sum < target){
+    left++;
+  } else if (sum>target){
+    right--;
+  } else{
+    return [left, right]
+  }
+}
+}
+
 ```
 
 ## Question #3 Two sum III - Data structure design
