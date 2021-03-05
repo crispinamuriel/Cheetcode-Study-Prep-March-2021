@@ -1,7 +1,3 @@
-# Chapter 3: Linked Lists
-
-```js
-
 class LinkedList {
   constuctor() {
     this.head = null;
@@ -33,9 +29,9 @@ class LinkedList {
 }
 
 class Node {
-  constructor(val) {
+  constructor(val, next = null) {
     this.val = val;
-    this.next = null;
+    this.next = next;
   }
 }
 
@@ -50,20 +46,10 @@ list2.setHead( new Node(1))
 list2.setTail( new Node(5))
 list2.setTail( new Node(6))
 
-```
+// ------------------------------------------------------------
 
-## 20. Merger Two Sorted Lists
-
-Time: O(1);
-Space: O(1);
-
-```js
-
-// Option: Recursive
-// Option: Iterative -- while loop*
-// Option: No dummy head - iterative
 function mergeLinkedLists(list1, list2) {
-
+  //
   const dummyHead = new Node(-1);
 	let prev = dummyHead
   let node1 = list1.head;
@@ -87,37 +73,45 @@ function mergeLinkedLists(list1, list2) {
 	return newList;
 }
 
+// console.log(mergeLinkedLists(list, list2));
+// mergeLinkedLists(list, list2)
 
-```
+// Happy Number
 
-## GTCI: Fast and Slow Pointers
-## Middle Of A Linked List
+function findHappyNumber(num) {
+  // create fast and slow pointers
+  let fast = findSqSum(findSqSum(num));
+  let slow = findSqSum(num);
 
-```js
-
-const find_middle_of_linked_list = function(head) {
-  let fast = head,
-    slow = head;
-
-  while (fast !== null && fast.next !== null) {
-    fast = fast.next.next
-    slow = slow.next;
+  while (fast !== slow) {
+    fast = findSqSum(findSqSum(fast));
+    slow = findSqSum(slow);
   }
 
-  return slow;
+  return fast === 1
 }
 
-```
+function findSqSum(num) {
+  let sum = 0;
+  while ((num > 0)) {
+    digit = num % 10;
+    sum += (digit * digit);
+    num = Math.floor(num / 10);
+  }
+  return sum;
+}
 
-## 1. Palindrome Linked List
-Given the head of Singly Linked List, write a method to check if the LL is a palindrome or not.
-- Couldn't figure this out without solution.
+// console.log(findHappyNumber(23));
+// console.log(findHappyNumber(12));
 
-## 2. Rearrange a Linked List
-Given the head of a Singly LinkedList, write a method to modify the LinkedList such that the nodes from the second half of the LinkedList are inserted alternately to the nodes from the first half in reverse order.
-- Refered to reverse nodes function from previous problem to solve.
 
-```js
+// Palindrome LinkedList
+
+// Time: O(N) Space: O(1)
+
+// Rearrange a Linked List
+
+// Time O(N) Space: O(1)
 
 const reorder = function(head) {
   // Find the middle node of the list
@@ -155,5 +149,3 @@ function reverseNodes(head) {
   }
   return prev;
 }
-
-```
