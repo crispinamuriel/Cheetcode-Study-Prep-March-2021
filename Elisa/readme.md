@@ -6,7 +6,7 @@ ARRAYS
 // Naive Solution
 
 const twoSum = (nums, target) => {
-  let result = []
+  let result = [];
 	for (let i = 0; i < nums.length; i++) {
 		for (let j = i + 1; j < nums.length; j++) {
 			if (nums[i] + nums[j] === target) {
@@ -23,12 +23,12 @@ const twoSum = (nums, target) =>  {
   let map = {}
 
    for(let i=0; i<nums.length; i++){
-     let thisNum = nums[i]
+     let thisNum = nums[i];
      map[thisNum] = i;
    }
 
    for(let i=0; i<nums.length; i++){
-     let difference = target-nums[i]
+     let difference = target-nums[i];
      if(map.hasOwnProperty(difference) && map[difference] !== i){
        return [i, map[difference]]
      }
@@ -37,14 +37,14 @@ const twoSum = (nums, target) =>  {
 ## Question #2 Container With Most Water (Medium)
 ```Javascript
 const maxArea = (array)=> {
-  let pointer1 = 0
-  let pointer2 = array.length -1
-  let maxArea = 0
+  let pointer1 = 0;
+  let pointer2 = array.length -1;
+  let maxArea = 0;
 
   while (pointer1 < pointer2) {
-    let width =  pointer2 - pointer1
-    let height = Math.min(array[pointer1], array[pointer2])
-    maxArea = Math.max(width * height, maxArea)
+    let width =  pointer2 - pointer1;
+    let height = Math.min(array[pointer1], array[pointer2]);
+    maxArea = Math.max(width * height, maxArea);
 
      if (array[pointer1] < array[pointer2]) {
        pointer1++
@@ -60,43 +60,71 @@ return maxArea
 const trapRain = (array) => {
  if (height === null || height.length < 3) return 0
 
-  let leftMax= []
-  leftMax[0] = height[0]
+  let leftMax= [];
+  leftMax[0] = height[0];
 
   for (let i=1; i<height.length; i++){
-    leftMax[i] = Math.max(leftMax[i-1], height[i])
+    leftMax[i] = Math.max(leftMax[i-1], height[i]);
   }
 
   let rightMax= []
   rightMax[height.length-1] = height[height.length -1]
   for( let i= height.length -2; i >= 0; i--){
-    rightMax [i] = Math.max(rightMax[i+1], height[i])
+    rightMax [i] = Math.max(rightMax[i+1], height[i]);
   }
 
   let waterSum=0
   for (let i=0; i<height.length ; i++){
     let currentHold = Math.min(leftMax[i], rightMax[i]) - height[i]
-    waterSum += currentHold
+    waterSum += currentHold;
   }
   return waterSum
 
 }
+```
+
+```Javascript
+const trap = function(height) {
+  let left = 0;
+  let right = height.length - 1;
+  let lowPoint = 0;
+
+  let result = 0;
+  while (left < right) {
+    const lefVal = height[left];
+    const rightVal = height[right];
+    if (leftVal > lowPoint && rightVal > lowPoint) {
+      lowPoint = Math.min(leftVal, rightVal);
+    }
+    if (leftVal <= lowPoint) {
+      result += lowPoint - leftVal;
+      left += 1;
+      continue;
+    }
+    if (rightVal <= lowPoint) {
+      result += lowPoint - rightVal;
+      right -= 1;
+    }
+  }
+  return result;
+};
+
 ```
 STRINGS
 ## Question #4 Backspace String Compare (Easy)
 ```Javascript
 const backSpace = (string1, string2) => {
   const trim = (string) => {
-    let stack = []
+    let stack = [];
 
     for (let char of string){
       if (char !== '#') {
-        stack.push(char)
+        stack.push(char);
       } else {
-        stack.pop()
+        stack.pop();
       }
     }
-    return stack.join('')
+    return stack.join('');
   }
   return trim(string1) === trim(string2)
 }
@@ -104,18 +132,18 @@ const backSpace = (string1, string2) => {
 ## Question #5 Longest Substring Without Repeating Characters (Medium)
 ```Javascript
 const longestSubstring = (string) => {
-  let left = 0
-  let right = 0
-  let maxLength = 0
-  let set = new Set()
+  let left = 0;
+  let right = 0;
+  let maxLength = 0;
+  let set = new Set();
 
   while(right < string.length) {
        if(!set.has(string.charAt(right))){
-           set.add(string.charAt(right))
-           maxLength = Math.max(maxLength, set.size)
+           set.add(string.charAt(right));
+           maxLength = Math.max(maxLength, set.size);
            right ++
        } else {
-           set.delete(string.charAt(left))
+           set.delete(string.charAt(left));
            left++
        }
   }
@@ -128,18 +156,18 @@ Naive
 ```Javascript
 const isPalindrome = (string) => {
   string= string.replace(/[^a-zA-Z0-9]/g,"").toLowerCase();
-  let array = s.split('').reverse().join('')
+  let array = s.split('').reverse().join('');
 
   return s === array
 }
 ```
 ```Javascript
 cons isPalindrome = (string) => {
-  string= string.replace(/[^a-zA-Z0-9]/g,"").toLowerCase()
-  let newString = ""
+  string= string.replace(/[^a-zA-Z0-9]/g,"").toLowerCase();
+  let newString = "";
 
   for (let i=string.length-1; i>=0 : i--){
-    newString += string[i]
+    newString += string[i];
   }
 
   return s === newString
@@ -165,6 +193,21 @@ const isPalindrome =(string) => {
 ## Question #6b Almost Palindrome (Easy)
 ```Javascript
 const almostPalindrome = (string) => {
+let leftIdx = 0;
+let rightIdx = string.length -1;
 
+while(leftIdx < rightIdx){
+  if(string[leftIdx] === string[rightIdx]){
+    leftIdx ++;
+    rightIdx ++;
+  } else {
+    return isPalindrome(string.substring(leftIdx + 1, rightIdx +1)) || isPalindrome(string.substring(leftIdx, rightIdx));
+  }
+}
+return true;
+
+const isPalindrome = (string) => {
+  return string.split('').reverse().join('') === string
+}
 }
 ```

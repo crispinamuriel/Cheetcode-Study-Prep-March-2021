@@ -70,31 +70,32 @@ var getMaxWaterContainer = function (heights) {
 ## Question #3 Trapping Rain Water (Hard)
 
 ```javascript
-var trapRain = function (heights) {
-  let totalWater = 0;
+const getTrappedRainwater = function (heights) {
+  let left = 0,
+    right = heights.length - 1,
+    totalWater = 0,
+    maxLeft = 0,
+    maxRight = 0;
 
-  for (let i = 0; i < heights.length; i++) {
-    let left = i,
-      right = i,
-      maxLeft = 0,
-      maxRight = 0;
+  while (left < right) {
+    if (heights[left] <= heights[right]) {
+      if (heights[left] >= maxLeft) {
+        maxLeft = heights[left];
+      } else {
+        totalWater += maxLeft - heights[left];
+      }
+      left++;
+    } else {
+      if (heights[right] >= maxRight) {
+        maxRight = heights[right];
+      } else {
+        totalWater += maxRight - heights[right];
+      }
 
-    while (left >= 0) {
-      maxLeft = Math.max(maxLeft, heights[left]);
-      left--;
-    }
-
-    while (right < heights.length) {
-      maxRight = Math.max(maxRight, heights[right]);
-      right++;
-    }
-
-    const currentWater = Math.min(maxLeft, maxRight) - heights[i];
-
-    if (currentWater >= 0) {
-      totalWater += currentWater;
+      right--;
     }
   }
+
   return totalWater;
 };
 ```
@@ -136,7 +137,28 @@ var backspaceCompare = function (S, T) {
 ## Question #5 Longest Substring Without Repeating Characters(Medium)
 
 ```javascript
+const lengthOfLongestSubstring = function (s) {
+  if (s.length <= 1) return s.length;
 
+  const seen = {};
+  let left = 0,
+    longest = 0;
+
+  for (let right = 0; right < s.length; right++) {
+    const currentChar = s[right];
+    const previouslySeenChar = seen[currentChar];
+
+    if (previouslySeenChar >= left) {
+      left = previouslySeenChar + 1;
+    }
+
+    seen[currentChar] = right;
+
+    longest = Math.max(longest, right - left + 1);
+  }
+
+  return longest;
+};
 ```
 
 ## Question #6a Valid Palindrome (Easy)
@@ -189,4 +211,137 @@ var validSubPalindrome = function (s, start, end) {
   }
   return true;
 };
+```
+
+## Question #7a Reverse Linked List (Easy)
+
+```Javascript
+var reverseList = function (head) {
+   let prevNode = null;
+
+   while(head !== null) {
+      let nextNode = head.next
+      head.next = prevNode
+      prevNode = head
+      head = nextNode
+   }
+
+   return prevNode;
+}
+```
+
+## Question #7b Reversed Linked List II (Medium)
+
+```Javascript
+var reverseBetween = function(head, left, right) {
+   let currentPos = 1, currentNode = head, start = head
+
+   while(currentPos < left) {
+      start = currentNode;
+      currentNode = currentNode.next
+      currentPos++;
+   }
+
+   let newList = null, tail = currentNode
+
+   while(currentPos >- left && currentPos <= right) {
+      const next = currentNode.next
+      currentNode.next = newList
+      newList = currentNode
+      currentNode = next
+      currentPos++
+   }
+   start.next = newList
+   tail.next = currentNode
+
+   if(left > 1) {
+      return head;
+   } else {
+      return newList
+   }
+}
+```
+
+## Question #8 Merge Multi-Level Doubly Linked List (Medium)
+
+```Javascript
+
+```
+
+## Question #9 Cycle Detection (Medium)
+
+```Javascript
+
+```
+
+## Question #10 Valid Parentheses (Easy)
+
+```Javascript
+var isValid = function(s) {
+    const parenthesis = {
+        "(":")",
+        "[":"]",
+        "{":"}",
+    }
+
+    if(s.length === 0) return true;
+
+    const stack = []
+
+    for(let i = 0; i < s.length; i++) {
+        if(parenthesis[s[i]]) {
+            stack.push(s[i])
+        } else {
+        const leftBracket = stack.pop()
+        const correctBracket = parenthesis[leftBracket]
+        if(s[i] !== correctBracket) return false
+        }
+    }
+    return stack.length === 0;
+};
+```
+
+## Question #11 Minimum Brackets To Remove To Make Valid (Medium)
+
+```Javascript
+
+```
+
+## Question #12 Implement Queue With Stacks (Easy)
+
+```Javascript
+class QueueWithStacks {
+   constructor() {
+      this.in=[]; //enqueue
+      this.out=[]; //dequeue
+   }
+
+   enqueue(val) {
+      this.in.push(val); //O(1)
+   }
+
+   dequeue() {
+      if(this.out.length === 0) {
+         while(this.in.length) {
+            this.out.push(this.in.pop())
+         }
+      }
+      return this.out.pop() //O(N)
+   }
+
+   peek() {
+      if(this.out.length === 0) {
+         while(this.in.length) {
+            this.out.push(this.in.pop())
+         }
+      }
+      return this.out[this.length - 1] //O(N)
+   }
+
+   empty() {
+      return this.in.length === 0 && this.out.length === 0 //O(1)
+   }
+}
+
+//Space Complexity = N
 ```
