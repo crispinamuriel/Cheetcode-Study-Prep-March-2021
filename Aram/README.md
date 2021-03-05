@@ -140,17 +140,8 @@ function substringCheck(s) {
 ```
 
 ## Question #6a Valid Palindrome (Easy)
-
 # Time: O(n) --- Space: O(1)
-
-````JavaScript
-
-## Question #6a Valid Palindrome (Easy)
-# Time: O(n) --- Space: O(1)
-
 ```JavaScript
-
-
 function validPalindrome(s) {
     leftIndex = 0
 	rightIndex = string.length - 1
@@ -163,23 +154,11 @@ function validPalindrome(s) {
     }
     return true
 }
-````
-
-## Question #6b Almost Palindrome (Easy)
-
-# Time: O(n) --- Space: O(1)
-
-````JavaScript
-function almostPalindrome(s) {
-    let start = 0;
-    let end = s.length - 1;
-    while (start < end) {
+```
 
 ## Question #6b Almost Palindrome (Easy)
 # Time: O(n) --- Space: O(1)
-
 ```JavaScript
-
 function almostPalindrome(s) {
      let start = 0;
   let end = s.length - 1;
@@ -203,12 +182,10 @@ const validSubPalindrome = function(s, start, end) {
   }
   return true;
 }
-````
+```
 
 ## Question #6c Valid Palindrome II
-
 # Time: --- Space:
-
 ```JavaScript
 function validPalindromeII(str) {
     if (str === '') return true
@@ -228,9 +205,7 @@ function validPalindromeII(str) {
 ```
 
 ## Question #7 Reverse Words in a String
-
 # Time: O(n) --- Space: O(n)
-
 ```JavaScript
 function reverseWords(str) {
     let words = str.split(' ')
@@ -245,9 +220,7 @@ function reverseWords(str) {
 ```
 
 ## Question #8 Reverse Words in a String II (in-place)
-
 # Time: O(n) --- Space: O(1)
-
 ```JavaScript
 const reverseString = (str) => {
     let strArr = str.split(' ')
@@ -266,9 +239,7 @@ const reverseString = (str) => {
 ```
 
 ## Question #9 Convert String to Integer (atoi)
-
 # Time: O(n) --- Space: O(1)
-
 ```JavaScript
 function convertToInt(str) {
    let result = 0
@@ -309,22 +280,14 @@ function convertToInt(str) {
 ```
 
 ## Question #10 Valid Number (Hard)
-
 # Time: --- Space:
-
 ```JavaScript
-
 function validNumber(str) {
-
 }
-
-
 ```
 
 ## Question #20 Merge Two Sorted Linked Lists
-
 # Time: O(m + n) --- Space: O(1)
-
 ```JavaScript
 class Node {
     constructor(val) {
@@ -332,7 +295,6 @@ class Node {
         this.next = next
     }
 }
-
 const mergeSorted = (l1, l2) => {
     let pointer1 = l1
     let pointer2 = l2
@@ -352,21 +314,17 @@ const mergeSorted = (l1, l2) => {
     if (pointer1 !== null) pointer1.next = pointer2
     return l1.val < l2.val ? l1 : l2
 }
-
 ```
 
 ## Question #21 Reverse Singly Linked List
-
 # Time: O(n) --- Space: O(1)
 ```JavaScript
-
 class Node {
     constructor(val) {
         this.val = val
         this.next = next
     }
 }
-
 const reverseList = (listHead) => {
     let node = listHead
     let temp
@@ -381,5 +339,4 @@ const reverseList = (listHead) => {
     }
     return previous
 }
-
 ```
