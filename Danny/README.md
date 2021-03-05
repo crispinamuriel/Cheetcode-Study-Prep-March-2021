@@ -89,6 +89,70 @@ function mergeLinkedLists(list1, list2) {
 
 
 ```
+## 21. Add Two Numbers
+
+```js
+
+// Probably not right
+
+function addTwoNumbers(listA, listB) {
+  let nodeA = listA.head;
+  let nodeB = listB.head;
+
+  let carry = 0;
+  let prevNode;
+  const newList = new LinkedList()
+
+  while (nodeA !== null && nodeB !== null) {
+    // Find the sum of the two nodes' vals
+    let sum = nodeA.val + nodeB.val + carry;
+    // reset carry
+    carry = 0;
+    // is there a new carry?
+    if (sum > 9) {
+      sum -= 10;
+      carry++;
+    }
+    const newNode = new Node(sum)
+
+    if (prevNode) {
+      prevNode.next = newNode;
+    } else {
+      newList.head = newNode;
+    }
+    prevNode = newNode;
+    nodeA = nodeA.next;
+    nodeB = nodeB.next;
+  }
+
+  // Handle one list longer than the other;
+  while (nodeA || nodeB || carry) {
+    let sum = carry;
+    if (nodeA) {
+      sum += nodeA.val;
+      nodeA = nodeA.next;
+    }
+    if (nodeB) {
+      sum += nodeB.val;
+      nodeB = nodeB.next;
+    };
+    carry = 0;
+    if (sum > 9) {
+      sum -= 10;
+      carry++;
+    }
+    const newNode = new Node(sum)
+
+    if (prevNode) {
+      prevNode.next = newNode;
+    }
+    prevNode = newNode;
+  }
+
+  return newList.head;
+}
+
+```
 
 ## GTCI: Fast and Slow Pointers
 ## Middle Of A Linked List
