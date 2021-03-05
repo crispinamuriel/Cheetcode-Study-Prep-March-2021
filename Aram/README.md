@@ -1,9 +1,8 @@
 ## Question #1 Google Interview Question Two Sum (Easy)
+
 # Time: O(n) --- Space: O(n)
 
-
-
-```JavaScript 
+```JavaScript
 
 
 function twoSum(nums, target) {
@@ -23,6 +22,7 @@ function twoSum(nums, target) {
 ```
 
 ## Question #2 Container With Most Water (Medium)
+
 # Time: O(n) --- Space: O(1)
 
 ```JavaScript
@@ -46,6 +46,7 @@ function maxArea(heights) {
 ```
 
 ## Question # 3 Trapping Rain Water (Hard)
+
 # Time: O(n) --- Space: O(1)
 
 ```JavaScript
@@ -68,7 +69,7 @@ function trap(heights) {
         }
     }
 
-    return heights.reduce((total, cur, idx) => total + Math.min(maxLeft[idx], maxRight[idx]) - cur, 0) 
+    return heights.reduce((total, cur, idx) => total + Math.min(maxLeft[idx], maxRight[idx]) - cur, 0)
 }
 
 
@@ -117,6 +118,7 @@ function backSpaceCompare(S, T) {
 ```
 
 ## Question #5 Longest Substring Without Repeating Characters (Medium)
+
 # Time: O(n) --- Space: O(n)
 
 ```JavaScript
@@ -137,17 +139,9 @@ function substringCheck(s) {
 }
 ```
 
-
 ## Question #6a Valid Palindrome (Easy)
 # Time: O(n) --- Space: O(1)
 ```JavaScript
-
-## Question #6a Valid Palindrome (Easy) 
-# Time: O(n) --- Space: O(1)
-
-```JavaScript
-
-
 function validPalindrome(s) {
     leftIndex = 0
 	rightIndex = string.length - 1
@@ -162,20 +156,9 @@ function validPalindrome(s) {
 }
 ```
 
-
 ## Question #6b Almost Palindrome (Easy)
 # Time: O(n) --- Space: O(1)
 ```JavaScript
-function almostPalindrome(s) {
-    let start = 0;
-    let end = s.length - 1;
-    while (start < end) {
-
-## Question #6b Almost Palindrome (Easy) 
-# Time: O(n) --- Space: O(1)
-
-```JavaScript 
-
 function almostPalindrome(s) {
      let start = 0;
   let end = s.length - 1;
@@ -220,6 +203,7 @@ function validPalindromeII(str) {
     return true;
 }
 ```
+
 ## Question #7 Reverse Words in a String
 # Time: O(n) --- Space: O(n)
 ```JavaScript
@@ -262,7 +246,7 @@ function convertToInt(str) {
    let sign = 1
    let hasNumberStarted = false
    let isNotBlankSpace = false
-   
+
    for (let i = 0; i < str.length; i++) {
        const char = str[i]
        if (char === ' ') {
@@ -296,13 +280,80 @@ function convertToInt(str) {
 ```
 
 ## Question #10 Valid Number (Hard)
-# Time: --- Space: 
+# Time: --- Space:
 ```JavaScript
-
 function validNumber(str) {
-  
 }
-
-
 ```
 
+## Question #20 Merge Two Sorted Linked Lists
+# Time: O(m + n) --- Space: O(1)
+```JavaScript
+class Node {
+    constructor(val) {
+        this.val = val
+        this.next = next
+    }
+}
+const mergeSorted = (l1, l2) => {
+    let pointer1 = l1
+    let pointer2 = l2
+    previous = null
+
+    while (pointer1 !== null && pointer2 !== null) {
+        if (pointer1.val <= pointer2.val) {
+            previous = pointer1
+            pointer1 = pointer1.next
+        } else {
+            if (previous !== null) previous.next = pointer2
+            previous = pointer2
+            poiunter2 = pointer2.next
+            previous.next = pointer1
+        }
+    }
+    if (pointer1 !== null) pointer1.next = pointer2
+    return l1.val < l2.val ? l1 : l2
+}
+```
+
+## Question #21 Reverse Singly Linked List
+# Time: O(n) --- Space: O(1)
+```JavaScript
+class Node {
+    constructor(val) {
+        this.val = val
+        this.next = next
+    }
+}
+const reverseList = (listHead) => {
+    let node = listHead
+    let temp
+    let previous
+
+    if (node.next === null) return node
+    while (node) {
+        temp = node.next
+        node.next = previous
+        previous = node
+        node = temp
+    }
+    return previous
+}
+```
+
+## Question #22 Linked List Cycle
+# Time: --- Space
+```JavaScript
+const isCycle = (listHead) => {
+    let slow = listHead
+    let fast = listHead
+    while (fast !== null && fast.next !== null) {
+        fast = fast.next.next
+        slow = slow.next
+        if (slow === fast) {
+            return true
+        }
+    }
+    return false
+}
+```
