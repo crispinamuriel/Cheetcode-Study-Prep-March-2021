@@ -256,3 +256,45 @@ function validNumber(str) {
 }
 
 ```
+
+## Question #20 Merge Two Sorted Linked Lists
+# Time: O(m + n) --- Space: O(1) 
+```JavaScript
+
+const mergeSorted = (l1, l2) => {
+    let tempHead = null
+
+    if (!l1) {
+        return l2
+    } else if (!l2) {
+        return l1
+    }
+
+    if (l1.val <= l2.val) {
+        tempHead = l1
+        l1 = l1.next
+    }
+}
+
+```
+
+## Question #21 Reverse Singly Linked List
+# Time: O(n) --- Space: O(1) 
+```JavaScript
+
+const reverseList = (listHead) => {
+    let node = listHead
+    let temp 
+    let previous
+
+    if (node.next === null) return node
+    while (node) {
+        temp = node.next
+        node.next = previous
+        previous = node
+        node = temp
+    } 
+    return previous
+}
+
+```
