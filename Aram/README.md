@@ -340,3 +340,21 @@ const reverseList = (listHead) => {
     return previous
 }
 ```
+
+## Question #22 Linked List Cycle
+# Time: --- Space
+```JavaScript
+const isCycle = (listHead) => {
+    let slow = listHead
+    let fast = listHead
+
+    while (fast !== null && fast.next !== null) {
+        fast = fast.next.next
+        slow = slow.next
+        if (slow === fast) {
+            return true
+        }
+    }
+    return false
+}
+```
