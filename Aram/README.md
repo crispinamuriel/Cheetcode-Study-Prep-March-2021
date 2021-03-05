@@ -347,7 +347,6 @@ const reverseList = (listHead) => {
 const isCycle = (listHead) => {
     let slow = listHead
     let fast = listHead
-
     while (fast !== null && fast.next !== null) {
         fast = fast.next.next
         slow = slow.next
