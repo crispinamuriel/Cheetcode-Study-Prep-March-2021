@@ -171,3 +171,46 @@ const isPalindromeII = (str) => {
   return true;
 };
 ```
+
+## Question #7a Reverse a Linked List
+
+```Javascript
+const reverseLL = (head) => {
+  let prev = null;
+  let current = head;
+
+  while (current) {
+    let next = current.next;
+    current.next = prev;
+    prev = current;
+    current = next;
+  }
+  return prev;
+};
+```
+
+## Question #7b M, N Reversals (Medium)
+
+```Javascript
+```
+
+## Question #8 Merge Multi Level Singly Linked List (Medium)
+
+```Javascript
+```
+
+## Question #9 Cycle Detection (Medium)
+
+```Javascript
+const has_cycle = (head) => {
+  let slow = head;
+  let fast = head;
+
+  while (fast !== null && fast.next !== null) {
+    slow = slow.next;
+    fast = fast.next.next;
+    if (slow === fast) return true;
+  }
+  return false;
+}
+```
