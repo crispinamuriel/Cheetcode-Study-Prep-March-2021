@@ -143,3 +143,20 @@ var validPalindrome = function (s) {
   }
   return true;
 };
+
+var twoSum = function (sortedNums, target) {
+  let result = [];
+  let left = 0;
+  let right = sortedNums.length - 1;
+  let sum = sortedNums[left] + sortedNums[right];
+  while (left < right) {
+    if (sum > target) {
+      right--;
+    } else if (sum < target) {
+      left++;
+    } else {
+      result.push(left, right);
+    }
+  }
+  return result;
+};
