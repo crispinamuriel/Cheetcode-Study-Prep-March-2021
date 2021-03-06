@@ -73,6 +73,7 @@ function isPalindrome(str) {
 ```
 ## Almost Palindrome (EASY)
 ## Reverse a Linked List (EASY)
+### Pattern: In place reversal of a linked list
 ```Javascript
 class Node {
   constructor(value){
@@ -107,3 +108,23 @@ function reverseList(head){
   >Time Complexity: O(N) where N is the number of nodes in the linked list
   
   >Space Complexity: O(1) since only constant space is used
+  ## Linked List Cycle (EASY) 
+  ### Pattern: Fast and Slow pointers
+```Javascript
+function hasCycle(head) {
+  let slow = head
+  let fast = head
+  while (fast !== null && fast.next !== null) {
+    slow = slow.next;
+    fast = fast.next.next;
+    if (slow === fast) {
+      return true; // found the cycle
+    }
+  }
+  return false;
+}
+```
+>Time Complexity: O(N) where N is the number of nodes in the linked list
+  
+>Space Complexity: O(1) since only constant space is used
+  
