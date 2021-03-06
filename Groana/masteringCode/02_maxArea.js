@@ -1,18 +1,18 @@
 const maxArea = (arr) => {
-  let p1 = 0;
-  let p2 = arr.length - 1;
+  let left = 0;
+  let right = arr.length - 1;
   let maxArea = 0;
 
-  while (p1 < p2) {
-    let height = Math.min(arr[p1], arr[p2]);
-    let width = p2 - p1;
+  while (left < right) {
+    let height = Math.min(arr[left], arr[right]);
+    let width = right - left;
     let area = width * height;
     maxArea = Math.max(maxArea, area);
 
-    if (arr[p1] <= arr[p2]) {
-      p1++;
+    if (arr[left] <= arr[right]) {
+      left++;
     } else {
-      p2--;
+      right--;
     }
   }
   return maxArea;

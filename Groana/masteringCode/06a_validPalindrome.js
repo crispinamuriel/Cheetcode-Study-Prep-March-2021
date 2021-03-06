@@ -1,12 +1,12 @@
 const isPalindrome = (str) => {
   str = str.replace(/[^A-Za-z0-9]/g, '').toLowerCase();
-  let front = 0;
-  let back = str.length - 1;
+  let left = 0;
+  let right = str.length - 1;
 
-  while (front < back) {
-    if (str[front] === str[back]) {
-      front++;
-      back--;
+  while (left < right) {
+    if (str[left] === str[right]) {
+      left++;
+      right--;
     } else {
       return false;
     }

@@ -9,7 +9,7 @@ const has_cycle = (head) => {
   let slow = head;
   let fast = head;
 
-  while (fast !== null  && fast.next !== null) {
+  while (fast !== null && fast.next !== null) { // why did solution call for && fast.next !== null
     slow = slow.next;
     fast = fast.next.next;
     if (slow === fast) return true;
@@ -23,8 +23,9 @@ head.next.next = new Node(3);
 head.next.next.next = new Node(4);
 head.next.next.next.next = new Node(5);
 head.next.next.next.next.next = new Node(6);
+head.next.next.next.next.next.next = new Node(7);
 console.log(`LinkedList has cycle: ${has_cycle(head)}`);
 head.next.next.next.next.next.next = head.next.next;
 console.log(`LinkedList has cycle: ${has_cycle(head)}`);
-head.next.next.next.next.next.next = head.next.next.next;
+head.next.next.next.next.next.next = head.next.next.next; // is this overriding line 27?
 console.log(`LinkedList has cycle: ${has_cycle(head)}`);
