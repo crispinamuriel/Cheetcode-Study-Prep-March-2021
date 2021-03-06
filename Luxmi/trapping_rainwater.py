@@ -8,33 +8,53 @@ class Solution(object):
         l = len(height)
         total_area = 0
     
-        left = 0
-        right = l - 1
-        left_max = right_max = 0
 
-        while(left<right):
+        for i in range(1,l-1):
 
-            if left < right:
-                if height[left] >= left_max:
-                    left_max = height[left]
-                else:
-                    total_area = total_area + (left_max - height[left])
-                left = left + 1
+            left_max = height[i]
+            for j in range(i):
+                left_max = max(left_max,height[j])
 
-            else:
-                if height[right] >= right_max:
-                    right_max = height[right]
-                else:
-                    total_area = total_area + (right_max - height[right])
-                right = right - 1 
+            right_max = height[i]
+            for j in range(i+1,l):
+                right_max = max(right_max,height[j])
+
+            total_area = total_area + (min(left_max,right_max) - height[i])
             
+
         return total_area
+
+    def trap2(self, height):
+                
+     # To store the maximum water 
+        # that can be stored 
+        res = 0; 
+        n = len(height)
+
+        # For every element of the array 
+        for i in range(1, n - 1) : 
+
+            # Find the maximum element on its left 
+            left = height[i]; 
+            for j in range(i) :
+                left = max(left, height[j]); 
+
+            # Find the maximum element on its right 
+            right = height[i]; 
+
+            for j in range(i + 1 , n) : 
+                right = max(right, height[j]);
+
+            # Update the maximum water
+            res = res + (min(left, right) - height[i]); 
+
+        return res;
 
 
 def main():
     sol = Solution()
-    height = [0,1,0,2,1,0,1,3,2,1,2,1]
-    # height = [4,3,2,1,4]
+    # height = [0,1,0,2,1,0,1,3,2,1,2,1]
+    height = [4,2,0,3,2,5]
     print(sol.trap(height))
 
 if __name__ == "__main__":
