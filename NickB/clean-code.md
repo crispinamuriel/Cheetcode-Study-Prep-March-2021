@@ -280,3 +280,80 @@ var mergeTwoLists = function (l1, l2) {
   return head.next;
 };
 ```
+
+## 21. ADD TWO NUMBERS
+
+```javascript
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var addTwoNumbers = function (l1, l2) {
+  let head = new ListNode(0);
+  let temp = head;
+  let overflow = 0;
+  //iterate until one of them is null
+  while (l1 !== null || l2 !== null) {
+    let x = l1 != null ? l1.val : 0;
+    let y = l2 != null ? l2.val : 0;
+    let total = x + y + overflow;
+    // while iterating add them and keep an overflow
+
+    // x%10
+    let currentValue = total % 10;
+    // x/10
+    overflow = Math.floor(total / 10);
+    temp.next = new ListNode(currentValue);
+
+    temp = temp.next;
+    if (l1 != null) l1 = l1.next;
+    if (l2 != null) l2 = l2.next;
+  }
+
+  if (overflow > 0) {
+    temp.next = new ListNode(overflow);
+  }
+
+  return head.next;
+};
+```
+
+## 22. SWAP NODES IN PAIRS
+
+```javascript
+var swapPairs = function (head) {
+  if (!head) return null;
+  if (!head.next) return head;
+
+  let prev = null;
+  const start = head.next;
+
+  while (head && head.next) {
+    const next = head.next;
+    const secondNext = head.next.next;
+
+    head.next = secondNext;
+    next.next = head;
+
+    if (prev) prev.next = next;
+
+    prev = head;
+    head = secondNext;
+  }
+
+  return start;
+};
+```
+
+## 23. MERGE K SORTED LINKED LISTS
+
+```javascript
+
+```
+
+## 24. COPY LIST WITH RANDOM POINTER
+
+```javascript
+
+```
