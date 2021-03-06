@@ -2,29 +2,29 @@
  * @param {string} s
  * @return {boolean}
  */
-const isPalindrome = (str, front, back) => {
-  while (front < back) {
-    if (str[front] !== str[back]) {
+const isPalindrome = (str, left, right) => {
+  while (left < right) {
+    if (str[left] !== str[right]) {
       return false;
     }
-    front++;
-    back--;
+    left++;
+    right--;
   }
   return true;
 };
 
 const isPalindromeII = (str) => {
-  let front = 0;
-  let back = str.length - 1;
+  let left = 0;
+  let right = str.length - 1;
 
-  while (front < back) {
-    if (str[front] !== str[back]) {
+  while (left < right) {
+    if (str[left] !== str[right]) {
       return (
-        isPalindrome(str, front + 1, back) || isPalindrome(str, front, back - 1)
+        isPalindrome(str, left + 1, right) || isPalindrome(str, left, right - 1)
       );
     }
-    front++;
-    back--;
+    left++;
+    right--;
   }
   return true;
 };

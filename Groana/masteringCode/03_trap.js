@@ -4,20 +4,20 @@ const trap = (height) => {
   for (let i = 0; i < height.length - 1; i++) {
     let leftP = i;
     let rightP = i;
-    let maxL = 0;
-    let maxR = 0;
+    let maxLeft = 0;
+    let maxRight = 0;
 
     while (leftP >= 0) {
-      maxL = Math.max(maxL, height[leftP]);
+      maxLeft = Math.max(maxLeft, height[leftP]);
       leftP--;
     }
 
     while (rightP < height.length) {
-      maxR = Math.max(maxR, height[rightP]);
+      maxRight = Math.max(maxRight, height[rightP]);
       rightP++;
     }
 
-    const currWater = Math.min(maxL, maxR) - height[i];
+    const currWater = Math.min(maxLeft, maxRight) - height[i];
 
     if (currWater >= 0) total += currWater;
   }
