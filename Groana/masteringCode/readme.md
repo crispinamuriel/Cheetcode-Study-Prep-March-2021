@@ -28,20 +28,20 @@ const twoSum = (nums, target) => {
 
 ```Javascript
 const maxArea = (arr) => {
-  let p1 = 0;
-  let p2 = arr.length - 1;
+  let left = 0;
+  let right = arr.length - 1;
   let maxArea = 0;
 
-  while (p1 < p2) {
-    let height = Math.min(arr[p1], arr[p2]);
-    let width = p2 - p1;
+  while (left < right) {
+    let height = Math.min(arr[left], arr[right]);
+    let width = right - left;
     let area = width * height;
     maxArea = Math.max(maxArea, area);
 
-    if (arr[p1] <= arr[p2]) {
-      p1++;
+    if (arr[left] <= arr[right]) {
+      left++;
     } else {
-      p2--;
+      right--;
     }
   }
   return maxArea;
@@ -57,20 +57,20 @@ const trap = (height) => {
   for (let i = 0; i < height.length - 1; i++) {
     let leftP = i;
     let rightP = i;
-    let maxL = 0;
-    let maxR = 0;
+    let maxLeft = 0;
+    let maxRight = 0;
 
     while (leftP >= 0) {
-      maxL = Math.max(maxL, height[leftP]);
+      maxLeft = Math.max(maxLeft, height[leftP]);
       leftP--;
     }
 
     while (rightP < height.length) {
-      maxR = Math.max(maxR, height[rightP]);
+      maxRight = Math.max(maxRight, height[rightP]);
       rightP++;
     }
 
-    const currWater = Math.min(maxL, maxR) - height[i];
+    const currWater = Math.min(maxLeft, maxRight) - height[i];
 
     if (currWater >= 0) total += currWater;
   }
@@ -126,13 +126,13 @@ const lengthOfLongestSubstring = (str) => {
 ```Javascript
 const isPalindrome = (str) => {
   str = str.replace(/[^A-Za-z0-9]/g, '').toLowerCase();
-  let front = 0;
-  let back = str.length - 1;
+  let left = 0;
+  let right = str.length - 1;
 
-  while (front < back) {
-    if (str[front] === str[back]) {
-      front++;
-      back--;
+  while (left < right) {
+    if (str[left] === str[right]) {
+      left++;
+      right--;
     } else {
       return false;
     }
@@ -144,30 +144,73 @@ const isPalindrome = (str) => {
 ## Question #6b Almost Palindrome(Hard)
 
 ```Javascript
-const isPalindrome = (str, front, back) => {
-  while (front < back) {
-    if (str[front] !== str[back]) {
+const isPalindrome = (str, left, right) => {
+  while (left < right) {
+    if (str[left] !== str[right]) {
       return false;
     }
-    front++;
-    back--;
+    left++;
+    right--;
   }
   return true;
 };
 
 const isPalindromeII = (str) => {
-  let front = 0;
-  let back = str.length - 1;
+  let left = 0;
+  let right = str.length - 1;
 
-  while (front < back) {
-    if (str[front] !== str[back]) {
+  while (left < right) {
+    if (str[left] !== str[right]) {
       return (
-        isPalindrome(str, front + 1, back) || isPalindrome(str, front, back - 1)
+        isPalindrome(str, left + 1, right) || isPalindrome(str, left, right - 1)
       );
     }
-    front++;
-    back--;
+    left++;
+    right--;
   }
   return true;
 };
+```
+
+## Question #7a Reverse a Linked List
+
+```Javascript
+const reverseLL = (head) => {
+  let prev = null;
+  let current = head;
+
+  while (current) {
+    let next = current.next;
+    current.next = prev;
+    prev = current;
+    current = next;
+  }
+  return prev;
+};
+```
+
+## Question #7b M, N Reversals (Medium)
+
+```Javascript
+```
+
+## Question #8 Merge Multi Level Singly Linked List (Medium)
+
+```Javascript
+```
+
+## Question #9 Cycle Detection (Medium)
+
+```Javascript
+const has_cycle = (head) => {
+  let slow = head;
+  let fast = head;
+
+  while (fast !== null && fast.next !== null) {
+    slow = slow.next;
+    fast = fast.next.next;
+    if (slow === fast) return true;
+  }
+  return false;
+}
 ```

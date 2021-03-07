@@ -44,7 +44,7 @@ const validNum = (str) => {
   while (i < str.length) {
     if (i === 0 && (str[i] === ' ' || str[i] === '+' || str[i] === '-')) {
       i++;
-    } else if (i === str.length - 1 && (str[i] === ' ' || str[i] === '+' || str[i] === '-')) {
+    } else if (i === str.length - 1 && (str[i] === ' ')) {
       i++;
     } else if (!(str[i] >= 0 || str[i] <= 9 || str[i] === '.') || str[i] === ' ') {
       return false;
