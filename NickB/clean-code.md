@@ -242,13 +242,53 @@ var lengthOfLongestSubstring = function (s) {
 ## 11 LONGEST SUBSTRING WITH AT MOST TWO DISTINCT CHARACTERS
 
 ```javascript
+// Running Time: O(n^3), Space O(n) - brute force with set
+// Running Time: O(n^2), Space O(n) - brute force with set reusing set when adding a char to form a new substring
+// Running Time: O(n), Space O(n) -
+// can switch k for another value for changing from 2 unique to k unique
+var lengthOfLongestSubstring = function (s) {
+  if (s === null || s.length === 0) return 0;
+  let count = new Map();
 
+  let max = 0;
+  let left = 0;
+  let k = 2;
+  for (let right = 0; right < s.length; right++) {
+    let value = count.get(s[right]);
+    count.set(s[right], value ? value + 1 : 1);
+    while (count.size > k) {
+      count.set(s[left], count.get(s[left]) - 1);
+      if (count.get(s[left]) === 0) {
+        count.delete(s[left]);
+      }
+      left++;
+    }
+    max = Math.max(max, right - left + 1);
+  }
+  return max;
+};
 ```
 
 ## 12 MISSING RANGES
 
 ```javascript
+// Running Time: O(n), Space O(n)
+function getRange(from, to) {
+  return from === to ? `${from}` : `${from} -> ${to}`;
+}
+var findMissingRanges = function (vals, start, end) {
+  let ranges = [];
+  let prev = start - 1;
+  for (let i = 0; i <= vals.length; i++) {
+    let curr = i === vals.length ? end + 1 : vals[i];
+    if (curr - prev >= 2) {
+      ranges.push(getRange(prev + 1, curr - 1));
+    }
+    prev = curr;
+  }
 
+  return ranges;
+};
 ```
 
 ## 13 LONGEST PALINDROMIC SUBSTRING
@@ -371,7 +411,7 @@ var swapPairs = function (head) {
 };
 ```
 
-## 23. MERGE K SORTED LINKED LISTS
+## 23. MERGE K SORTED LINKED LISTS (HARD)
 
 ```javascript
 
