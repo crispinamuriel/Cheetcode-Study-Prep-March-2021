@@ -8,6 +8,7 @@
 ## Rearrange a LinkedList
 
 ```javascript
+//running time O(n), space O(1)
 function reverse(head) {
   let prev = null;
   while (head !== null) {

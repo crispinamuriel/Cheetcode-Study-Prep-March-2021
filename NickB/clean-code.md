@@ -1,6 +1,13 @@
 ## 1 Two Sum
 
 ```javascript
+/*
+Template: 
+  // Running Time: O(n^1), Space O(1) - Brute force
+  // Running Time: O(n), Space O(n) - Hash Table
+*/
+// Running Time: O(n^1), Space O(1) - Brute force
+// Running Time: O(n), Space O(n) - Hash Table
 var twoSum = function (nums, target) {
   let dict = new Map();
   if (nums.length <= 1) return [];
@@ -18,6 +25,8 @@ var twoSum = function (nums, target) {
 ## 2 Two sum II – INPUT ARRAY IS SORTED
 
 ```javascript
+// Running Time: O(nlogn), Space O(1) - Binary Search
+// Running Time: O(n), Space O(1) - Two Pointers
 var twoSum = function (numbers, target) {
   let left = 0,
     right = numbers.length - 1;
@@ -37,6 +46,9 @@ var twoSum = function (numbers, target) {
 ## 3 Two sum III – DATA STRUCTURE DESIGN
 
 ```javascript
+// Running Time: add:O(n) - Find- O(1), Space O(n^2) - Store pair sums in hash table
+// Running Time: add: O(nlogn), Find O(n), Space O(n) - Stored Array - Binary Search + Two Pointers
+// Running Time: add: O(n), Find O(n), Space O(n) - Hash table
 class TwoSum {
   constructor() {
     this.dict = new map();
@@ -61,6 +73,8 @@ class TwoSum {
 ## 4 VALID PALINDROME
 
 ```javascript
+// Running Time: O(n), Space O(n) - Reverse
+// Running Time: O(n), Space O(1) - Two Pointers
 var isPalindrome = function (s) {
   let clean = s.replace(/[^a-z0-9]/gi, "").toLowerCase();
   let left = 0;
@@ -81,6 +95,7 @@ var isPalindrome = function (s) {
 ## 5 IMPLEMENT STRSTR()
 
 ```javascript
+// Running Time: O(nm), Space O(1) - Brute Force
 var strStr = function (haystack, needle) {
   if (needle == "") return 0;
   if (needle.length > haystack.length) return -1;
@@ -102,6 +117,8 @@ var strStr = function (haystack, needle) {
 ## 6 REVERSE WORDS IN A STRING
 
 ```javascript
+// Running Time: O(n), Space O(n) - lots of cuntions
+// Running Time: O(n), Space O(n) - split and push, join
 var reverseWords = function (s) {
   let words = s.split(" ");
   let answer = [];
@@ -125,6 +142,7 @@ var reverseWords = function (s) {
 ## 7 REVERSE WORDS IN A STRING II
 
 ```javascript
+// Running Time: O(n), Space O(1) - In place assuming you have an array of chars
 function reverse(s, begin, end) {
   for (let i = 0; i < (end - begin) / 2; i++) {
     let temp = s[begin + i];
@@ -150,6 +168,7 @@ var reverseWords = function (s) {
 ## 8 STRING TO INTEGER (ATOI)
 
 ```javascript
+// Running Time: O(n), Space O(1)
 var myAtoi = function (s) {
   const string = s.trim();
   let sign = "+";
@@ -206,6 +225,8 @@ var myAtoi = function (s) {
 ## 10 LONGEST SUBSTRING WITHOUT REPEATING CHARACTERS
 
 ```javascript
+// Running Time: O(n), Space O(1) - Two iterations
+// Running Time: O(n), Space O(N) - Single iteration  (could use a static array and be O(1) )
 var lengthOfLongestSubstring = function (s) {
   let max = 0;
   let index = {};
@@ -257,6 +278,8 @@ var lengthOfLongestSubstring = function (s) {
 ## 20 Merge Two Sorted Lists
 
 ```javascript
+// Running Time: O(n), Space O(n) - create new nodes
+// Running Time: O(n), Space O(1) - in place
 var mergeTwoLists = function (l1, l2) {
   let newList = new ListNode(0);
   let head = newList;
@@ -284,6 +307,7 @@ var mergeTwoLists = function (l1, l2) {
 ## 21. ADD TWO NUMBERS
 
 ```javascript
+// Running Time: O(n), Space O(n)
 /**
  * @param {ListNode} l1
  * @param {ListNode} l2
@@ -322,6 +346,7 @@ var addTwoNumbers = function (l1, l2) {
 ## 22. SWAP NODES IN PAIRS
 
 ```javascript
+// Running Time: O(n), Space O(1) - in place
 var swapPairs = function (head) {
   if (!head) return null;
   if (!head.next) return head;
