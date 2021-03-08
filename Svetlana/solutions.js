@@ -160,3 +160,30 @@ var twoSum = function (sortedNums, target) {
   }
   return result;
 };
+
+class TwoSum {
+  constructor(numbers = []) {
+    this.numbers = numbers;
+  }
+  add(num) {
+    //O(1) space b/c in JS arrays are dynamic
+
+    return this.numbers.push(num);
+  }
+  find(target) {
+    //O(n) space with hash map
+    //O(n) time - for loop
+
+    let map = {};
+    for (let i = 0; i < this.numbers.length; i++) {
+      let currentNum = this.numbers[i];
+      let difference = target - currentNum;
+      if (difference in map) {
+        return true;
+      } else {
+        map[currentNum] = i;
+      }
+    }
+    return false;
+  }
+}

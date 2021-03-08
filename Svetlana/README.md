@@ -44,6 +44,46 @@ var twoSum = function (sortedNums, target) {
 };
 ```
 
+# Problem 1 - Two Sum (DS design)
+
+Design and implement a TwoSum class. It should support the following operations: add and find.
+
+add(input) – Add the number input to an internal data structure.
+
+find(value) – Find if there exists any pair of numbers which sum is equal to the value.
+
+For example,
+add(1); add(3); add(5); find(4) => true; find(7) => false
+
+```js
+class TwoSum {
+  constructor(numbers = []) {
+    this.numbers = numbers;
+  }
+  add(num) {
+    //O(1) space b/c in JS arrays are dynamic
+
+    return this.numbers.push(num);
+  }
+  find(target) {
+    //O(n) space with hash map
+    //O(n) time - for loop
+
+    let map = {};
+    for (let i = 0; i < this.numbers.length; i++) {
+      let currentNum = this.numbers[i];
+      let difference = target - currentNum;
+      if (difference in map) {
+        return true;
+      } else {
+        map[currentNum] = i;
+      }
+    }
+    return false;
+  }
+}
+```
+
 # Problem 2 - Container With Most Water
 
 Time: O(n);
@@ -207,5 +247,42 @@ var validPalindrome = function (s) {
     right--;
   }
   return true;
+};
+```
+
+# Problem 7 - Basic Linked List reversal
+
+Time: O(n);
+Space: O(1);
+
+1. Construct a Linked List using JS class syntax
+
+```js
+class Node {
+  constructor(value, next=null){
+    this.value = value;
+    this.next = next;
+  }
+
+let head = new Node(2);
+head.next = new Node(4);
+head.next.next = new Node(6);
+head.next.next.next = new Node(8);
+head.next.next.next.next = new Node(10);
+```
+
+2. Write a reverse function
+
+```js
+const reverse = function (head) {
+  let current = head;
+  let prev = null;
+  while (current !== null) {
+    let temp = current.next;
+    current.next = prev;
+    prev = current;
+    current = temp;
+  }
+  return prev;
 };
 ```
