@@ -1,7 +1,71 @@
-# Chapter 3: Linked Lists
+## Mastering 1. Two Sum
 
 ```js
+// Time: O(N) | Space: O(N)
+const twoSum = function(nums, target) {
+    const dict = {};
+    for (let i = 0; i < nums.length; i++) {
+        const diff = target - nums[i];
+        if (dict[diff] !== undefined) {
+            return [dict[diff], i]
+        } else {
+            dict[nums[i]] = i;
+        }
+    }
+};
+```
 
+## Mastering 4. Backspace String Compare
+
+```js
+// Brute Force: Time: O(N^2) | Space: O(1)
+const backspaceCompare = function(S, T) {
+  return backspaceChars(S) === backspaceChars(T)
+};
+
+const backspaceChars = function(str) {
+  let i = str.length-1;
+  while (i >= 0) {
+      if (str[i+1] === '#' && str[i] !== '#') {
+        str = str.slice(0, i) + str.slice(i+2, str.length1)
+      }
+      i--;
+  }
+  // First char is backspace
+  if (str[0] === '#') return str.slice(1)
+  return str;
+}
+```
+
+## Mastering 7. M, N Reversals
+
+```js
+// Time: O(N) | Space: O(1)
+const reverseBetween = function(head, left, right) {
+  let prev = null;
+  let curr = head;
+  while (curr !== left) {
+      prev = curr;
+      curr = curr.next;
+  }
+  let segmentTail = curr;
+  let next = null;
+  while (curr !== right) {
+      let temp = curr.next;
+      curr.next = next;
+      next = curr;
+      curr = temp;
+  }
+  segmentTail.next = curr.next;
+  curr.next = next;
+  prev.next = curr;
+  return head;
+};
+```
+
+## Linked List Construction
+
+```js
 class LinkedList {
   constuctor() {
     this.head = null;
@@ -38,21 +102,9 @@ class Node {
     this.next = null;
   }
 }
-
-const list = new LinkedList();
-list.setHead( new Node(2))
-list.setTail( new Node(3))
-list.setTail( new Node(4))
-list.setTail( new Node(8))
-
-const list2 = new LinkedList();
-list2.setHead( new Node(1))
-list2.setTail( new Node(5))
-list2.setTail( new Node(6))
-
 ```
 
-## 20. Merger Two Sorted Lists
+## Grokking 20. Merger Two Sorted Lists
 
 Time: O(1);
 Space: O(1);
@@ -86,13 +138,10 @@ function mergeLinkedLists(list1, list2) {
 
 	return newList;
 }
-
-
 ```
-## 21. Add Two Numbers
+## Grokking 21. Add Two Numbers
 
 ```js
-
 // Probably not right
 
 function addTwoNumbers(listA, listB) {
@@ -151,14 +200,12 @@ function addTwoNumbers(listA, listB) {
 
   return newList.head;
 }
-
 ```
 
-## GTCI: Fast and Slow Pointers
+## Grokking: Fast and Slow Pointers
 ## Middle Of A Linked List
 
 ```js
-
 const find_middle_of_linked_list = function(head) {
   let fast = head,
     slow = head;
@@ -170,7 +217,6 @@ const find_middle_of_linked_list = function(head) {
 
   return slow;
 }
-
 ```
 
 ## 1. Palindrome Linked List
@@ -182,7 +228,6 @@ Given the head of a Singly LinkedList, write a method to modify the LinkedList s
 - Refered to reverse nodes function from previous problem to solve.
 
 ```js
-
 const reorder = function(head) {
   // Find the middle node of the list
   let fast = head,
@@ -219,5 +264,4 @@ function reverseNodes(head) {
   }
   return prev;
 }
-
 ```
