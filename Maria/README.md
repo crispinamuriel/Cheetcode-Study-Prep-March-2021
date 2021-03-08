@@ -20,8 +20,45 @@ function twoSum (nums, target) {
         }
     }
 };
+//solution without sorting the given array: 
+function twoSum (nums, target) {
+ let numsObj = {}
+ for (let i = 0; i < nums.length; i++){
+     let value = nums[i]
+     let mapValue = numsObj[value]
+     if (mapValue >= 0){  
+         return [mapValue,i]
+     }else{
+         let numToFind = target - value
+         numsObj[numToFind]=i
+     }
+ }
+    return null
+}
 ```
 ## Container With Most Water (MEDIUM)
+```Javascript
+function maxArea(height) {
+  let leftP = 0
+  let rightP = height.length - 1
+  let maxArea = 0
+  
+  while (leftP < rightP){
+     let length = Math.min(height[leftP],height[rightP])
+     let width = rightP-leftP
+     let area = length * width  
+     maxArea = Math.max(maxArea,area)
+     if (height[leftP] <= height[rightP]){
+         leftP++
+     }else{
+         rightP--
+     }
+  }
+    return maxArea
+};
+```
+ * As long as we're moving the pointer that is smaller we're always working with the lesser of the two heights that form a container.
+ >Time/Space: O(N) / O(1)
 ## Trapping Rainwater (HARD)
 ```Javascript
 function trap (heights){
@@ -56,6 +93,55 @@ function trap (heights){
 ```
  * As long as we're moving the pointer that is smaller we're always working with the lesser of the two heights that form a container.
 ## Typed Out Strings (EASY)
+```Javascript
+function backspaceCompare (S, T) {
+    let p1 = S.length-1
+    let p2 = T.length-1
+    //while either pointer is at a character 
+    while (p1 >=0 || p2 >= 0){
+        //check if either p1 or p2 is a '#'
+        if (S[p1] === '#' || T[p2] === '#' ){
+             //check if the character is a '#' in S
+            if (S[p1] === '#'){
+                let backCount = 2
+                //check for more hashes
+                while (backCount > 0){
+                    p1--
+                    backCount--
+                    if (S[p1] === '#'){
+                        backCount += 2
+                    }
+                }
+            }
+            //check if character is a '#' in T
+            if (T[p2] === '#'){
+                let backCount = 2
+                //check for more hashes
+                while (backCount > 0){
+                    p2--
+                    backCount--
+                    if (T[p2] === '#'){
+                        backCount += 2
+                    }
+                }
+            }
+            
+        }else{  //p1 and p2 BOTH must be characters
+            //false if characters don't match
+            if (S[p1] !== T[p2]){
+                return false
+            }else{  //p1 and p2 match
+                p1--
+                p2--
+            }
+        } 
+    }
+    return true
+};
+```
+> Time/Space: O(A+B) where A and B are the strings/O(1)
+* Why do we need backcount if we’re moving the pointers by one anyway? Backcount variable provides a condition to keep moving pointers if there are any hashes 
+* Why are we returning true when breaking out of the while loop? We will only break out of the while loop if neither string has any letters left to compare and no false conditions were met. This means the resulting string must match! If even one of the strings has a letter remaining then we will enter the while loop again and return false at the condition that checks for the matching character in both strings.
 ## Longest Substring Without Repeating Characterts (MEDIUM)
 ## Valid Palindrome (EASY)
 ```Javascript
