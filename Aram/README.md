@@ -357,3 +357,29 @@ const isCycle = (listHead) => {
     return false
 }
 ```
+## Question #23 Valid Parentheses
+# Time: --- Space
+```JavaScript
+const isValid = (string) => {
+    let stack = []
+    let map = {
+        ')' : '(',
+        ']' : '[',
+        '}' : '{'
+    }
+    for (let i = 0; i < string.length; i++) {
+        if (string[i] === '(' || string[i] === '[' || string[i] === '{') {
+            stack.push(string[i])
+        } else if (string[i] === ')' || string[i] === ']' || string[i] === '}') {
+            if (stack.length === 0) {
+                return false
+            }
+        } if (stack[stack.length - 1] === map[string[i]]) {
+            stack.pop()
+        } else {
+            return false
+        }
+    }
+    return stack.length === 0
+}
+```
