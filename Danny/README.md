@@ -35,6 +35,35 @@ const backspaceChars = function(str) {
   if (str[0] === '#') return str.slice(1)
   return str;
 }
+
+// Stack Solution: Time: O(N) | Space: O(N)
+// 3 Pass O(N) Solution
+const backspaceCompare = function(S, T) {
+    const sStack = [];
+    const tStack = [];
+    createStack(S, sStack);
+    createStack(T, tStack);
+
+    if (sStack.length !== tStack.length) return false;
+    for (let i = 0; i < sStack.length; i++) {
+        if (sStack[i] !== tStack[i]) {
+            return false
+        }
+    }
+
+    return true;
+}
+
+const createStack = function(str, stack) {
+        for (let i = 0; i < str.length; i++) {
+        const char = str[i];
+        if (char !== '#') {
+            stack.push(char)
+        } else {
+            stack.pop();
+        }
+    }
+}
 ```
 
 ## Mastering 7. M, N Reversals
@@ -264,4 +293,58 @@ function reverseNodes(head) {
   }
   return prev;
 }
+```
+
+# Leetcode
+
+## 227. Basic Calculator II
+```js
+const calculate = function(s) {
+    const operators = '+-*/';
+    const stack = [];
+    let currentNumber = 0;
+    for (let i = 0; i < s.length; i++) {
+        // Handle multi-digit numbers
+        let num = ''
+        while (isNaN(s[i]) === false) {
+            num += s[i];
+            i++
+        }
+        if (num) {
+            currentNumber = Number(num);
+            // Peek at stack operator
+            const stackTop = stack[stack.length-1]
+            // handle mult or div
+            if (stackTop === '/' || stackTop === '*') {
+                let oper = stack.pop();
+                let prevNumber = stack.pop();
+                stack.push(oper === '/'
+                    ? prevNumber / currentNumber
+                    : prevNumber * currentNumber
+                )
+                currentNumber = 0;
+            // empty stack, add or subt -- push currentNumber to handle later
+            } else {
+                stack.push(currentNumber)
+            }
+        }
+        // it's an operator -- push to stack to handle next
+        if (operators.indexOf(s[i]) !== -1) {
+            stack.push(s[i])
+        }
+
+    }
+    // while loop to handle all lower operators
+    while (stack.length > 1) {
+        let num1 = stack.pop();
+        let oper = stack.pop();
+        let num2 = stack.pop();
+        stack.push(oper === '-'
+            ? num2 - num1 // subtract
+            : num2 + num1 // add
+        )
+    }
+    // return the first item
+    return stack[0]
+};
 ```
