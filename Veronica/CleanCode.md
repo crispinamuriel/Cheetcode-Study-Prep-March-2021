@@ -1,5 +1,29 @@
 # Clean Code Handbook
+## Table of contents
 
+1. [Two Sum II-- Input Array Sorted](#Two-Sum-II---Input-Array-Sorted)
+2. [Longest Substring Without Repeating Characters](#longest-substring-without-repeating-characters)
+3. [Valid Palindrome](#Valid-Palindrome)
+4. [Merge Two Sorted Lists](#Merge-Two-Sorted-Lists)
+5. [Swap Nodes in Pairs](#Swap-Nodes-in-Pairs)
+6. [Merge K Sorted Linked Lists](#Merge-K-Sorted-Linked-Lists)
+7. [Copy List with Random Pointer](#Copy-List-with-Random-Pointer)
+
+## Two Sum II-- Input Array Sorted
+```javascript
+const twoSumTwo = function(arr, target) {
+    let p1 = 0;
+    let p2 = arr.length - 1;
+    while (p1 < p2) {
+        if (arr[p1] + arr[p2] == target)
+            return [p1, p2];
+        else if (arr[p1] + arr[p2] > target)
+            p2--;
+        else
+            p1++;
+    }
+};
+```
 ## Longest Substring Without Repeating Characters
 ```javascript
 const LongestSubstringWithoutRepeat = function(str) {

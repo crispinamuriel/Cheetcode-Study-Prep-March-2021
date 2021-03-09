@@ -1,4 +1,20 @@
 # Master the Coding Interview: Big Tech (FAANG) Udemy
+## Table of contents
+1. [Two Sum (EASY)](#Two-Sum-(EASY))
+2. [Container with Most Water (MEDIUM)](#container-with-most-water-(MEDIUM))
+3. [Trapping Rainwater (HARD)](#Trapping-Rainwater-(HARD))
+4. [Typed Out Strings (EASY)](#Typed-Out-Strings-(EASY))
+5. [Longest Substring Without Repeating Characters  (MEDIUM)](#longest-substring-without-repeating-characters-(MEDIUM))
+6. [Valid Palindrome (EASY)](#Valid-Palindrome-(EASY))
+7. [Valid Palindrome II or Almost A Palidrome](#Almost-Palindrome)
+8. [Reverse Linked List](#Basic-Algorithm---Reverse-Linked-List)
+9. [Reverse Linked List II or M, N Reversals](#M,-N-Reversals-(Medium))
+10. [Merge Multi-Level Doubly Linked List (Medium)](#Merge-Multi-Level-Doubly-Linked-List-(Medium))
+11. [Cycle Detection (Medium)](#Cycle-Detection-(Medium))
+12. [Valid Parentheses](#Valid-Parentheses)
+13. [Minimum Brackets To Remove](#Minimum-Brackets-To-Remove)
+14. [Implement Queue with Stacks](#Implement-Queue-with-Stacks)
+
 ## Two Sum (EASY)
 https://gist.github.com/vtomchak/f521d41b424119afd7e8c45f651f1828
 ```javascript
@@ -230,13 +246,14 @@ var reverseBetween = function(head, m, n) {
 
   while(currentPos < m) {
     // before the starting position converges on the m boundary
+    /* we move through the list before m starts and then capture the value previous to the boundary in the start variable*/
     start = currentNode;
     currentNode = currentNode.next;
     currentPos++;
   }
 
   let newList = null, tail = currentNode;
-  // initialize the copy that will be our answer
+  // newList will hold our previous/ listsofar values for the portion we are reversing
   while(currentPos >= m && currentPos <= n) {
     // inside the boundary of m and n reverse the list
     const next = currentNode.next;
@@ -245,10 +262,14 @@ var reverseBetween = function(head, m, n) {
     currentNode = next;
     currentPos++;
   }
-
+// these two steps piece the boundary, start, and after-boundary portions together
   start.next = newList;
+  // newList is always the head of the portion of the list that we reversed
+  // we stored the node before we entered into the boundary in the start variable
   tail.next = currentNode;
+  // after our while loop currentNode is pointing to n+1
 
+//if m is equal to 1 we must return the newList head, otherwise we return the head
   if(m > 1) {
     return head
   } else {
@@ -257,6 +278,36 @@ var reverseBetween = function(head, m, n) {
 };
 ```
 ## Merge Multi-Level Doubly Linked List (Medium)
+```javascript
+const flatten = function(head) {
+  if(!head) return head;   //if the head is null, just return null
+  let currentNode = head;   //instantiate current node at first node, head
+  while(currentNode){     // while the currrent node is not null
+    if(currentNode.child === null){  //if the node has no children iterate
+      currentNode= currentNode.next
+    }
+   else {  //else case for if the node does have a child
+     let tail = currentNode.child
+     //storage variable for the head of the child sub LL to find the tail of that sub LL
+     while(tail.next){
+       /*while the ail variable has a next, til the end, iterate so that our variable will be pointing at the end of the child sub LL*/
+       tail = tail.next;
+     }
+     tail.next = currentNode.next
+     if(tail.next !== null){
+       // if tail.next is null that means that the parent (currentNode) was at the end of the main LL
+       tail.next.prev = tail
+     }
+     currentNode.next = currentNode.child //reset currentNode.next to be the child
+     currentNode.next.prev = currentNode
+     //reset child node that is now currentNode.next to point previous towards currentNode
+     currentNode.child = null;
+   }
+  }
+  return head;
+}
+```
+
 ## Cycle Detection (Medium)
 ```javascript
 function has_cycle(head) {
@@ -271,5 +322,103 @@ function has_cycle(head) {
   }
   return false;
   // if slow never catches up to fast that means the LinkedList is not cyclical
+}
+```
+## Valid Parentheses
+```javascript
+const validParen = function (s) {
+  const parenCheck = {
+  '(':')',
+  '{':'}',
+  '[':']'
+}
+   const stack = []
+   if(s.length === 0) return true; //an empty string should return true
+   for (let i = 0; i < s.length; i++) {
+
+     if(parenCheck[s[i]]){ //checks if the character at i is a key in the hashmap which means its a left paren
+       stack.push(s[i])
+     } else { //this means it is a right parentheses
+       const leftBracket = stack.pop(); //take the latest bracket pushed into our array
+       const correctBracket = parenCheck[leftBracket] // find the value where that left bracket is a key
+       if(s[i] !== correctBracket){ //if they dont match
+         return false
+       }
+     }
+   }
+   if(stack.length){ //if there are still left brackets left in the stack after the for loop that means they did not have valid matches so not valid
+     return false
+   } else{
+     return true
+   }
+ }
+```
+## Minimum Brackets To Remove
+## Implement Queue with Stacks
+```javascript
+var MyQueue = function() {
+    this.stackA = [] // push elements
+    this.stackB = [] // pop elements
+};
+MyQueue.prototype.push = function(x) {
+    this.stackA.push(x)
+};
+MyQueue.prototype.pop = function() {
+    if (this.stackB.length > 0) {
+        return this.stackB.pop()
+    } else {
+        while(this.stackA.length > 1){
+            this.stackB.push(this.stackA.pop())
+        }
+        return this.stackA.pop()
+    }
+};
+MyQueue.prototype.peek = function() {
+    if (this.stackB.length > 0) {
+        return this.stackB[this.stackB.length-1]
+    } else {
+          while(this.stackA.length > 0){
+            this.stackB.push(this.stackA.pop())
+        }
+        return this.stackB[this.stackB.length-1]
+    }
+};
+
+MyQueue.prototype.empty = function() {
+  if(this.stackA.length === 0 && this.stackB.length === 0){
+    return true
+  } else {
+      return false
+  }
+
+}
+// Using JS Class Syntax
+class queueWithStacks {
+  constructor(){
+    this.in =[];
+    this.out=[];
+  }
+  enqueue(val){
+    this.in.push(val)
+  }
+  dequeue(val){
+    if(this.out.length === 0){
+      while(this.in.length){
+        this.out.pudh(this.in.pop());
+      }
+    }
+         return this.out.pop();
+  }
+  peek(){
+    if(this.out.length === 0){
+      while(this.in.length){
+        this.out.push(this.in.pop())
+      }
+    }
+    return this.out[this.out.length-1]
+  }
+  empty() {
+   return this.in.length === 0 && this.out.length === 0
+  }
 }
 ```
