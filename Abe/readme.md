@@ -173,7 +173,100 @@ def is_palindrome(s: str) -> bool:
 # Question #8 Merge Multi-Level Doubly Linked List (Medium)
 # Question #9 Cycle Detection (Medium)
 # Question #10 Valid Parentheses (Easy)
+```python
+class Solution(object):
+    def isValid(self, s):
+        stack, match = [], {')': '(', ']': '[', '}': '{'}
+        
+        for char in s:
+            if char in match:
+                # stack should have closing bracket on top
+                
+                if stack and stack[-1] == match[char]:
+                    stack.pop()
+                    continue
+                else:
+                    return False
+            else:
+                stack.append(char)
+        
+        return not stack
+        
+```
 # Question #11 Minimum Brackets To Remove To Make Valid (Medium)
+```python
+class Solution(object):
+    
+    
+    def remove_invalid(self, s, opened, close):
+        current_pass = []
+        count_open = 0 # how many (
+        
+        for element in s:
+            
+            if element == opened:
+                current_pass.append(element)
+                count_open += 1
+            elif element == close:
+                # if there are not enough open then we can skip it
+                if count_open == 0:
+                    continue
+                else:
+                    count_open -= 1
+                    current_pass.append(element)
+            else:
+                current_pass.append(element)
+            
+        return "".join(current_pass)
+        
+        
+    def minRemoveToMakeValid(self, s):
+        current = self.remove_invalid(s, "(", ")")
+        right = self.remove_invalid(current[::-1], ")", "(")
+        
+        return right[::-1]
+```
 # Question #12 Implement Queue With Stacks (Easy)
+```python
+class MyQueue:
+    def __init__(self):
+        self.s1 = []
+        self.s2 = []
+
+    def push(self, x):
+        while self.s1:
+            self.s2.append(self.s1.pop())
+        self.s1.append(x)
+        while self.s2:
+            self.s1.append(self.s2.pop())
+
+    def pop(self):
+        return self.s1.pop()
+
+    def peek(self):
+        return self.s1[-1]
+
+    def empty(self):
+        return not self.s1
+```
 # Question #13 Kth Largest Element (Medium)
+```python
+from heapq import *
+class Solution(object):
+    def findKthLargest(self, nums, k):
+        # use a min-heap
+        heap = []
+        
+        for element in nums:
+            if len(heap) < k:
+                heappush(heap, element)
+            
+            else:
+                if heap[0] < element:
+                    heappop(heap)
+                    heappush(heap, element)
+        return heap[0]
+                    
+        
+```
 # Question #14 Start And End Of Target (Medium)
