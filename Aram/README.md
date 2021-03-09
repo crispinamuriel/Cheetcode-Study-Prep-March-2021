@@ -470,6 +470,7 @@ const isCollision = (array) => {
 // account for the numbers in the string -- condition -- evaluate based on integer value
 // account for the sign/operands in the string -- condition -- evaluate based on operand
 // account for any spaces in the string -- condition -- continue on
+// basic calculations contingent upon PEMDAS, evaluate from left-to-right
 
 const calculator = (string) => {
     let stack = []
