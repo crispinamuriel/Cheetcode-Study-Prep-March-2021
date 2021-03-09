@@ -284,3 +284,28 @@ const str = 'the sky is blue'
 // console.log(reverseWordsInStr(str));
 console.log(reverseStr('reverse', 0, 7))
 console.log(reverseStr('andersonpaak', 2, 8))
+
+// Asteroid Collision, Basic Calculator II, Valid Parenth
+
+// ASTEROID COLLISION
+var asteroidCollision = function(asteroids) {
+  let stack = []
+  for (let i = 0; i< asteroids.length; i++){
+      let element = asteroids[i]
+      //check collision
+      let elemInStack = stack[stack.length-1]
+      if (elemInStack > 0 && element < 0){
+          //which kind of collision?
+          let sum = element + elemInStack
+          if (sum === 0 || sum < 0 ){
+              stack.pop()
+          }
+          if (sum < 0){
+              i--
+          }
+      } else {
+          stack.push(element)
+      }
+  }
+  return stack
+};
