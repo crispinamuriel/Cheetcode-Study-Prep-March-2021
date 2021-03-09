@@ -1,17 +1,30 @@
+<<<<<<< HEAD
 # Question #1 Google Interview Question Two Sum (Easy)
 
 ## Time: O(n) --- Space: O(n)
+=======
+## Question #1 Google Interview Question Two Sum (Easy)
+# Time: O(n) --- Space: O(n)
+>>>>>>> 7cccbb4f347442f19ac29ff7d9a0fffb2a9c26fa
 
-```JavaScript
+```JavaScript 
 
 
 function twoSum(nums, target) {
     const hash = {}
+<<<<<<< HEAD
     for (let i = 0; i < nums.length; i++) {
         hash[nums[i]] = i
     }
 
     for (let i = 0; i < nums.length; i++) {
+=======
+    for (let i = 0; i < nums.length; i++) {
+        hash[nums[i]] = i
+    }
+
+    for (let i = 0; i < nums.length; i++) {
+>>>>>>> 7cccbb4f347442f19ac29ff7d9a0fffb2a9c26fa
         const diff = target - nums[i]
         if (hash[diff] && hash[diff] !== i) {
             return [i, hash[diff]]
@@ -19,9 +32,15 @@ function twoSum(nums, target) {
     }
 }
 
+
 ```
 
+<<<<<<< HEAD
 # Question #2 Container With Most Water (Medium)
+=======
+## Question #2 Container With Most Water (Medium)
+# Time: O(n) --- Space: O(1)
+>>>>>>> 7cccbb4f347442f19ac29ff7d9a0fffb2a9c26fa
 
 ## Time: O(n) --- Space: O(1)
 
@@ -45,7 +64,12 @@ function maxArea(heights) {
 }
 ```
 
+<<<<<<< HEAD
 # Question # 3 Trapping Rain Water (Hard)
+=======
+## Question # 3 Trapping Rain Water (Hard)
+# Time: O(n) --- Space: O(1)
+>>>>>>> 7cccbb4f347442f19ac29ff7d9a0fffb2a9c26fa
 
 ## Time: O(n) --- Space: O(1)
 
@@ -56,12 +80,27 @@ function trap(heights) {
 
     if (heights.length < 3) return 0
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7cccbb4f347442f19ac29ff7d9a0fffb2a9c26fa
     for (let i = i; i < height.length; i++) {
         if (maxLeft[i] < maxLeft[i - 1]) {
             maxLeft[i] = maxLeft[i - 1]
         }
     }
+<<<<<<< HEAD
+=======
+
+    for (let i = height.length - 2; i >= 0; i--) {
+        if (maxRight[i] < maxRight[i - 1]) {
+            maxRight[i] maxright[i - 1]
+        }
+    }
+
+    return heights.reduce((total, cur, idx) => total + Math.min(maxLeft[idx], maxRight[idx]) - cur, 0) 
+}
+>>>>>>> 7cccbb4f347442f19ac29ff7d9a0fffb2a9c26fa
 
     for (let i = height.length - 2; i >= 0; i--) {
         if (maxRight[i] < maxRight[i - 1]) {
@@ -73,7 +112,12 @@ function trap(heights) {
 }
 ```
 
+<<<<<<< HEAD
 # Question #4 Backspace String Compare (Easy)
+=======
+## Question #4 Backspace String Compare (Easy)
+# Time: O(n^2) --- Space: O(n)
+>>>>>>> 7cccbb4f347442f19ac29ff7d9a0fffb2a9c26fa
 
 ## Time: O(n) --- Space: O(n)
 
@@ -101,7 +145,12 @@ function backSpaceCompare(S, T) {
 }
 ```
 
+<<<<<<< HEAD
 # Question #5 Longest Substring Without Repeating Characters (Medium)
+=======
+## Question #5 Longest Substring Without Repeating Characters (Medium)
+# Time: O(n) --- Space: O(n)
+>>>>>>> 7cccbb4f347442f19ac29ff7d9a0fffb2a9c26fa
 
 ## Time: O(n) --- Space: O(n)
 
@@ -123,11 +172,19 @@ function substringCheck(s) {
 }
 ```
 
+<<<<<<< HEAD
 # Question #6a Valid Palindrome (Easy)
+=======
+## Question #6a Valid Palindrome (Easy) 
+# Time: O(n) --- Space: O(1)
+>>>>>>> 7cccbb4f347442f19ac29ff7d9a0fffb2a9c26fa
 
 ## Time: O(n) --- Space: O(1)
 
+<<<<<<< HEAD
 ```JavaScript
+=======
+>>>>>>> 7cccbb4f347442f19ac29ff7d9a0fffb2a9c26fa
 function validPalindrome(s) {
     leftIndex = 0
 	rightIndex = string.length - 1
@@ -142,11 +199,19 @@ function validPalindrome(s) {
 }
 ```
 
+<<<<<<< HEAD
 # Question #6b Almost Palindrome (Easy)
 
 ## Time: O(n) --- Space: O(1)
 
 ```JavaScript
+=======
+## Question #6b Almost Palindrome (Easy) 
+# Time: O(n) --- Space: O(1)
+
+```JavaScript 
+
+>>>>>>> 7cccbb4f347442f19ac29ff7d9a0fffb2a9c26fa
 function almostPalindrome(s) {
      let start = 0;
   let end = s.length - 1;
