@@ -422,3 +422,39 @@ var swapPairs = function (head) {
 ```javascript
 
 ```
+
+# 39. Min Stack
+
+```javascript
+
+```
+
+# 40. Evaluate Reverse Polish Notation
+
+```javascript
+
+```
+
+# 41. Valid Parentheses
+
+```javascript
+var isValid = function (s) {
+  let stack = [];
+  let map = {
+    ")": "(",
+    "]": "[",
+    "}": "{",
+  };
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] in map) {
+      let val = stack.pop();
+      if (val !== map[s[i]]) {
+        return false;
+      }
+    } else {
+      stack.push(s[i]);
+    }
+  }
+  return stack.length === 0;
+};
+```

@@ -337,3 +337,112 @@ function find_cycle_start(head) {
   return null;
 }
 ```
+
+# Question #10 Valid Parentheses (Easy)
+
+var isValid = function(s) {
+
+```javascript
+// running O(n), space O(n)
+var isValid = function (s) {
+  if (s.length < 2) return false;
+  let stack = [];
+  let matchingRightToLeft = {
+    ")": "(",
+    "}": "{",
+    "]": "[",
+  };
+
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] in matchingRightToLeft) {
+      let item = stack.pop();
+      if (item !== matchingRightToLeft[s[i]]) {
+        return false;
+      }
+    } else {
+      stack.push(s[i]);
+    }
+  }
+  return stack.length == 0;
+};
+```
+
+# Question #11 Minimum Brackets To Remove To Make Valid (Medium)
+
+```javascript
+// running O(n), space O(n)
+var minRemoveToMakeValid = function (s) {
+  const answer = s.split("");
+  const stack = [];
+
+  for (let i = 0; i < answer.length; i++) {
+    if (answer[i] === "(") {
+      stack.push(i);
+    } else if (answer[i] === ")" && stack.length) {
+      stack.pop();
+    } else if (answer[i] === ")") {
+      answer[i] = "";
+    }
+  }
+
+  while (stack.length) {
+    const curIndex = stack.pop();
+    answer[curIndex] = "";
+  }
+
+  return answer.join("");
+};
+```
+
+# Question #12 Implement Queue With Stacks (Easy)
+
+```javascript
+class My Queue{
+  constructor () {
+    this.data =[];
+    this.stack2 = [];
+  }
+
+/**
+ * Push element x to the back of queue.
+ * @param {number} x
+ * @return {void}
+ */
+  push(x) {
+    this.data.push(x);
+  }
+
+/**
+ * Removes the element from in front of queue and returns that element.
+ * @return {number}
+ */
+  pop() {
+  	while (this.data.length) {
+		  this.stack2.push(this.data.pop())
+    }
+    let poped = this.stack2.pop()
+    while (this.stack2.length) {
+      this.data.push(this.stack2.pop())
+    }
+	return poped
+}
+
+/**
+ * Get the front element.
+ * @return {number}
+ */
+  peek() {
+    return this.data[0];
+}
+
+/**
+ * Returns whether the queue is empty.
+ * @return {boolean}
+ */
+  empty() {
+    if(this.data.length || this.stack2.length)
+      return false;
+    else return true;
+  }
+}
+```
