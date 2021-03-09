@@ -211,18 +211,82 @@ var validPalindrome = function (s) {
 ## Question 7 Reverse Linked List II, M, N Reversals
 
 ```javascript
-//TODO: redo and copy solution here (did it already but didnt save it and dont like the one on solution)
+// running O(n), space O(1)
+//p,q are indexs to the position in the linkedlist not the values
+const reverseSubList = function (head, p, q) {
+  let current = head;
+  let prev = null;
+  let i = 0;
+  while (current !== null && i < p - 1) {
+    prev = current;
+    current = current.next;
+    i++;
+  }
+
+  let lastPartOfFirstLink = prev;
+
+  let endOfLinkAfterReverse = current;
+
+  current = endOfLinkAfterReverse;
+  let next = null;
+  prev = null;
+  i = 0;
+  while ((current != null) & (i < q - p + 1)) {
+    next = current.next;
+    current.next = prev;
+    prev = current;
+    current = next;
+    i++;
+  }
+  if (lastPartOfFirstLink !== null) {
+    // need to link first part to reversed
+    lastPartOfFirstLink.next = prev;
+  } else {
+    head = prev;
+  }
+  //reversed to what is left of the linklist
+  endOfLinkAfterReverse.next = current;
+  return head;
+};
 ```
 
 ## Question 8 Flatten a Multilevel Doubly Linked List
 
 ```javascript
+// running time O(n), space O(1)
+// merge up the child linkedlist and keep iterating next
+var flatten = function (head) {
+  if (!head) return head;
 
+  let currentNode = head;
+  while (currentNode !== null) {
+    if (currentNode.child === null) {
+      currentNode = currentNode.next;
+    } else {
+      let tail = currentNode.child;
+      while (tail.next !== null) {
+        tail = tail.next;
+      }
+
+      tail.next = currentNode.next;
+      if (tail.next !== null) {
+        tail.next.prev = tail;
+      }
+
+      currentNode.next = currentNode.child;
+      currentNode.next.prev = currentNode;
+      currentNode.child = null;
+    }
+  }
+
+  return head;
+};
 ```
 
 ## Question 9 Cycle Detection
 
 ```javascript
+// running O(n), space O(1)
 function find_start(head, cycle_length) {
   let pointer1 = head,
     pointer2 = head;
@@ -253,6 +317,7 @@ function calculate_cycle_length(slow) {
 }
 
 function find_cycle_start(head) {
+  if (head == null || head.next == null) return null;
   cycle_length = 0;
   // find the LinkedList cycle
   let slow = head,
@@ -263,9 +328,121 @@ function find_cycle_start(head) {
     if (slow === fast) {
       // found the cycle
       cycle_length = calculate_cycle_length(slow);
+      let start = find_start(head, cycle_length);
+      if (start != -1) return start;
+      else return null;
       break;
     }
   }
-  return find_start(head, cycle_length);
+  return null;
+}
+```
+
+# Question #10 Valid Parentheses (Easy)
+
+var isValid = function(s) {
+
+```javascript
+// running O(n), space O(n)
+var isValid = function (s) {
+  if (s.length < 2) return false;
+  let stack = [];
+  let matchingRightToLeft = {
+    ")": "(",
+    "}": "{",
+    "]": "[",
+  };
+
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] in matchingRightToLeft) {
+      let item = stack.pop();
+      if (item !== matchingRightToLeft[s[i]]) {
+        return false;
+      }
+    } else {
+      stack.push(s[i]);
+    }
+  }
+  return stack.length == 0;
+};
+```
+
+# Question #11 Minimum Brackets To Remove To Make Valid (Medium)
+
+```javascript
+// running O(n), space O(n)
+var minRemoveToMakeValid = function (s) {
+  const answer = s.split("");
+  const stack = [];
+
+  for (let i = 0; i < answer.length; i++) {
+    if (answer[i] === "(") {
+      stack.push(i);
+    } else if (answer[i] === ")" && stack.length) {
+      stack.pop();
+    } else if (answer[i] === ")") {
+      answer[i] = "";
+    }
+  }
+
+  while (stack.length) {
+    const curIndex = stack.pop();
+    answer[curIndex] = "";
+  }
+
+  return answer.join("");
+};
+```
+
+# Question #12 Implement Queue With Stacks (Easy)
+
+```javascript
+class My Queue{
+  constructor () {
+    this.data =[];
+    this.stack2 = [];
+  }
+
+/**
+ * Push element x to the back of queue.
+ * @param {number} x
+ * @return {void}
+ */
+  push(x) {
+    this.data.push(x);
+  }
+
+/**
+ * Removes the element from in front of queue and returns that element.
+ * @return {number}
+ */
+  pop() {
+  	while (this.data.length) {
+		  this.stack2.push(this.data.pop())
+    }
+    let poped = this.stack2.pop()
+    while (this.stack2.length) {
+      this.data.push(this.stack2.pop())
+    }
+	return poped
+}
+
+/**
+ * Get the front element.
+ * @return {number}
+ */
+  peek() {
+    return this.data[0];
+}
+
+/**
+ * Returns whether the queue is empty.
+ * @return {boolean}
+ */
+  empty() {
+    if(this.data.length || this.stack2.length)
+      return false;
+    else return true;
+  }
 }
 ```
