@@ -67,6 +67,35 @@ Explanation: Smallest subarrays with a sum greater than or
  equal to '8' are [3, 4, 1] or [1, 1, 6].
  ```
 
+```javascript
+function smallest_subarray_with_given_sum(s, arr) {
+  let windowSum = 0,
+    minLength = Infinity,
+    windowStart = 0;
+
+  for (windowEnd = 0; windowEnd < arr.length; windowEnd++) {
+    windowSum += arr[windowEnd]; // add the next element
+    // shrink the window as small as possible until the 'window_sum' is smaller than 's'
+    while (windowSum >= s) {
+      minLength = Math.min(minLength, windowEnd - windowStart + 1);
+      windowSum -= arr[windowStart];
+      windowStart += 1;
+    }
+  }
+
+  if (minLength === Infinity) {
+    return 0;
+  }
+  return minLength;
+}
+
+
+console.log(`Smallest subarray length: ${smallest_subarray_with_given_sum(7, [2, 1, 5, 2, 3, 2])}`);
+console.log(`Smallest subarray length: ${smallest_subarray_with_given_sum(7, [2, 1, 5, 2, 8])}`);
+console.log(`Smallest subarray length: ${smallest_subarray_with_given_sum(8, [3, 4, 1, 1, 6])}`);
+
+```
+
 
 ###Longest Substring with K Distinct Characters (medium): LC 340
 ```
@@ -93,6 +122,40 @@ Output: 5
 Explanation: The longest substrings with no more than '3' distinct 
 characters are "cbbeb" & "bbebi".
  ```
+```javascript
+function longest_substring_with_k_distinct(str, k) {
+  let windowStart = 0,
+    maxLength = 0,
+    charFrequency = {};
+
+  // in the following loop we'll try to extend the range [window_start, window_end]
+  for (let windowEnd = 0; windowEnd < str.length; windowEnd++) {
+    const rightChar = str[windowEnd];
+    if (!(rightChar in charFrequency)) {
+      charFrequency[rightChar] = 0;
+    }
+    charFrequency[rightChar] += 1;
+    // shrink the sliding window, until we are left with 'k' distinct characters in the char_frequency
+    while (Object.keys(charFrequency).length > k) {
+      const leftChar = str[windowStart];
+      charFrequency[leftChar] -= 1;
+      if (charFrequency[leftChar] === 0) {
+        delete charFrequency[leftChar];
+      }
+      windowStart += 1; // shrink the window
+    }
+    // remember the maximum length so far
+    maxLength = Math.max(maxLength, windowEnd - windowStart + 1);
+  }
+
+  return maxLength;
+}
+
+
+console.log(`Length of the longest substring: ${longest_substring_with_k_distinct('araaci', 2)}`);
+console.log(`Length of the longest substring: ${longest_substring_with_k_distinct('araaci', 1)}`);
+console.log(`Length of the longest substring: ${longest_substring_with_k_distinct('cbbebi', 3)}`);
+```
 
 ### Fruits into Baskets (medium): LC 904
 ```Problem Statement #
