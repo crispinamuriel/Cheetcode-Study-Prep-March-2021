@@ -1,4 +1,4 @@
-# Pattern: Sliding Window (11)
+# Pattern: Sliding Window 
 
 ### Maximum Sum Subarray of Size K 
 ```
