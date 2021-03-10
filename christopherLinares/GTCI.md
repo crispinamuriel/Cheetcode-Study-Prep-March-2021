@@ -1,5 +1,120 @@
 # Grokking the Coding Interview: Patterns for Coding Questions
 
+
+
+
+## Pattern: Sliding Window
+
+### Average of all contiguous subarrays of size ‘K’
+
+```javascript
+function find_averages_of_subarrays(K, arr) {
+  const result = [];
+  let windowSum = 0.0,
+    windowStart = 0;
+  for (let windowEnd = 0; windowEnd < arr.length; windowEnd++) {
+    windowSum += arr[windowEnd]; // add the next element
+    // slide the window, we don't need to slide if we've not hit the required window size of 'k'
+    if (windowEnd >= K - 1) {
+      result.push(windowSum / K); // calculate the average
+      windowSum -= arr[windowStart]; // subtract the element going out
+      windowStart += 1; // slide the window ahead
+    };
+  };
+
+  return result;
+};
+```
+
+### Maximum Sum Subarray of Size K (easy)
+
+```javascript
+function max_sub_array_of_size_k(k, arr) {
+  let maxSum = 0;
+  let windowSum = 0;
+  let windowStart = 0;
+
+  for (let windowEnd = 0; windowEnd < arr.length; windowEnd++) {
+    windowSum += arr[windowEnd]; // add the next element
+    // slide the window, we don't need to slide if we've not hit the required window size of 'k'
+    if (windowEnd >= k - 1) {
+      maxSum = Math.max(maxSum, windowSum);
+      windowSum -= arr[windowStart]; // subtract the element going out
+      windowStart += 1; // slide the window ahead
+    };
+  };
+  return maxSum;
+};
+
+/*
+Time Complexity #
+The time complexity of the above algorithm will be O(N)
+
+Space Complexity #
+The algorithm runs in constant space O(1)
+*/
+```
+
+### Smallest Subarray with a given sum (easy)
+
+```javascript
+/*
+
+let sum = 0
+let minLength = Infinity
+let windowStart = 0
+
+for (windowEnd < arr.length)
+keep a running sum of elements
+while nested loop (sum >=s)
+Record length of this window as smallest so far
+remove windowStart from sum
+shrink the window from left once
+continue until for loop ends
+if(minLength === Infinity)return 0 else minLength
+
+*/
+
+function smallest_subarray_with_given_sum(s, arr) {
+  let windowSum = 0,
+    minLength = Infinity,
+    windowStart = 0;
+
+  for (windowEnd = 0; windowEnd < arr.length; windowEnd++) {
+    windowSum += arr[windowEnd]; // add the next element
+    // shrink the window as small as possible until the 'window_sum' is smaller than 's'
+    while (windowSum >= s) {
+      minLength = Math.min(minLength, windowEnd - windowStart + 1);
+      windowSum -= arr[windowStart];
+      windowStart += 1;
+    };
+  };
+
+  if (minLength === Infinity) {
+    return 0;
+  };
+  return minLength;
+};
+
+/*
+Time Complexity #
+The time complexity of the above algorithm will be O(N)O(N). The outer for loop runs for all elements, and the inner while loop processes each element only once; therefore, the time complexity of the algorithm will be O(N+N)O(N+N), which is asymptotically equivalent to O(N)
+
+Space Complexity #
+The algorithm runs in constant space O(1)
+*/
+```
+
+
+
+
+
+
+
+
+
+
+
 ## Pattern: In-place Reversal of a LinkedList
 
 In a lot of problems, we are asked to reverse the links between a set of nodes of a LinkedList. Often, the constraint is that we need to do this in-place, i.e., using the existing node objects and without using extra memory.

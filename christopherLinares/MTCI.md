@@ -28,10 +28,8 @@ var twoSum = function (nums, target) {
 };
 ```
 
-
-
-
 ## Stacks - Question #10 - Valid Parentheses (Easy)
+
 ```javascript
 /*
 inputA = "{}[]" -> true
@@ -50,50 +48,48 @@ for(i < s.length)
 
 */
 
-var isValid = function(s) {
-    // edge cases
-    if (s.length === 0) return true
-    if (s.length === 1) return false
-    if (s.length % 2 !== 0) return false
+var isValid = function (s) {
+  // edge cases
+  if (s.length === 0) return true;
+  if (s.length === 1) return false;
+  if (s.length % 2 !== 0) return false;
 
-    let stack = [];
-    const hashMap = {
-	'}': '{',
-	')': '(',
-	']': '['
-    };
+  let stack = [];
+  const hashMap = {
+    '}': '{',
+    ')': '(',
+    ']': '[',
+  };
 
-    for (var i = 0; i < s.length; i ++) {
-        const currChar = s[i];
-        const topStack = stack[stack.length - 1];
-        const delChar = hashMap[currChar];
+  for (var i = 0; i < s.length; i++) {
+    const currChar = s[i];
+    const topStack = stack[stack.length - 1];
+    const delChar = hashMap[currChar];
 
-        if (delChar) {
-            if (delChar === topStack) {
-                stack.pop();
-            } else {
-                return false;
-            };
-        } else {
-            stack.push(currChar)
-        };
-    };
+    if (delChar) {
+      if (delChar === topStack) {
+        stack.pop();
+      } else {
+        return false;
+      }
+    } else {
+      stack.push(currChar);
+    }
+  }
 
-    return !stack.length;
+  return !stack.length;
 };
 ```
 
-
-
-
 ## Stacks - Extra Credit - Asteroid Collision (Medium)
+
 ```javascript
 /*
 
 
 
 */
-var asteroidCollision = function(asteroids) {
+var asteroidCollision = function (asteroids) {
   let i = 0;
   let stack = [];
 
@@ -103,12 +99,15 @@ var asteroidCollision = function(asteroids) {
 
     if (curr >= 0 || !stack.length || topStack < 0) {
       stack.push(asteroids[i++]);
-    } else if (curr + topStack < 0) { // current negative is bigger than previous positive
+    } else if (curr + topStack < 0) {
+      // current negative is bigger than previous positive
       stack.pop();
-    } else if (curr + topStack === 0) { // same size
+    } else if (curr + topStack === 0) {
+      // same size
       stack.pop();
       i++;
-    } else { // current negative is smaller than previous positive
+    } else {
+      // current negative is smaller than previous positive
       i++;
     }
   }
@@ -120,6 +119,7 @@ var asteroidCollision = function(asteroids) {
 
 
 
+## Stacks - Question #11 - Minimum Brackets To Remove (Medium)
 ```javascript
 
 ```
