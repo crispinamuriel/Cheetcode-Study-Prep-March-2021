@@ -135,19 +135,12 @@ function substringCheck(s) {
 }
 ```
 
-<<<<<<< HEAD
-# Question #6a Valid Palindrome (Easy)
-=======
 ## Question #6a Valid Palindrome (Easy) 
 # Time: O(n) --- Space: O(1)
->>>>>>> 7cccbb4f347442f19ac29ff7d9a0fffb2a9c26fa
 
 ## Time: O(n) --- Space: O(1)
 
-<<<<<<< HEAD
 ```JavaScript
-=======
->>>>>>> 7cccbb4f347442f19ac29ff7d9a0fffb2a9c26fa
 function validPalindrome(s) {
     leftIndex = 0
 	rightIndex = string.length - 1
@@ -162,19 +155,11 @@ function validPalindrome(s) {
 }
 ```
 
-<<<<<<< HEAD
-# Question #6b Almost Palindrome (Easy)
-
-## Time: O(n) --- Space: O(1)
-
-```JavaScript
-=======
 ## Question #6b Almost Palindrome (Easy) 
 # Time: O(n) --- Space: O(1)
 
 ```JavaScript 
 
->>>>>>> 7cccbb4f347442f19ac29ff7d9a0fffb2a9c26fa
 function almostPalindrome(s) {
      let start = 0;
   let end = s.length - 1;
