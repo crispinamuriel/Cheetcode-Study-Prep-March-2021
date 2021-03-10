@@ -105,6 +105,125 @@ The algorithm runs in constant space O(1)
 */
 ```
 
+### Longest Substring with K Distinct Characters (medium)
+
+```javascript
+/*
+
+  sliding window pattern
+  let windowStart = 0
+  let characters = {};
+  for (windowEnd < str.length)
+  let curr = string[i]
+  if (characters[curr] === undefined) change value of undefined to 1
+  else (increment value)
+  if(value at that key not exceeding K)
+
+*/
+
+function longest_substring_with_k_distinct(str, k) {
+  let windowStart = 0,
+    maxLength = 0,
+    charFrequency = {};
+
+  // in the following loop we'll try to extend the range [window_start, window_end]
+  for (let windowEnd = 0; windowEnd < str.length; windowEnd++) {
+    const rightChar = str[windowEnd];
+    if (!(rightChar in charFrequency)) {
+      charFrequency[rightChar] = 0;
+    };
+    charFrequency[rightChar] += 1;
+    // shrink the sliding window, until we are left with 'k' distinct characters in the char_frequency
+    while (Object.keys(charFrequency).length > k) {
+      const leftChar = str[windowStart];
+      charFrequency[leftChar] -= 1;
+      if (charFrequency[leftChar] === 0) {
+        delete charFrequency[leftChar];
+      };
+      windowStart += 1; // shrink the window
+    };
+    // remember the maximum length so far
+    maxLength = Math.max(maxLength, windowEnd - windowStart + 1);
+  };
+
+  return maxLength;
+};
+```
+
+### Fruits into Baskets (medium)
+
+```javascript
+const fruits_into_baskets = function(fruits) {
+  /*
+  edges: empty fruits arr return 0, .length = 1 return 1;
+
+  Sliding window pattern
+  let currMax;
+  let windowStart = 0;
+  let frequency = {};
+  for (windowEnd < fruits.length)
+  if () fruit not found in frequency add it else increment
+  while () if more than two fruits in frequency shrink window
+  return currMax
+
+  */
+
+  let currMax = 0;
+  let windowStart = 0;
+  let frequency = {};
+
+  for (let windowEnd = 0; windowEnd < fruits.length; windowEnd++) {
+    const curr = fruits[windowEnd];
+
+    if (frequency[curr] === undefined) {
+      frequency[curr] = 1;
+    } else {
+      frequency[curr]++
+    };
+
+    while (Object.keys(frequency).length > 2) {
+      const left = fruits[windowStart];
+      frequency[left]--;
+
+      if (frequency[left] === 0) delete frequency[left];
+      windowStart++
+    };
+
+    currMax = Math.max(currMax, windowEnd - windowStart + 1);
+  };
+
+  return currMax;
+};
+
+```
+
+### No-repeat Substring (hard)
+
+```javascript
+function non_repeat_substring(str) {
+  let windowStart = 0,
+    maxLength = 0,
+    charIndexMap = {};
+
+  // try to extend the range [windowStart, windowEnd]
+  for (let windowEnd = 0; windowEnd < str.length; windowEnd++) {
+    const rightChar = str[windowEnd];
+    // if the map already contains the 'rightChar', shrink the window from the beginning so that
+    // we have only one occurrence of 'rightChar'
+    if (rightChar in charIndexMap) {
+      // this is tricky; in the current window, we will not have any 'rightChar' after its previous index
+      // and if 'windowStart' is already ahead of the last index of 'rightChar', we'll keep 'windowStart'
+      windowStart = Math.max(windowStart, charIndexMap[rightChar] + 1);
+    }
+    // insert the 'rightChar' into the map
+    charIndexMap[rightChar] = windowEnd;
+    // remember the maximum length so far
+    maxLength = Math.max(maxLength, windowEnd - windowStart + 1);
+  }
+  return maxLength;
+}
+```
+
 
 
 
