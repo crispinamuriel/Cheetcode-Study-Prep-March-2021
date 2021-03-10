@@ -405,15 +405,15 @@ const decodeString = (string) => {
     let temp = ''
     let result = ''
     for (let elem in string) {
-        if (!isNaN(elem)) {
+        if (!isNaN(elem)) { // if elem is a number
             temp = `${temp}${elem}`
-        } else if (elem === '[') {
+        } else if (elem === '[') { // if elem is opening of square bracket
             stack.push(temp)
             temp = ''
             subString.push(result)
             result = ''
-        } else if (elem === ']') {
-            solution = subString.pop() + solution.repeat(stack.pop())
+        } else if (elem === ']') { // if elem is closing of square bracket
+            result = subString.pop() + result.repeat(stack.pop())
         } else {
             result += elem
         }
@@ -511,4 +511,14 @@ const calculator = (string) => {
         return a + b
     }, 0)
 }
+```
+
+# Question #26 Max-Stack
+## Time: --- Space: 
+```JavaScript
+
+
+
+
+
 ```
