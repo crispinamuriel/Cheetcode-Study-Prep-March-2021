@@ -200,28 +200,87 @@ const fruits_into_baskets = function(fruits) {
 ### No-repeat Substring (hard)
 
 ```javascript
-function non_repeat_substring(str) {
-  let windowStart = 0,
-    maxLength = 0,
-    charIndexMap = {};
+const non_repeat_substring = function(str) {
+  /*
+  let currMax = 0;
+  let windowStart = 0;
+  let charIndexes = {};
 
-  // try to extend the range [windowStart, windowEnd]
+  for (windowEnd < str.length)
+  if () charIndexes doesn't have letter than add it
+  else {} windowstart = last index that char was seen + 1
+  update max accordingly
+  return max
+
+  */
+
+  let currMax = 0;
+  let windowStart = 0;
+  let charIndexes = {};
+
+  for (let windowEnd = 0; windowEnd < str.length; windowEnd++) {
+    let rightWindow = str[windowEnd];
+
+    if (charIndexes[rightWindow] !== undefined) {
+      windowStart = Math.max(windowStart, charIndexes[rightWindow] + 1)
+    }
+
+    charIndexes[rightWindow] = windowEnd;
+    currMax = Math.max(currMax, windowEnd - windowStart + 1);
+
+  };
+
+  return currMax;
+
+  /*
+Time Complexity
+The above algorithm’s time complexity will be O(N), where ‘N’ is the number of characters in the input string.
+
+Space Complexity
+The algorithm’s space complexity will be O(K), where KK is the number of distinct characters in the input string. This also means K<=N, because in the worst case, the whole string might not have any repeating character, so the entire string will be added to the HashMap.
+*/
+};
+```
+
+### Longest Substring with Same Letters after Replacement (hard)
+
+```javascript
+function length_of_longest_substring(str, k) {
+  let windowStart = 0;
+  let maxLength = 0;
+  let maxRepeatLetterCount = 0;
+  let frequencyMap = {};
+
+  // Try to extend the range [windowStart, windowEnd]
   for (let windowEnd = 0; windowEnd < str.length; windowEnd++) {
     const rightChar = str[windowEnd];
-    // if the map already contains the 'rightChar', shrink the window from the beginning so that
-    // we have only one occurrence of 'rightChar'
-    if (rightChar in charIndexMap) {
-      // this is tricky; in the current window, we will not have any 'rightChar' after its previous index
-      // and if 'windowStart' is already ahead of the last index of 'rightChar', we'll keep 'windowStart'
-      windowStart = Math.max(windowStart, charIndexMap[rightChar] + 1);
+    if (frequencyMap[rightChar] === undefined) {
+      frequencyMap[rightChar] = 0;
     }
-    // insert the 'rightChar' into the map
-    charIndexMap[rightChar] = windowEnd;
-    // remember the maximum length so far
+    frequencyMap[rightChar]++;
+    maxRepeatLetterCount = Math.max(maxRepeatLetterCount, frequencyMap[rightChar]);
+
+    // Current window size is from windowStart to windowEnd, overall we have a letter which is
+    // repeating 'maxRepeatLetterCount' times, this means we can have a window which has one letter
+    // repeating 'maxRepeatLetterCount' times and the remaining letters we should replace.
+    // if the remaining letters are more than 'k', it is the time to shrink the window as we
+    // are not allowed to replace more than 'k' letters
+    if ((windowEnd - windowStart + 1 - maxRepeatLetterCount) > k) {
+      leftChar = str[windowStart];
+      frequencyMap[leftChar] -= 1;
+      windowStart += 1;
+    };
+
     maxLength = Math.max(maxLength, windowEnd - windowStart + 1);
-  }
+  };
   return maxLength;
 }
+```
+
+### Longest Subarray with Ones after Replacement (hard)
+
+```javascript
+
 ```
 
 
