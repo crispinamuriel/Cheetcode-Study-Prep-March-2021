@@ -165,7 +165,7 @@ const lengthOfLongestSubstring = function (s) {
 
 ```javascript
 var isValidPalindrome = function (s) {
-  let s = s.replace(/[^A-Za-z0-9]/g, " ").toLowerCase();
+  let s = s.replace(/[^A-Za-z0-9]/g, "").toLowerCase();
 
   let left = 0;
   let right = s.length - 1;
@@ -216,6 +216,8 @@ var validSubPalindrome = function (s, start, end) {
 ## Question #7a Reverse Linked List (Easy)
 
 ```Javascript
+//Create your own Node
+
 var reverseList = function (head) {
    let prevNode = null;
 
@@ -299,12 +301,38 @@ var isValid = function(s) {
     }
     return stack.length === 0;
 };
+
+//time: O(n)
+//space: O(n)
 ```
 
 ## Question #11 Minimum Brackets To Remove To Make Valid (Medium)
 
 ```Javascript
+const minRemoveToMakeValid = function(str) {
+    const res = str.split('');
+    const stack = [];
 
+    for (let i = 0; i < res.length; i++) {
+        if (res[i] === '(') {
+            stack.push(i);
+        } else if (res[i] === ')' && stack.length) {
+            stack.pop();
+        } else if (res[i] === ')') {
+            res[i] = ''
+        }
+    }
+
+    while (stack.length) {
+        const curChar = stack.pop();
+        res[curChar] = '';
+    }
+
+    return res.join('');
+};
+
+//time: O(n)
+//space: O(n)
 ```
 
 ## Question #12 Implement Queue With Stacks (Easy)
