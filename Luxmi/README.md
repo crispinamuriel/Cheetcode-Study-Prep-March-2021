@@ -233,7 +233,7 @@
 ```
 ---
 
-### [Two sum-ii](https://leetcode.com/problems/two-sum-iii-data-structure-design/submissions/)
+### 7. [Two sum-ii](https://leetcode.com/problems/two-sum-iii-data-structure-design/submissions/)
 ```python
 
 class TwoSum(object):
@@ -275,7 +275,7 @@ class TwoSum(object):
 ```
 ---
 
-### [One edit](https://leetcode.com/problems/edit-distance/)
+### 8. [One edit](https://leetcode.com/problems/edit-distance/)
 
 ```python
 def oneEdit(self, s, t): # using an external variable. O(n)
@@ -328,5 +328,26 @@ def oneEdit(self, s, t): # using an external variable. O(n)
                 j = j+1
                 continue
         return True
+
+```
+
+### 9. [strstr](https://leetcode.com/problems/implement-strstr/)
+
+```python
+
+        i = 0
+        len_needle = len(needle)
+        # edge cases
+        if not needle:
+            return 0
+        if haystack == needle:
+            return 0
+
+        while(i<=len(haystack)-len_needle):
+            if haystack[i:i+len_needle] == needle:
+                return i
+            i = i+1
+        
+        return -1
 
 ```
