@@ -2,6 +2,7 @@
 
 ## Maximum Sum Subarray of Size K (easy)
 
+```
 Given an array of positive numbers and a positive number ‘k,’ find the maximum sum of any contiguous subarray of size ‘k’.
 
 Example 1:
@@ -14,6 +15,7 @@ Example 2:
 Input: [2, 3, 4, 1, 5], k=2
 Output: 7
 Explanation: Subarray with maximum sum is [3, 4].
+```
 
 ```javascript
 // running time: O(N), space O(1)
@@ -37,6 +39,7 @@ function max_sub_array_of_size_k(k, arr) {
 
 ## Smallest Subarray with a given sum (easy)
 
+```
 Given an array of positive numbers and a positive number ‘S,’ find the length of the smallest contiguous subarray whose sum is greater than or equal to ‘S’. Return 0 if no such subarray exists.
 
 Example 1:
@@ -48,6 +51,7 @@ Explanation: The smallest subarray with a sum greater than or equal to '7' is [5
 Input: [2, 1, 5, 2, 8], S=7
 Output: 1
 Explanation: The smallest subarray with a sum greater than or equal to '7' is [8].
+```
 
 ```javascript
 // running time: O(N), space O(1)
@@ -75,6 +79,7 @@ function smallest_subarray_with_given_sum(s, arr) {
 
 # Longest Substring with K Distinct Characters (medium)
 
+```
 Given a string, find the length of the longest substring in it with no more than K distinct characters.
 
 Example 1:
@@ -87,6 +92,7 @@ Example 2:
 Input: String="araaci", K=1
 Output: 2
 Explanation: The longest substring with no more than '1' distinct characters is "aa".
+```
 
 ```javascript
 // running time: O(N), space O(1)  since 26 chars in alphabet  can also switch out to fixed array
@@ -121,6 +127,7 @@ function longest_substring_with_k_distinct(str, k) {
 
 # Fruits into Baskets (medium)
 
+```
 Given an array of characters where each character represents a fruit tree, you are given two baskets, and your goal is to put maximum number of fruits in each basket. The only restriction is that each basket can have only one type of fruit.
 
 You can start with any tree, but you can’t skip a tree once you have started. You will pick one fruit from each tree until you cannot, i.e., you will stop when you have to pick from a third fruit type.
@@ -138,6 +145,7 @@ Input: Fruit=['A', 'B', 'C', 'B', 'B', 'C']
 Output: 5
 Explanation: We can put 3 'B' in one basket and two 'C' in the other basket.
 This can be done if we start with the second letter: ['B', 'C', 'B', 'B', 'C']
+```
 
 ```javascript
 // running time: O(N), space O(1)  since max 3 of fruits
@@ -172,6 +180,7 @@ function fruits_into_baskets(fruits) {
 
 # No-repeat Substring (hard)
 
+```
 Problem Statement #
 Given a string, find the length of the longest substring, which has no repeating characters.
 
@@ -185,6 +194,7 @@ Example 2:
 Input: String="abbbb"
 Output: 2
 Explanation: The longest substring without any repeating characters is "ab".
+```
 
 ```javascript
 // running time: O(N), space O(1)  since 26 chars in alphabet  can also switch out to fixed array
@@ -214,6 +224,7 @@ function non_repeat_substring(str) {
 
 # Longest Substring with Same Letters after Replacement (hard)
 
+```
 Given a string with lowercase letters only, if you are allowed to replace no more than ‘k’ letters with any letter, find the length of the longest substring having the same letters after replacement.
 
 Example 1:
@@ -226,6 +237,7 @@ Example 2:
 Input: String="abbcb", k=1
 Output: 4
 Explanation: Replace the 'c' with 'b' to have a longest repeating substring "bbbb".
+```
 
 ```javascript
 //running time O(n) and space O(1)
@@ -266,6 +278,7 @@ function length_of_longest_substring(str, k) {
 
 # Longest Subarray with Ones after Replacement (hard)
 
+```
 Given an array containing 0s and 1s, if you are allowed to replace no more than ‘k’ 0s with 1s, find the length of the longest contiguous subarray having all 1s.
 
 Example 1:
@@ -278,8 +291,10 @@ Example 2:
 Input: Array=[0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1], k=3
 Output: 9
 Explanation: Replace the '0' at index 6, 9, and 10 to have the longest contiguous subarray of 1s having length 9.
+```
 
 ```javascript
+// O(N) and space O(1)
 function length_of_longest_substring(arr, k) {
   let windowStart = 0,
     maxLength = 0,
@@ -311,6 +326,7 @@ function length_of_longest_substring(arr, k) {
 
 # Permutation in a String (hard)
 
+```
 Given a string and a pattern, find out if the string contains any permutation of the pattern.
 
 Permutation is defined as the re-arranging of the characters of the string. For example, “abc” has the following six permutations:
@@ -332,8 +348,10 @@ Explanation: The string contains "bca" which is a permutation of the given patte
 Input: String="odicf", Pattern="dc"
 Output: false
 Explanation: No permutation of the pattern is present in the given string as a substring.
+```
 
 ```javascript
+//time O(N+M) and space O(M) m number of chars
 function find_permutation(str, pattern) {
   let windowStart = 0,
     matched = 0,
@@ -381,6 +399,7 @@ function find_permutation(str, pattern) {
 
 # String Anagrams (hard)
 
+```
 Given a string and a pattern, find all anagrams of the pattern in the given string.
 
 Anagram is actually a Permutation of a string. For example, “abc” has the following six anagrams:
@@ -403,8 +422,10 @@ Example 2:
 Input: String="abbcabc", Pattern="abc"
 Output: [2, 3, 4]
 Explanation: The three anagrams of the pattern in the given string are "bca", "cab", and "abc".
+```
 
 ```javascript
+// running time  O(N + M) and space O(N)
 function find_string_anagrams(str, pattern) {
   let windowStart = 0,
     matched = 0,
@@ -455,6 +476,7 @@ function find_string_anagrams(str, pattern) {
 
 # Smallest Window containing Substring (hard)
 
+```
 Given a string and a pattern, find the smallest substring in the given string which has all the characters of the given pattern.
 
 Example 1:
@@ -472,8 +494,10 @@ Example 3:
 Input: String="adcad", Pattern="abc"
 Output: ""
 Explanation: No substring in the given string has all characters of the pattern.
+```
 
 ```javascript
+// running time O(N + M) and space O(N)
 function find_substring(str, pattern) {
   let windowStart = 0,
     matched = 0,
@@ -529,6 +553,7 @@ function find_substring(str, pattern) {
 
 # Words Concatenation (hard)
 
+```
 Given a string and a list of words, find all the starting indices of substrings in the given string that are a concatenation of all the given words exactly once without any overlapping of words. It is given that all words are of the same length.
 
 Example 1:
@@ -541,8 +566,10 @@ Example 2:
 Input: String="catcatfoxfox", Words=["cat", "fox"]
 Output: [3]
 Explanation: The only substring containing both the words is "catfox".
+```
 
 ```javascript
+// O(N∗M∗Len) and space O(M+N)
 function find_word_concatenation(str, words) {
   if (words.length === 0 || words[0].length === 0) {
     return [];
