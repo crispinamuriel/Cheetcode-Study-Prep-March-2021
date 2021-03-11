@@ -1,8 +1,8 @@
-#Sliding Window Protocol
+# Sliding Window Protocol
 
 
-##Maximum Sum Subarray of Size K (easy)
-###Given an array of positive numbers and a positive number ‘k,’ find the maximum sum of any contiguous subarray of size ‘k’.
+## 1. Maximum Sum Subarray of Size K (easy)
+### Given an array of positive numbers and a positive number ‘k,’ find the maximum sum of any contiguous subarray of size ‘k’.
 
 ```python
 def max_sub_array_of_size_k(k, arr):
@@ -24,8 +24,8 @@ def max_sub_array_of_size_k(k, arr):
 ```
 ---
 
-##Smallest Subarray with a given sum (easy)
-###Given an array of positive numbers and a positive number ‘S,’ find the length of the smallest contiguous subarray whose sum is greater than or equal to ‘S’. Return 0 if no such subarray exists.
+## 2. Smallest Subarray with a given sum (easy)
+### Given an array of positive numbers and a positive number ‘S,’ find the length of the smallest contiguous subarray whose sum is greater than or equal to ‘S’. Return 0 if no such subarray exists.
 
 ```python
 def smallest_subarray_with_given_sum(s, arr):
@@ -47,8 +47,8 @@ def smallest_subarray_with_given_sum(s, arr):
   ```
 ---
 
-##Longest Substring with K Distinct Characters (medium)
-###Given a string, find the length of the longest substring in it with no more than K distinct characters.
+## 3. Longest Substring with K Distinct Characters (medium)
+### Given a string, find the length of the longest substring in it with no more than K distinct characters.
 
 
 ```python
