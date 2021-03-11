@@ -225,22 +225,6 @@ For each problem you study, add YOUR own version of the code using markdown. You
 
 
 - Two Sum
-
-```javascript
-function find_averages_of_subarrays(K, arr) {
-  const result = [];
-  for (let i = 0; i < arr.length - K + 1; i++) {
-    // find sum of next 'K' elements
-    sum = 0.0;
-    for (let j = i; j < i + K; j++) {
-      sum += arr[j];
-    }
-    result.push(sum / K); // calculate average
-  }
-
-  return result;
-}
-```
 - Two Sum II
 - Two Sum III
 - Valid Palindrome
