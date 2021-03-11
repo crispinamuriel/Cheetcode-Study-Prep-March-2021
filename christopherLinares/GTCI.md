@@ -1,5 +1,239 @@
 # Grokking the Coding Interview: Patterns for Coding Questions
 
+
+
+
+## Pattern: Sliding Window
+
+### Average of all contiguous subarrays of size ‘K’
+
+```javascript
+function find_averages_of_subarrays(K, arr) {
+  const result = [];
+  let windowSum = 0.0,
+    windowStart = 0;
+  for (let windowEnd = 0; windowEnd < arr.length; windowEnd++) {
+    windowSum += arr[windowEnd]; // add the next element
+    // slide the window, we don't need to slide if we've not hit the required window size of 'k'
+    if (windowEnd >= K - 1) {
+      result.push(windowSum / K); // calculate the average
+      windowSum -= arr[windowStart]; // subtract the element going out
+      windowStart += 1; // slide the window ahead
+    };
+  };
+
+  return result;
+};
+```
+
+### Maximum Sum Subarray of Size K (easy)
+
+```javascript
+function max_sub_array_of_size_k(k, arr) {
+  let maxSum = 0;
+  let windowSum = 0;
+  let windowStart = 0;
+
+  for (let windowEnd = 0; windowEnd < arr.length; windowEnd++) {
+    windowSum += arr[windowEnd]; // add the next element
+    // slide the window, we don't need to slide if we've not hit the required window size of 'k'
+    if (windowEnd >= k - 1) {
+      maxSum = Math.max(maxSum, windowSum);
+      windowSum -= arr[windowStart]; // subtract the element going out
+      windowStart += 1; // slide the window ahead
+    };
+  };
+  return maxSum;
+};
+
+/*
+Time Complexity #
+The time complexity of the above algorithm will be O(N)
+
+Space Complexity #
+The algorithm runs in constant space O(1)
+*/
+```
+
+### Smallest Subarray with a given sum (easy)
+
+```javascript
+/*
+
+let sum = 0
+let minLength = Infinity
+let windowStart = 0
+
+for (windowEnd < arr.length)
+keep a running sum of elements
+while nested loop (sum >=s)
+Record length of this window as smallest so far
+remove windowStart from sum
+shrink the window from left once
+continue until for loop ends
+if(minLength === Infinity)return 0 else minLength
+
+*/
+
+function smallest_subarray_with_given_sum(s, arr) {
+  let windowSum = 0,
+    minLength = Infinity,
+    windowStart = 0;
+
+  for (windowEnd = 0; windowEnd < arr.length; windowEnd++) {
+    windowSum += arr[windowEnd]; // add the next element
+    // shrink the window as small as possible until the 'window_sum' is smaller than 's'
+    while (windowSum >= s) {
+      minLength = Math.min(minLength, windowEnd - windowStart + 1);
+      windowSum -= arr[windowStart];
+      windowStart += 1;
+    };
+  };
+
+  if (minLength === Infinity) {
+    return 0;
+  };
+  return minLength;
+};
+
+/*
+Time Complexity #
+The time complexity of the above algorithm will be O(N)O(N). The outer for loop runs for all elements, and the inner while loop processes each element only once; therefore, the time complexity of the algorithm will be O(N+N)O(N+N), which is asymptotically equivalent to O(N)
+
+Space Complexity #
+The algorithm runs in constant space O(1)
+*/
+```
+
+### Longest Substring with K Distinct Characters (medium)
+
+```javascript
+/*
+
+  sliding window pattern
+  let windowStart = 0
+  let characters = {};
+  for (windowEnd < str.length)
+  let curr = string[i]
+  if (characters[curr] === undefined) change value of undefined to 1
+  else (increment value)
+  if(value at that key not exceeding K)
+
+*/
+
+function longest_substring_with_k_distinct(str, k) {
+  let windowStart = 0,
+    maxLength = 0,
+    charFrequency = {};
+
+  // in the following loop we'll try to extend the range [window_start, window_end]
+  for (let windowEnd = 0; windowEnd < str.length; windowEnd++) {
+    const rightChar = str[windowEnd];
+    if (!(rightChar in charFrequency)) {
+      charFrequency[rightChar] = 0;
+    };
+    charFrequency[rightChar] += 1;
+    // shrink the sliding window, until we are left with 'k' distinct characters in the char_frequency
+    while (Object.keys(charFrequency).length > k) {
+      const leftChar = str[windowStart];
+      charFrequency[leftChar] -= 1;
+      if (charFrequency[leftChar] === 0) {
+        delete charFrequency[leftChar];
+      };
+      windowStart += 1; // shrink the window
+    };
+    // remember the maximum length so far
+    maxLength = Math.max(maxLength, windowEnd - windowStart + 1);
+  };
+
+  return maxLength;
+};
+```
+
+### Fruits into Baskets (medium)
+
+```javascript
+const fruits_into_baskets = function(fruits) {
+  /*
+  edges: empty fruits arr return 0, .length = 1 return 1;
+
+  Sliding window pattern
+  let currMax;
+  let windowStart = 0;
+  let frequency = {};
+  for (windowEnd < fruits.length)
+  if () fruit not found in frequency add it else increment
+  while () if more than two fruits in frequency shrink window
+  return currMax
+
+  */
+
+  let currMax = 0;
+  let windowStart = 0;
+  let frequency = {};
+
+  for (let windowEnd = 0; windowEnd < fruits.length; windowEnd++) {
+    const curr = fruits[windowEnd];
+
+    if (frequency[curr] === undefined) {
+      frequency[curr] = 1;
+    } else {
+      frequency[curr]++
+    };
+
+    while (Object.keys(frequency).length > 2) {
+      const left = fruits[windowStart];
+      frequency[left]--;
+
+      if (frequency[left] === 0) delete frequency[left];
+      windowStart++
+    };
+
+    currMax = Math.max(currMax, windowEnd - windowStart + 1);
+  };
+
+  return currMax;
+};
+
+```
+
+### No-repeat Substring (hard)
+
+```javascript
+function non_repeat_substring(str) {
+  let windowStart = 0,
+    maxLength = 0,
+    charIndexMap = {};
+
+  // try to extend the range [windowStart, windowEnd]
+  for (let windowEnd = 0; windowEnd < str.length; windowEnd++) {
+    const rightChar = str[windowEnd];
+    // if the map already contains the 'rightChar', shrink the window from the beginning so that
+    // we have only one occurrence of 'rightChar'
+    if (rightChar in charIndexMap) {
+      // this is tricky; in the current window, we will not have any 'rightChar' after its previous index
+      // and if 'windowStart' is already ahead of the last index of 'rightChar', we'll keep 'windowStart'
+      windowStart = Math.max(windowStart, charIndexMap[rightChar] + 1);
+    }
+    // insert the 'rightChar' into the map
+    charIndexMap[rightChar] = windowEnd;
+    // remember the maximum length so far
+    maxLength = Math.max(maxLength, windowEnd - windowStart + 1);
+  }
+  return maxLength;
+}
+```
+
+
+
+
+
+
+
+
+
+
+
 ## Pattern: In-place Reversal of a LinkedList
 
 In a lot of problems, we are asked to reverse the links between a set of nodes of a LinkedList. Often, the constraint is that we need to do this in-place, i.e., using the existing node objects and without using extra memory.
