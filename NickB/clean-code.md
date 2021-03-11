@@ -3,10 +3,10 @@
 ```javascript
 /*
 Template: 
-  // Running Time: O(n^1), Space O(1) - Brute force
+  // Running Time: O(n^2), Space O(1) - Brute force
   // Running Time: O(n), Space O(n) - Hash Table
 */
-// Running Time: O(n^1), Space O(1) - Brute force
+// Running Time: O(n^2), Space O(1) - Brute force
 // Running Time: O(n), Space O(n) - Hash Table
 var twoSum = function (nums, target) {
   let dict = new Map();

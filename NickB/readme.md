@@ -85,6 +85,8 @@ var trap = function (heights) {
 ## Question #4 Backspace String Compare (Easy)
 
 ```javascript
+// runing time  O(n) and space O(n) with a  stack
+//runing time O(n) and space O(1)
 var backspaceCompare = function(S, T) {
 
     let i= S.length-1, j =T.length-1;
@@ -132,6 +134,8 @@ var backspaceCompare = function(S, T) {
 ## Question #5 Longest Substring Without Repeating Characters (Medium)
 
 ```javascript
+// running time O(n^2) and space O(1) brute force
+// runing time O(n) and space O(1)
 var lengthOfLongestSubstring = function (s) {
   let max = 0;
   let index = {};
@@ -151,6 +155,7 @@ var lengthOfLongestSubstring = function (s) {
 ## Question #6a Valid Palindrome(Easy)
 
 ```javascript
+//runining time  O(n) and space O(1)
 var isPalindrome = function (s) {
   let clean = s.toLowerCase().replace(/[^a-z0-9]/gi, "");
   return clean === clean.split("").reverse().join("");
@@ -178,6 +183,7 @@ var isPalindrome = function (s) {
 ## Question #6b Almost Palindrome (Easy)
 
 ```javascript
+// running time O(n) and space O(1) - two pointer
 var validSubPalindrome = function (s, left, right) {
   while (left < right) {
     if (s[left] !== s[right]) {
@@ -196,6 +202,7 @@ var validPalindrome = function (s) {
   let end = s.length - 1;
   while (start < end) {
     if (s[start] !== s[end]) {
+      //when u find one that isn't the space lets try without it to the left and to the right
       return (
         validSubPalindrome(s, start + 1, end) ||
         validSubPalindrome(s, start, end - 1)
@@ -397,51 +404,50 @@ var minRemoveToMakeValid = function (s) {
 # Question #12 Implement Queue With Stacks (Easy)
 
 ```javascript
-class My Queue{
-  constructor () {
-    this.data =[];
+class MyQueue {
+  constructor() {
+    this.data = [];
     this.stack2 = [];
   }
 
-/**
- * Push element x to the back of queue.
- * @param {number} x
- * @return {void}
- */
+  /**
+   * Push element x to the back of queue.
+   * @param {number} x
+   * @return {void}
+   */
   push(x) {
     this.data.push(x);
   }
 
-/**
- * Removes the element from in front of queue and returns that element.
- * @return {number}
- */
+  /**
+   * Removes the element from in front of queue and returns that element.
+   * @return {number}
+   */
   pop() {
-  	while (this.data.length) {
-		  this.stack2.push(this.data.pop())
+    while (this.data.length) {
+      this.stack2.push(this.data.pop());
     }
-    let poped = this.stack2.pop()
+    let poped = this.stack2.pop();
     while (this.stack2.length) {
-      this.data.push(this.stack2.pop())
+      this.data.push(this.stack2.pop());
     }
-	return poped
-}
+    return poped;
+  }
 
-/**
- * Get the front element.
- * @return {number}
- */
+  /**
+   * Get the front element.
+   * @return {number}
+   */
   peek() {
     return this.data[0];
-}
+  }
 
-/**
- * Returns whether the queue is empty.
- * @return {boolean}
- */
+  /**
+   * Returns whether the queue is empty.
+   * @return {boolean}
+   */
   empty() {
-    if(this.data.length || this.stack2.length)
-      return false;
+    if (this.data.length || this.stack2.length) return false;
     else return true;
   }
 }

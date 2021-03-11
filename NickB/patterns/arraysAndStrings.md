@@ -1,3 +1,0 @@
-# Sliding window
-
-# Two pointers
