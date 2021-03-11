@@ -116,10 +116,29 @@ var asteroidCollision = function (asteroids) {
 };
 ```
 
-
-
-
 ## Stacks - Question #11 - Minimum Brackets To Remove (Medium)
+
 ```javascript
 
+```
+
+## Recursion (Sorting and Hoare's QuickSelect) - Question #13 - Kth Largest Element
+
+```javascript
+/*
+Brute Force Approach:
+Sort nums A-Z - O(n log(n)) time // O(n) space
+iterate through the new sorted array to drop doubles - O(n) time // O(1) space
+access kth largest by (.length - k) designation
+
+
+
+*/
+
+var findKthLargest = function (nums, k) {
+  let sorted = nums.sort((a, b) => a - b);
+
+  console.log(sorted);
+  return sorted[sorted.length - k];
+};
 ```
