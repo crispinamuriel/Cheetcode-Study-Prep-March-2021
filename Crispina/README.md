@@ -35,38 +35,36 @@ var twoSum = function(nums, target) {
 
 ```
 var maxArea = function(height) {
-//the two tallest (biggest integers)
-// going through every single pair calulcate thea area
-//loop through array
-// use a hash map to keep , no need for hash map
-// subtraction with the left and right
-// area = smallest of (leftValue, rightValue) * (right-left)
-let left =0;
-let right =height.length-1;
-let areaMax =0;
+    /*
 
-while(left < right){
-  areaMax = Math.max(areaMax, Math.min(height[left], height[right]) * (right-left))
-  if(height[left]<height[right]){
-    left++;
-  }
-  else {
-    right--;
-  }
-}
+    // going through every single pair calulcate thea area
+    // area calculation:
+        // HEIGHT: find left height, find right height (which one is smaller?)
+        // WIDTH: find right index, subtract left index
+        // H * W = currentArea
+    // reassign a max area vallue to hold Math.max(areaMax, areaCalulation)
+    //
+    // move the left pointer if it's value is less or equal than the right pointer's value
+    // else move the right pointer
+    //
+    // return max water
 
+    /*/
+    let left = 0;
+    let right = height.length - 1;
+    let maxWater = 0;
 
-return areaMax;
-}
-
-console.log(maxArea([1,8,6,2,5,4,8,3,7] )=== 49)
-
-console.log(maxArea([1,1] )=== 1)
-
-console.log(maxArea([4,3,2,1,4] )=== 16)
-
-
-console.log(maxArea([1,2,1] )=== 2)
+    while(left < right) {
+        const currentArea = Math.min(height[left], height[right]) * (right - left);
+        maxWater = Math.max(maxWater, currentArea);
+        if(height[left] <= height[right]) {
+            left++;
+        }  else  {
+            right --;
+        }
+    }
+    return maxWater;
+};
 ```
 
 ## Question #3 Trapping Rainwater (Hard)

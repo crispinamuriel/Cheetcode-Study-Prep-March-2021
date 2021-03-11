@@ -1,8 +1,7 @@
 ## Question #1 Google Interview Question Two Sum (Easy)
-
 # Time: O(n) --- Space: O(n)
 
-```JavaScript
+```JavaScript 
 
 
 function twoSum(nums, target) {
@@ -19,11 +18,13 @@ function twoSum(nums, target) {
     }
 }
 
+
 ```
 
 ## Question #2 Container With Most Water (Medium)
-
 # Time: O(n) --- Space: O(1)
+
+## Time: O(n) --- Space: O(1)
 
 ```JavaScript
 function maxArea(heights) {
@@ -46,8 +47,9 @@ function maxArea(heights) {
 ```
 
 ## Question # 3 Trapping Rain Water (Hard)
-
 # Time: O(n) --- Space: O(1)
+
+## Time: O(n) --- Space: O(1)
 
 ```JavaScript
 function trap(heights) {
@@ -55,7 +57,6 @@ function trap(heights) {
     const maxRight = 0
 
     if (heights.length < 3) return 0
-
 
     for (let i = i; i < height.length; i++) {
         if (maxLeft[i] < maxLeft[i - 1]) {
@@ -69,15 +70,8 @@ function trap(heights) {
         }
     }
 
-    return heights.reduce((total, cur, idx) => total + Math.min(maxLeft[idx], maxRight[idx]) - cur, 0)
+    return heights.reduce((total, cur, idx) => total + Math.min(maxLeft[idx], maxRight[idx]) - cur, 0) 
 }
-
-
-    for (let i = i; i < height.length; i++) {
-        if (maxLeft[i] < maxLeft[i - 1]) {
-            maxLeft[i] = maxLeft[i - 1]
-        }
-    }
 
     for (let i = height.length - 2; i >= 0; i--) {
         if (maxRight[i] < maxRight[i - 1]) {
@@ -90,8 +84,9 @@ function trap(heights) {
 ```
 
 ## Question #4 Backspace String Compare (Easy)
+# Time: O(n^2) --- Space: O(n)
 
-# Time: O(n) --- Space: O(n)
+## Time: O(n) --- Space: O(n)
 
 ```JavaScript
 function backSpaceCompare(S, T) {
@@ -118,8 +113,9 @@ function backSpaceCompare(S, T) {
 ```
 
 ## Question #5 Longest Substring Without Repeating Characters (Medium)
-
 # Time: O(n) --- Space: O(n)
+
+## Time: O(n) --- Space: O(n)
 
 ```JavaScript
 function substringCheck(s) {
@@ -139,8 +135,11 @@ function substringCheck(s) {
 }
 ```
 
-## Question #6a Valid Palindrome (Easy)
+## Question #6a Valid Palindrome (Easy) 
 # Time: O(n) --- Space: O(1)
+
+## Time: O(n) --- Space: O(1)
+
 ```JavaScript
 function validPalindrome(s) {
     leftIndex = 0
@@ -156,9 +155,11 @@ function validPalindrome(s) {
 }
 ```
 
-## Question #6b Almost Palindrome (Easy)
+## Question #6b Almost Palindrome (Easy) 
 # Time: O(n) --- Space: O(1)
-```JavaScript
+
+```JavaScript 
+
 function almostPalindrome(s) {
      let start = 0;
   let end = s.length - 1;
@@ -184,8 +185,10 @@ const validSubPalindrome = function(s, start, end) {
 }
 ```
 
-## Question #6c Valid Palindrome II
-# Time: --- Space:
+# Question #6c Valid Palindrome II
+
+## Time: --- Space:
+
 ```JavaScript
 function validPalindromeII(str) {
     if (str === '') return true
@@ -204,8 +207,10 @@ function validPalindromeII(str) {
 }
 ```
 
-## Question #7 Reverse Words in a String
-# Time: O(n) --- Space: O(n)
+# Question #7 Reverse Words in a String
+
+## Time: O(n) --- Space: O(n)
+
 ```JavaScript
 function reverseWords(str) {
     let words = str.split(' ')
@@ -219,8 +224,10 @@ function reverseWords(str) {
 }
 ```
 
-## Question #8 Reverse Words in a String II (in-place)
-# Time: O(n) --- Space: O(1)
+# Question #8 Reverse Words in a String II (in-place)
+
+## Time: O(n) --- Space: O(1)
+
 ```JavaScript
 const reverseString = (str) => {
     let strArr = str.split(' ')
@@ -238,8 +245,10 @@ const reverseString = (str) => {
 }
 ```
 
-## Question #9 Convert String to Integer (atoi)
-# Time: O(n) --- Space: O(1)
+# Question #9 Convert String to Integer (atoi)
+
+## Time: O(n) --- Space: O(1)
+
 ```JavaScript
 function convertToInt(str) {
    let result = 0
@@ -279,15 +288,19 @@ function convertToInt(str) {
 }
 ```
 
-## Question #10 Valid Number (Hard)
-# Time: --- Space:
+# Question #10 Valid Number (Hard)
+
+## Time: --- Space:
+
 ```JavaScript
 function validNumber(str) {
 }
 ```
 
-## Question #20 Merge Two Sorted Linked Lists
-# Time: O(m + n) --- Space: O(1)
+# Question #20 Merge Two Sorted Linked Lists
+
+## Time: O(m + n) --- Space: O(1)
+
 ```JavaScript
 class Node {
     constructor(val) {
@@ -316,8 +329,10 @@ const mergeSorted = (l1, l2) => {
 }
 ```
 
-## Question #21 Reverse Singly Linked List
-# Time: O(n) --- Space: O(1)
+# Question #21 Reverse Singly Linked List
+
+## Time: O(n) --- Space: O(1)
+
 ```JavaScript
 class Node {
     constructor(val) {
@@ -341,8 +356,10 @@ const reverseList = (listHead) => {
 }
 ```
 
-## Question #22 Linked List Cycle
-# Time: --- Space
+# Question #22 Linked List Cycle
+
+## Time: --- Space
+
 ```JavaScript
 const isCycle = (listHead) => {
     let slow = listHead
@@ -356,4 +373,171 @@ const isCycle = (listHead) => {
     }
     return false
 }
+```
+
+# Question #23 Valid Parentheses
+
+## Time: O(n) --- Space: O(n)
+
+```JavaScript
+const isValid = (s) => {
+    if(s.length === 1){
+        return false
+    }
+    let validMap = {
+        ")": "(",
+        "]": "[",
+        "}": "{"
+    }
+    var stack = []
+    for(let i = 0; i < s.length; i++) {
+        if(s[i]==='(' || s[i]==='[' || s[i]==='{'){
+            stack.push(s[i])
+        } else if (validMap[s[i]] === stack[stack.length - 1] && stack.length !== 0) {
+            stack.pop()
+        } else {
+            return false
+        }
+    }
+    if (stack.length === 0) return true;
+    else return false
+}
+```
+
+# Question #24 Decode String
+
+## Time: --- Space:
+
+```JavaScript
+// k = how many times you'll repeat the letters
+// [ = indicates to store what you need to repeat
+// ] = indicates it is safe to repeat the items you've store
+const decodeString = (string) => {
+    let stack = []
+    let subString = []
+    let temp = ''
+    let result = ''
+    for (let elem in string) {
+        if (!isNaN(elem)) { // if elem is a number
+            temp = `${temp}${elem}`
+        } else if (elem === '[') { // if elem is opening of square bracket
+            stack.push(temp)
+            temp = ''
+            subString.push(result)
+            result = ''
+        } else if (elem === ']') { // if elem is closing of square bracket
+            result = subString.pop() + result.repeat(stack.pop())
+        } else {
+            result += elem
+        }
+    }
+    return result
+}
+```
+
+# Question #24 Asteroid Collision
+
+## Time: --- Space:
+
+```JavaScript
+// array on integers
+// positive initegers --> right
+// negative integers --> left
+// if two asteroids meet, smaller explodes ---- if same value integer, both will
+// if the last item in our stack is positive and the current element is negative, assess collision
+
+// if the one im on is negative and the one before it is positive
+// compare opposite values
+// if i is smaller don't add to stack
+// if i === i - 1, pop from stack AND don't push
+// if i > i - 1, pop from stack first and then push
+// can use Math.abs() on current and previous to get absolute value and cross compare those
+
+const isCollision = (array) => {
+    let stack = []
+    let i = 0
+
+    while (i < array.length) {
+        // current is positive (greater than or equal to 0) OR the stack is empty OR the last item in the stack is negative (less than 0)
+        if (array[i] >= 0 || !stack.length || stack[stack.length - 1] < 0) {
+            stack.push(array[i]++)
+            // current negative is bigger than previous positive
+        } else if (array[i] + stack[stack.length -1] < 0) {
+            stack.pop()
+            // current and previous are the same value (i.e. [8, -8])
+        } else if (array[i] + stack[stack.length - 1] === 0) {
+            stack.pop()
+            i++
+            // current negative is smaller than previous positive
+        } else {
+            i++
+        }
+    }
+    return stack
+}
+```
+
+# Question #25 Basic Calculator II
+## Time: --- Space:
+```JavaScript
+// account for the numbers in the string -- condition -- evaluate based on integer value
+// account for the sign/operands in the string -- condition -- evaluate based on operand
+// account for any spaces in the string -- condition -- continue on
+// basic calculations contingent upon PEMDAS, evaluate from left-to-right
+
+const calculator = (string) => {
+    let stack = []
+    let num = ''
+    let operand = null
+
+    for (let i = 0; i <= string.length; i++) {
+        const elem = string[i]
+        if (elem === ' ') continue
+        // if current element is a number, concate to string
+        if (!isNaN(elem)) {
+            num += elem
+        }
+        // if current element is an operand
+        if (isNaN(elem)) {
+            num = Number(num) // turn string into valid integer
+            switch(operand) {
+                case '+':
+                case null:
+                    stack.push(num) // push number into stack
+                    break;
+                case '-':
+                    stack.push(-num) // push negative value into our stack
+                    break;
+                case '*':
+                    stack.push(stack.pop() * num) // pop last item in stack, multiply times number and place back in stack
+                    break;
+                case '/':
+                    stack.push(parseInt(stack.pop()/num, 10)) // pop last item in stack, divide by base 10 and place back in stack
+                    break;
+            }
+            operand = elem
+            num = ''
+        }
+    }
+    // reduce array by adding positive and negative integer values
+    return stack.reduce((a,b) => {
+        return a + b
+    }, 0)
+}
+```
+
+# Question #26 Max-Stack
+## Time: --- Space: 
+```JavaScript
+/*
+
+Implement a LIFO stack that has a push(), pop(), and max() function, where max() returns the maximum value in the stack.
+All of these functions should run in O(1) time.
+
+*/
+
+
+
+
+
 ```
