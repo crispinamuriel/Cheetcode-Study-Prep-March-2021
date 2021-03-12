@@ -373,3 +373,55 @@ class QueueWithStacks {
 
 //Space Complexity = N
 ```
+
+
+## Question #13 Kth Largest Element (Medium)
+
+```Javascript
+var findKthLargest = function(nums, k) {
+    let sorted = nums.sort(function(a,b) {
+        return a - b
+    })
+    let kthIdx = nums.length - k
+    return nums[kthIdx]
+};
+
+//Time Complexity =
+//Space Complexity =
+```
+
+## Question #14 Start And End Of Target (Medium)
+
+```Javascript
+
+
+//Time Complexity =
+//Space Complexity =
+```
+
+## Question #15 Maximum Depth Of Binary Tree (Easy)
+
+```Javascript
+
+
+//Time Complexity =
+//Space Complexity =
+```
+
+## Question #16 Level Order Of Binary Tree (Medium)
+
+```Javascript
+
+
+//Time Complexity =
+//Space Complexity =
+```
+
+## Question #17 Right Side View of Tree (Medium)
+
+```Javascript
+
+
+//Time Complexity =
+//Space Complexity =
+```
