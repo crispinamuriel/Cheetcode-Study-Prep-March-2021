@@ -1,4 +1,4 @@
-## Mastering 1. Two Sum
+## 1. Two Sum
 
 ```js
 // Time: O(N) | Space: O(N)
@@ -15,7 +15,7 @@ const twoSum = function(nums, target) {
 };
 ```
 
-## Mastering 4. Backspace String Compare
+## 4. Backspace String Compare
 
 ```js
 // Brute Force: Time: O(N^2) | Space: O(1)
@@ -96,7 +96,7 @@ const reverseBetween = function(head, left, right) {
 Given an integer array nums and an integer k, return the kth largest element in the array.
 
 Recursive Solution.
-Time: O(log(N)) | Space: O(1)
+Time: O(log(N)) | Space: O(log(N))
 ```js
 const findKthLargest = function(nums, k) {
   if (nums.length <= 1) return nums[0];
@@ -413,7 +413,7 @@ function reverseNodes(head) {
 Return the Index of Element 'key' in a sorted array - array can be sorted asc or desc.
 
 Iterative Solution.
-Time: O(log(N)) | Space: O(1)
+Time: O(log(N)) | Space: O(log(N))
 ```js
 const binary_search = function(arr, key) {
   let start = 0;
