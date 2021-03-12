@@ -1,7 +1,13 @@
 # Sliding Window
 
-## Template
-
+### Template
+You will usually have 4 variables in the function scope:
+* left
+* right
+* running sum (or other value pointing to the elems in the window)
+* return value i.e. greatest sum (or other -- that meets the condition)
+Left and Right pointers will iterate, usually from left to right along the array.
+As they iterate, we can update running sum in Constant Time, and compare each update to the return value
 
 ## Maximum Sum Subarray of Size K
 Time: O(N) | Space: O(1)

@@ -1,6 +1,7 @@
 # Reverse A Linked List
 
 ## Template
+You will need a lot of variables, including a temp var when swapping the order of two nodes. Mind your edge cases such as: Reverse a sub list that starts at the head or ends at the tail.
 
 ```js
 const reverse = function(head) {
@@ -24,7 +25,7 @@ const reverse = function(head) {
 ## Reverse Sub List
 ```js
 const reverse_sub_list = function(head, p, q) {
-  let prev = null // this is going to be node(1)
+  let prev = null
   let cur = head
   let position = 1
   // Iterate to position p
@@ -34,24 +35,24 @@ const reverse_sub_list = function(head, p, q) {
     position++
   }
   // Set up our temp vars
-  let tempHead = cur // 2
+  let tempHead = cur
   let tempPrev = null
   while (position < q) {
-    let temp = tempHead.next // 3
-    tempHead.next = tempPrev //null
-    tempPrev = tempHead // 2
-    tempHead = temp // 3
+    let temp = tempHead.next
+    tempHead.next = tempPrev
+    tempPrev = tempHead
+    tempHead = temp
     position++
   }
   // Connect it all together
   if (prev !== null) {
-    prev.next = tempHead // connects 1 to 4
+    prev.next = tempHead
   } else {
     head = tempHead;
   }
-  let tempTail = tempHead.next //store the 5 to tempTail
-  tempHead.next = tempPrev // connect 4 to 3
-  cur.next = tempTail // Connect 2 to 5
+  let tempTail = tempHead.next
+  tempHead.next = tempPrev
+  cur.next = tempTail
 
   return head;
 };
@@ -79,4 +80,46 @@ const reverseBetween = function(head, left, right) {
   prev.next = curr;
   return head;
 };
+```
+
+## Rearrange a Linked List
+Given the head of a Singly LinkedList, write a method to modify the LinkedList such that the nodes from the second half of the LinkedList are inserted alternately to the nodes from the first half in reverse order. So if the LinkedList has nodes 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> null, your method should return 1 -> 6 -> 2 -> 5 -> 3 -> 4 -> null.
+
+```js
+const reorder = function(head) {
+  // Find the middle node of the list
+  let fast = head,
+    slow = head;
+
+  while (fast !== null && fast.next !== null) {
+    fast = fast.next.next;
+    slow = slow.next;
+  }
+
+  // Reverse the middle of the LL to the end, store new head
+  let second = reverseNodes(slow);
+  let first = head;
+  // Iterate through the LL's, inserting all the values after the head
+  while (second !== null && first !== null) {
+    let firstNext = first.next;
+    let secondNext = second.next;
+    first.next = second;
+    second.next = firstNext;
+    first = firstNext;
+    second = secondNext;
+  }
+
+  return head;
+}
+
+function reverseNodes(head) {
+  let prev = null;
+  while (head !== null) {
+    next = head.next;
+    head.next = prev;
+    prev = head;
+    head = next;
+  }
+  return prev;
+}
 ```
