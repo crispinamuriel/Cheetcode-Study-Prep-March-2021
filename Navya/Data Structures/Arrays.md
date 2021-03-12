@@ -8,7 +8,7 @@ An array is a data structure that contains a group of elements.
 Class MyArray {
   constructor() {
       this.length = 0;
-      This.data = {};
+      this.data = {};
 }
 get(index){
    return this.data[index];

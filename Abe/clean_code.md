@@ -403,12 +403,117 @@ class Solution:
         return True
 ```
 # Merge Two Sorted Lists
+```python
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def mergeTwoLists(self, l1, l2):
+        dummy_head = ListNode(0)
+        current = dummy_head
+        
+        while l1 and l2:
+            if l1.val <= l2.val:
+                current.next = l1
+                l1 = l1.next
+            else:
+                current.next = l2
+                l2 = l2.next
+            
+            current = current.next
+            
+        if l1:
+            current.next = l1
+            
+        if l2:
+            current.next = l2
+                
+        return dummy_head.next
+```
 # Add Two Numbers
 # Swap Nodes in Pairs
 # Merge K Sorted Linked Lists
+```python
+from heapq import *
+
+class Solution(object):
+    def mergeKLists(self, lists):
+        current_heap = []
+        dummy_head = current = ListNode(-1)
+
+        
+        for list in lists:
+            if list:
+            # edge case be carefull with empty list?
+                #head_value, head_pointer = list.val, list
+                heappush(current_heap, (list.val,  list))
+                
+        while current_heap:
+            smallest_value, current_pointer = heappop(current_heap)
+            
+            current.next = ListNode(smallest_value)
+            current = current.next # advance the current head
+            
+            if current_pointer.next:
+                heappush(current_heap, (current_pointer.next.val, current_pointer.next))
+        
+        return dummy_head.next
+        
+```
 # Copy List with Random Pointer
 # Valid Binary Search Tree
+```python
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def isValidBST(self, root):
+        return self.valid(root, float("-inf"), float("inf"))
+    
+    def valid(self,root, low, high):
+        if not root:
+            return True
+        
+        if root.val <= low or root.val >= high:
+            return False
+        
+        return self.valid(root.left, low, root.val) and self.valid(root.right, root.val, high)
+        
+        
+```
 # Maximum Depth of a Binary Tree
+```python
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def maxDepth(self, root):
+        self.maxdepth = 0
+        
+        def dfs(root):
+            if not root:
+                return 0
+            
+            left = dfs(root.left)
+            right = dfs(root.right)
+            
+            
+            self.maxdepth = max(self.maxdepth, 1 + max(left, right))
+            
+            return 1 + max(left, right)
+            
+        
+        dfs(root)
+        return self.maxdepth
+```
 # Minimum Depth of a Binary Tree
 # Balanced Binary Tree
 # Convert Sorted Array to Balanced Binary Search Tree
@@ -420,10 +525,132 @@ class Solution:
 # Spiral Matrix
 # Integer to Roman
 # Roman to Integer
+```python
+values = {
+    "I": 1,
+    "V": 5,
+    "X": 10,
+    "L": 50,
+    "C": 100,
+    "D": 500,
+    "M": 1000,
+}
+
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        total = values.get(s[-1])
+        for i in reversed(range(len(s) - 1)):
+            if values[s[i]] < values[s[i + 1]]:
+                total -= values[s[i]]
+            else:
+                total += values[s[i]]
+        return total
+
+```
 # Clone Graph
+```python
+class Solution:
+    def cloneGraph(self, node: 'Node') -> 'Node':
+        
+        # key: memory id of original node
+        # value: corresponding deep copy node
+        mapping = {}
+        
+        # -----------------------------------------
+        def helper( node: 'Node' ) -> 'Node':
+            
+            if not node:
+    
+                # empty node's deep copy is still empty node
+                return node
+            
+            elif id(node) in mapping:
+                
+                # current node already has deep copy
+                return mapping[ id(node) ]
+            
+            # create deep copy for current node
+            mapping[ id(node) ] = Node( val=node.val, neighbors=[] )
+            
+            for original_neighbor in node.neighbors:
+                # update neighbor list for current node
+                mapping[ id(node) ].neighbors.append( helper(original_neighbor) )
+            
+            return  mapping[ id(node) ]
+        
+        # -----------------------------------------
+        return helper( node )
+```
+# Min Stack
+
+# Evaluate Reverse Polish Notation
+
+# Valid Parentheses
+```python
+class Solution(object):
+    def isValid(self, s):
+        stack, match = [], {')': '(', ']': '[', '}': '{'}
+        
+        for char in s:
+            if char in match:
+                # stack should have closing bracket on top
+                
+                if stack and stack[-1] == match[char]:
+                    stack.pop()
+                    continue
+                else:
+                    return False
+            else:
+                stack.append(char)
+        
+        return not stack
+        
+```
 # Climbing Stairs
 # Unique Paths
 # Unique Paths II
+```python
+class Solution(object):
+    def uniquePathsWithObstacles(self, obstacleGrid):
+        """
+        :type obstacleGrid: List[List[int]]
+        :rtype: int
+        """
+        if obstacleGrid[0][0]:
+            return 0
+        
+        row_size = len(obstacleGrid)
+        column_size = len(obstacleGrid[0])
+        
+        dp = [[0 for column in range(column_size)] for row in range(row_size)]
+        
+        for row in range(row_size):
+            for col in range(column_size):
+                
+                if row == 0 and col == 0:
+                    dp[row][col] = 1
+                    continue
+            
+                if obstacleGrid[row][col] == 1:
+                    dp[row][col] = 0
+                    continue 
+                    
+                # top of row
+                if row - 1 < 0:
+                    dp[row][col] = dp[row][col-1]
+                    
+                # leftmostcolumn 
+                elif col -1 < 0:
+                    dp[row][col] = dp[row-1][col]
+                
+                else:
+                    dp[row][col] = dp[row][col - 1] + dp[row - 1][col]
+        
+        return dp[-1][-1]
+    
+    
+    
+```
 # Maximum Sum Subarray
 ```python
 class Solution(object):

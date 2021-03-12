@@ -1,11 +1,8 @@
-## Pattern: Fast & Slow pointers 
+## Reverse a linked list
 
-```
-```
 
-## Pattern: In-place Reversal of a LinkedList
 
-``` python
+```python
 def reverse(head):
   previous, current, next = None, head, None
 

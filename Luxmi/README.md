@@ -1,6 +1,6 @@
 ###  1. [Two sum](https://leetcode.com/problems/two-sum/)
     Unsorted array
-```
+```python
         dict_nums = {}
         i = 0
         for n in nums:
@@ -13,8 +13,7 @@
 ```
 
     Sorted Array
-
-```
+```python
         i = 0
         j = len(nums) - 1
 
@@ -33,7 +32,7 @@
 ---
 ###    2. [Container with most water](https://leetcode.com/problems/container-with-most-water/) 
 
-```
+```python
     def maxArea(self, height):
         """
         :type height: List[int]
@@ -61,15 +60,32 @@
 ---
 ###    3. [Trapping Water](https://leetcode.com/problems/trapping-rain-water/)
 
-
     
+        l = len(height)
+        total_area = 0
+    
+```python
+        for i in range(1,l-1):
 
-    **************************************
+            left_max = height[i]
+            for j in range(i):
+                left_max = max(left_max,height[j])
+
+            right_max = height[i]
+            for j in range(i+1,l):
+                right_max = max(right_max,height[j])
+
+            total_area = total_area + (min(left_max,right_max) - height[i])
+            
+
+        return total_area
+
+```
 
 ---
 ###    4. [Backspace string compare](https://leetcode.com/problems/backspace-string-compare/)
 
-```
+```python
     class OpStack(object):
         def __init__(self):
             self.arr = []
@@ -137,7 +153,7 @@
 
 ###    5. [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
 
-```
+```python
     if s is None or not s:
             return 0
 
@@ -164,7 +180,7 @@
 
 ###    6a. [Valid Palindrome (with special characters)](https://leetcode.com/problems/valid-palindrome)
 
-```
+```python
     lower_s = s.lower()
 
     l = len(lower_s)
@@ -191,7 +207,8 @@
 ---
 
 ###    6b. [Valid Palindrome (with one character deletion)](https://leetcode.com/problems/valid-palindrome-ii/)
-```
+
+```python
     def isPalindrome(self,s):
 
         isValid = 0
@@ -215,3 +232,122 @@
 
 ```
 ---
+
+### 7. [Two sum-ii](https://leetcode.com/problems/two-sum-iii-data-structure-design/submissions/)
+```python
+
+class TwoSum(object):
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.arr = []
+        
+
+    def add(self, number):
+        """
+        Add the number to an internal data structure..
+        :type number: int
+        :rtype: None
+        """
+        self.arr.append(number)
+        
+
+    def find(self, value):
+        """
+        Find if there exists any pair of numbers which sum is equal to the value.
+        :type value: int
+        :rtype: bool
+        """
+        i = 0
+        j = len(self.arr)
+        d = {}
+        while(i<j):
+            if (value - self.arr[i]) not in d:
+                d[self.arr[i]] = i #Solved with hash since the ordering of numbers is not known.
+            else:
+                return True
+            i = i + 1
+        return False
+                
+
+```
+---
+
+### 8. [One edit](https://leetcode.com/problems/edit-distance/)
+
+```python
+def oneEdit(self, s, t): # using an external variable. O(n)
+        m = len(s)
+        n = len(t)
+        if abs(m-n)>1:
+            return False
+        if m < n:
+            return self.oneEdit(t,s)
+
+        i = 0
+        j = 0
+        edit = 0
+        while(i<m and j<n):
+            print(i,j)
+            print(s[i], t[j])
+            if(m == n) and (s[i] != t[j] and edit<=1): #count how many times there is a different in character and return false if diff>1
+                edit = edit + 1
+            elif (m != n) and (s[i] != t[j] and edit<=1):
+                edit = edit + 1
+                i=i+1
+                continue
+          
+            if edit > 1:
+                    return False
+            i = i+1
+            j = j+1
+
+        return True
+
+    def oneEdit2(self,s ,t): # using string concat. O(n)
+        m = len(s)
+        n = len(t)
+        if abs(m-n)>2:
+            return False
+        if m > n:
+            return self.oneEdit2(t,s)
+        
+        i = 0
+        j = 0
+        while(i < m and j < n):
+            if m == n and s[i] != t[j]:
+                s = s[:i] + t[j] + s[i+1:] # split and join string as 'ab' + 'b' + 'd'
+                return s == t
+            elif m != n and s[i] != t[j]:
+                s = s[:i] + t[j] + s[i:]  # split and join string as 'ab' + 'e' + 'cd'
+                return s == t
+            else:
+                i = i+1
+                j = j+1
+                continue
+        return True
+
+```
+
+### 9. [strstr](https://leetcode.com/problems/implement-strstr/)
+
+```python
+
+        i = 0
+        len_needle = len(needle)
+        # edge cases
+        if not needle:
+            return 0
+        if haystack == needle:
+            return 0
+
+        while(i<=len(haystack)-len_needle):
+            if haystack[i:i+len_needle] == needle:
+                return i
+            i = i+1
+        
+        return -1
+
+```

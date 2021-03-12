@@ -1,6 +1,13 @@
 ## 1 Two Sum
 
 ```javascript
+/*
+Template: 
+  // Running Time: O(n^2), Space O(1) - Brute force
+  // Running Time: O(n), Space O(n) - Hash Table
+*/
+// Running Time: O(n^2), Space O(1) - Brute force
+// Running Time: O(n), Space O(n) - Hash Table
 var twoSum = function (nums, target) {
   let dict = new Map();
   if (nums.length <= 1) return [];
@@ -18,6 +25,8 @@ var twoSum = function (nums, target) {
 ## 2 Two sum II – INPUT ARRAY IS SORTED
 
 ```javascript
+// Running Time: O(nlogn), Space O(1) - Binary Search
+// Running Time: O(n), Space O(1) - Two Pointers
 var twoSum = function (numbers, target) {
   let left = 0,
     right = numbers.length - 1;
@@ -37,6 +46,9 @@ var twoSum = function (numbers, target) {
 ## 3 Two sum III – DATA STRUCTURE DESIGN
 
 ```javascript
+// Running Time: add:O(n) - Find- O(1), Space O(n^2) - Store pair sums in hash table
+// Running Time: add: O(nlogn), Find O(n), Space O(n) - Stored Array - Binary Search + Two Pointers
+// Running Time: add: O(n), Find O(n), Space O(n) - Hash table
 class TwoSum {
   constructor() {
     this.dict = new map();
@@ -61,6 +73,8 @@ class TwoSum {
 ## 4 VALID PALINDROME
 
 ```javascript
+// Running Time: O(n), Space O(n) - Reverse
+// Running Time: O(n), Space O(1) - Two Pointers
 var isPalindrome = function (s) {
   let clean = s.replace(/[^a-z0-9]/gi, "").toLowerCase();
   let left = 0;
@@ -81,6 +95,7 @@ var isPalindrome = function (s) {
 ## 5 IMPLEMENT STRSTR()
 
 ```javascript
+// Running Time: O(nm), Space O(1) - Brute Force
 var strStr = function (haystack, needle) {
   if (needle == "") return 0;
   if (needle.length > haystack.length) return -1;
@@ -102,6 +117,8 @@ var strStr = function (haystack, needle) {
 ## 6 REVERSE WORDS IN A STRING
 
 ```javascript
+// Running Time: O(n), Space O(n) - lots of cuntions
+// Running Time: O(n), Space O(n) - split and push, join
 var reverseWords = function (s) {
   let words = s.split(" ");
   let answer = [];
@@ -125,6 +142,7 @@ var reverseWords = function (s) {
 ## 7 REVERSE WORDS IN A STRING II
 
 ```javascript
+// Running Time: O(n), Space O(1) - In place assuming you have an array of chars
 function reverse(s, begin, end) {
   for (let i = 0; i < (end - begin) / 2; i++) {
     let temp = s[begin + i];
@@ -150,6 +168,7 @@ var reverseWords = function (s) {
 ## 8 STRING TO INTEGER (ATOI)
 
 ```javascript
+// Running Time: O(n), Space O(1)
 var myAtoi = function (s) {
   const string = s.trim();
   let sign = "+";
@@ -206,6 +225,8 @@ var myAtoi = function (s) {
 ## 10 LONGEST SUBSTRING WITHOUT REPEATING CHARACTERS
 
 ```javascript
+// Running Time: O(n), Space O(1) - Two iterations
+// Running Time: O(n), Space O(N) - Single iteration  (could use a static array and be O(1) )
 var lengthOfLongestSubstring = function (s) {
   let max = 0;
   let index = {};
@@ -221,13 +242,53 @@ var lengthOfLongestSubstring = function (s) {
 ## 11 LONGEST SUBSTRING WITH AT MOST TWO DISTINCT CHARACTERS
 
 ```javascript
+// Running Time: O(n^3), Space O(n) - brute force with set
+// Running Time: O(n^2), Space O(n) - brute force with set reusing set when adding a char to form a new substring
+// Running Time: O(n), Space O(n) -
+// can switch k for another value for changing from 2 unique to k unique
+var lengthOfLongestSubstring = function (s) {
+  if (s === null || s.length === 0) return 0;
+  let count = new Map();
 
+  let max = 0;
+  let left = 0;
+  let k = 2;
+  for (let right = 0; right < s.length; right++) {
+    let value = count.get(s[right]);
+    count.set(s[right], value ? value + 1 : 1);
+    while (count.size > k) {
+      count.set(s[left], count.get(s[left]) - 1);
+      if (count.get(s[left]) === 0) {
+        count.delete(s[left]);
+      }
+      left++;
+    }
+    max = Math.max(max, right - left + 1);
+  }
+  return max;
+};
 ```
 
 ## 12 MISSING RANGES
 
 ```javascript
+// Running Time: O(n), Space O(n)
+function getRange(from, to) {
+  return from === to ? `${from}` : `${from} -> ${to}`;
+}
+var findMissingRanges = function (vals, start, end) {
+  let ranges = [];
+  let prev = start - 1;
+  for (let i = 0; i <= vals.length; i++) {
+    let curr = i === vals.length ? end + 1 : vals[i];
+    if (curr - prev >= 2) {
+      ranges.push(getRange(prev + 1, curr - 1));
+    }
+    prev = curr;
+  }
 
+  return ranges;
+};
 ```
 
 ## 13 LONGEST PALINDROMIC SUBSTRING
@@ -257,6 +318,8 @@ var lengthOfLongestSubstring = function (s) {
 ## 20 Merge Two Sorted Lists
 
 ```javascript
+// Running Time: O(n), Space O(n) - create new nodes
+// Running Time: O(n), Space O(1) - in place
 var mergeTwoLists = function (l1, l2) {
   let newList = new ListNode(0);
   let head = newList;
@@ -278,5 +341,120 @@ var mergeTwoLists = function (l1, l2) {
     newList.next = l2;
   }
   return head.next;
+};
+```
+
+## 21. ADD TWO NUMBERS
+
+```javascript
+// Running Time: O(n), Space O(n)
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var addTwoNumbers = function (l1, l2) {
+  let head = new ListNode(0);
+  let temp = head;
+  let overflow = 0;
+  //iterate until one of them is null
+  while (l1 !== null || l2 !== null) {
+    let x = l1 != null ? l1.val : 0;
+    let y = l2 != null ? l2.val : 0;
+    let total = x + y + overflow;
+    // while iterating add them and keep an overflow
+
+    // x%10
+    let currentValue = total % 10;
+    // x/10
+    overflow = Math.floor(total / 10);
+    temp.next = new ListNode(currentValue);
+
+    temp = temp.next;
+    if (l1 != null) l1 = l1.next;
+    if (l2 != null) l2 = l2.next;
+  }
+
+  if (overflow > 0) {
+    temp.next = new ListNode(overflow);
+  }
+
+  return head.next;
+};
+```
+
+## 22. SWAP NODES IN PAIRS
+
+```javascript
+// Running Time: O(n), Space O(1) - in place
+var swapPairs = function (head) {
+  if (!head) return null;
+  if (!head.next) return head;
+
+  let prev = null;
+  const start = head.next;
+
+  while (head && head.next) {
+    const next = head.next;
+    const secondNext = head.next.next;
+
+    head.next = secondNext;
+    next.next = head;
+
+    if (prev) prev.next = next;
+
+    prev = head;
+    head = secondNext;
+  }
+
+  return start;
+};
+```
+
+## 23. MERGE K SORTED LINKED LISTS (HARD)
+
+```javascript
+
+```
+
+## 24. COPY LIST WITH RANDOM POINTER
+
+```javascript
+
+```
+
+# 39. Min Stack
+
+```javascript
+
+```
+
+# 40. Evaluate Reverse Polish Notation
+
+```javascript
+
+```
+
+# 41. Valid Parentheses
+
+```javascript
+var isValid = function (s) {
+  let stack = [];
+  let map = {
+    ")": "(",
+    "]": "[",
+    "}": "{",
+  };
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] in map) {
+      let val = stack.pop();
+      if (val !== map[s[i]]) {
+        return false;
+      }
+    } else {
+      stack.push(s[i]);
+    }
+  }
+  return stack.length === 0;
 };
 ```
