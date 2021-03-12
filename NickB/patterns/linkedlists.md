@@ -1,9 +1,44 @@
-# slow and fast
+# Slow and fast
+
+```javascript
+function isCycle(head) {
+  let slow = head,
+    fast = head;
+  while (fast !== null && fast.next !== null) {
+    slow = slow.next;
+    fast = fast.next.next;
+    if (slow === fast) {
+      return true; // found the cycle
+    }
+  }
+  return false;
+}
+```
 
 - can help find cycles
   - find the distance of cycle
   - find the starting of cycle by finding distance and adding it to fast node and just moving up one slow and fast till they meet
 - can help find the middle by just iterating if no cycle
+
+## Reverse
+
+```javascript
+//running time O(n), space O(1)
+function reverse(head) {
+  let curr = head;
+  let next = null;
+  let prev = null;
+  while (curr !== null) {
+    next = curr.next;
+    curr.next = prev;
+    prev = curr;
+    curr = next;
+  }
+  return prev;
+}
+```
+
+---
 
 ## Rearrange a LinkedList
 
@@ -61,7 +96,7 @@ function reverse(head) {
   let current = head,
     previous = null;
   while (current !== null) {
-    next = current.next; // temporarily store the next node
+    let next = current.next; // temporarily store the next node
     current.next = previous; // reverse the current node
     previous = current; // before we move to the next node, point previous to the current node
     current = next; // move on the next node

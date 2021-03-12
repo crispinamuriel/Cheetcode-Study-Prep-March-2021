@@ -1,5 +1,7 @@
 # Two pointers
 
+# Basic problem:
+
 ## Pair with Target Sum (Two sum)
 
 ```javascript
@@ -20,6 +22,8 @@ const pair_with_targetsum = function (arr, target_sum) {
   return [];
 };
 ```
+
+---
 
 ## Remove Duplicates
 

@@ -1,11 +1,38 @@
 # Modiified Binary Search
 
+## Basic Binary Search
+
+```javascript
+const binarySearch = function (arr, key) {
+  let start = 0;
+  let end = arr.length - 1;
+
+  while (start <= end) {
+    let middle = Math.floor(start + (end - start) / 2);
+    if (arr[middle] === key) {
+      return middle;
+    } else if (key < arr[middle]) {
+      end = middle - 1;
+    } else {
+      start = middle + 1;
+    }
+  }
+
+  return -1;
+};
+```
+
+---
+
 # Order-agnostic Binary Search
 
 ```
-Given a sorted array of numbers, find if a given number ‘key’ is present in the array. Though we know that the array is sorted, we don’t know if it’s sorted in ascending or descending order. You should assume that the array can have duplicates.
+Given a sorted array of numbers, find if a given number ‘key’ is present in the array.
+Though we know that the array is sorted, we don’t know if it’s sorted in ascending or
+descending order. You should assume that the array can have duplicates.
 
-Write a function to return the index of the ‘key’ if it is present in the array, otherwise return -1.
+Write a function to return the index of the ‘key’ if it is present in the array,
+otherwise return -1.
 
 Example 1:
 
