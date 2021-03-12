@@ -1,23 +1,18 @@
 # Two Pointers
 
-## Dutch national Flag
+## Remove duplicates
 
  ```python
-def dutch_flag_sort(arr):
-  # all elements < low are 0, and all elements > high are 2
-  # all elements from >= low < i are 1
-  low, high = 0, len(arr) - 1
-  i = 0
-  while(i <= high):
-    if arr[i] == 0:
-      arr[i], arr[low] = arr[low], arr[i]
-      # increment 'i' and 'low'
-      i += 1
-      low += 1
-    elif arr[i] == 1:
-      i += 1
-    else:  # the case for arr[i] == 2
-      arr[i], arr[high] = arr[high], arr[i]
-      # decrement 'high' only, after the swap the number at index 'i' could be 0, 1 or 2
-      high -= 1
+def remove_duplicates(arr):
+  # index of the next non-duplicate element
+  next_non_duplicate = 1
+
+  i = 1
+  while(i < len(arr)):
+    if arr[next_non_duplicate - 1] != arr[i]:
+      arr[next_non_duplicate] = arr[i]
+      next_non_duplicate += 1
+    i += 1
+
+  return next_non_duplicate
 ```
