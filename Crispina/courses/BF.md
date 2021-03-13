@@ -1,6 +1,9 @@
 # Brute force solutions
 ## TwoSum
 ```
+Time Complexity: O(n^2)
+*For Best Time: O(n) - use Hashmap*
+
 var twoSum = function(nums, target) {
      for(let i = 0; i < nums.length; i++) {
          for(let j = 1; j < nums.length; j++) {
