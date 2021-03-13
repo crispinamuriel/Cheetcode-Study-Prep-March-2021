@@ -1,6 +1,3 @@
-// Currently working through these problems, not README.md
-
-
 # Clean Code Readme
 
 ## Two Sum
