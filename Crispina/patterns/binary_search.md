@@ -1,3 +1,6 @@
+# Binary Search Template
+
+```
 const binaryS = (arr, target) => {
   let low = 0;
   let high = arr.length - 1;
@@ -21,3 +24,4 @@ const binaryS = (arr, target) => {
 
 console.log(binaryS([4, 6, 10], 10));
 console.log(binaryS([1, 2, 3, 4, 5, 6, 7], 5));
+```
