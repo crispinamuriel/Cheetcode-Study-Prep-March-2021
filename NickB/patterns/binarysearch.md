@@ -2,7 +2,15 @@
 
 ## Basic Binary Search
 
+Use on sorted arrays. O(log(N)) Time operation involves cutting a sorted array/set in half every iteration, getting closer to the target element. Three vars: start/left, end/right (both in function scope), and middle.
+MEMORIZE THIS:
+
+```js
+let middle = Math.floor(start + (end - start) / 2);
+```
+
 ```javascript
+// running time O(logN) and space O(1)
 const binarySearch = function (arr, key) {
   let start = 0;
   let end = arr.length - 1;
