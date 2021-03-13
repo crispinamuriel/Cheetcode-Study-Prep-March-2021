@@ -1,13 +1,17 @@
-# Grokking the Coding Interview
+# Grokking the Coding Interview Patterns CheatSheet
+
 ## Table of contents
+
 1. [Two Pointers](#Two-Pointers)
 2. [Fast and Slow Pointers](#Fast-and-Slow-Pointers)
 3. [Reverse Linked List](#Reverse-Linked-List)
 4. [Sliding Window](#Sliding-Window)
-5. [Merge Intervals](#Merge-Intervals)
-6. [Modified Binary Search](#Modified-Binary-Search)
+5. [Binary Search](#Binary-Search)
+6. [Merge Intervals](#Merge-Intervals)
+7. [Modified Binary Search](#Modified-Binary-Search)
 
 # Two Pointers
+
 ```javascript
 /*
 WHEN TO USE: very helpful for sorted arrays & Linked Lists when finding a set of elements with a condition
@@ -38,7 +42,9 @@ function pair_with_target_sum(arr, targetSum) {
   return [-1, -1];
 }
 ```
+
 # Fast and Slow Pointers
+
 ```javascript
 /*
 WHEN TO USE: when dealing with cyclic Linked Lists or array
@@ -58,10 +64,11 @@ function find_cycle_start(head) {
   // find the LinkedList cycle
   let slow = head,
     fast = head;
-  while ((fast !== null && fast.next !== null)) {
+  while (fast !== null && fast.next !== null) {
     fast = fast.next.next;
     slow = slow.next;
-    if (slow === fast) { // found the cycle
+    if (slow === fast) {
+      // found the cycle
       cycle_length = calculate_cycle_length(slow);
       break;
     }
@@ -99,7 +106,9 @@ function find_start(head, cycle_length) {
   return pointer1;
 }
 ```
+
 # Reverse Linked List
+
 ```javascript
 /*
 variables to consider:
@@ -127,7 +136,9 @@ function reverse(head) {
   return previous;
 }
 ```
+
 # Sliding Window
+
 ```javascript
 /*
 WHEN TO USE: CONTIGUOUS subset with a condition
@@ -171,14 +182,17 @@ function length_of_longest_substring(str, k) {
       frequencyMap[rightChar] = 0;
     }
     frequencyMap[rightChar] += 1;
-    maxRepeatLetterCount = Math.max(maxRepeatLetterCount, frequencyMap[rightChar]);
+    maxRepeatLetterCount = Math.max(
+      maxRepeatLetterCount,
+      frequencyMap[rightChar]
+    );
 
     // Current window size is from windowStart to windowEnd, overall we have a letter which is
     // repeating 'maxRepeatLetterCount' times, this means we can have a window which has one letter
     // repeating 'maxRepeatLetterCount' times and the remaining letters we should replace.
     // if the remaining letters are more than 'k', it is the time to shrink the window as we
     // are not allowed to replace more than 'k' letters
-    if ((windowEnd - windowStart + 1 - maxRepeatLetterCount) > k) {
+    if (windowEnd - windowStart + 1 - maxRepeatLetterCount > k) {
       leftChar = str[windowStart];
       frequencyMap[leftChar] -= 1;
       windowStart += 1;
@@ -189,5 +203,32 @@ function length_of_longest_substring(str, k) {
   return maxLength;
 }
 ```
+
+# Binary Search
+
+```javascript
+const binarySearch = function (array, target) {
+  let left = 0;
+  let right = array.length - 1;
+
+  white(left <= right) {
+     const mid = Math.floor((left + right)/2)
+     const foundValue = array[mid];
+     if(foundValue === target) {
+        return mid;
+     } else if(foundValue < target) {
+        left = mid + 1;
+     } else {
+        right = mid - 1;
+     }
+  }
+  return -1
+};
+
+//Time Complexity = O(logN)
+//Space Complexity = O(1)
+```
+
 # Merge Intervals
+
 # Modified Binary Search

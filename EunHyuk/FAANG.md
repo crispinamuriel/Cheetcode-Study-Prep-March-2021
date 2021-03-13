@@ -374,7 +374,6 @@ class QueueWithStacks {
 //Space Complexity = N
 ```
 
-
 ## Question #13 Kth Largest Element (Medium)
 
 ```Javascript
@@ -393,10 +392,50 @@ var findKthLargest = function(nums, k) {
 ## Question #14 Start And End Of Target (Medium)
 
 ```Javascript
+const binarySearch = function(nums, left, right, target) {
+  while(left <= right) {
+    const mid = Math.floor((left + right)/2)
+    const foundValue = nums[mid]
+    if(foundValue === target) {
+      return mid
+    } else if(foundValue < target) {
+      left = mid + 1
+    } else {
+      right = mid - 1
+    }
+  }
+  return -1
+}
 
+const searchRange = function(nums, target) {
+  if(nums.length < 1) return [-1, -1];
 
-//Time Complexity =
-//Space Complexity =
+  const firstPos = binarySearch(nums, 0, sums.length - 1, target)
+
+  if(firstPos === -1) return [-1, -1];
+
+  let endPos = firstPos
+  let startPos = firstPos
+  let temp1
+  let temp2
+
+  while(startPos !== -1) {
+    temp1 = startPos;
+    startPos = binarySearch(nums, 0, startPos - 1, target)
+  }
+  startPos = temp1;
+
+  while(endPos !== -1) {
+    temp2 = endPos;
+    endPos = binarySearc(nums, endPos + 1, nums.length - 1, target)
+  }
+  endPos = temp2;
+
+  return [startPos, endPos]
+}
+
+//Time Complexity = O(logN)
+//Space Complexity = O(1)
 ```
 
 ## Question #15 Maximum Depth Of Binary Tree (Easy)
