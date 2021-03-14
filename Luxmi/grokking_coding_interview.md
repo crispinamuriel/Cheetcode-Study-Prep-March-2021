@@ -1,4 +1,12 @@
-# Sliding Window Protocol
+#Sliding Window Protocol with template
+
+
+
+#Template
+windowStart = 0
+
+maxSum = 0 
+wins
 
 
 ## 1. Maximum Sum Subarray of Size K (easy)
