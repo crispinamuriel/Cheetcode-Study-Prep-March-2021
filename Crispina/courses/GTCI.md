@@ -7,6 +7,53 @@ This course categorizes coding interview probllems into a set of 16 patterns. Ea
 ### 1. Introduction
 ### 2. Maximum Sum Subarray of Size K (easy)
 ### 3. Smallest Subarray with a given sum (easy)
+```
+/* Smallest Subarry With a Given Sum
+
+create fn
+keep a windowSum
+keep a minLength at Infinity (So we always have something bigger to compare when we compare our lengths)
+keep a windowStart
+
+for(windowEnd
+inside our for loop we want to add elements to our Sum
+the instruction says 'shrink the window as small as possible until the windowSum is smaller than s'
+what it really means is make sure, as you're adding to the sum, that sum stays where we want it, we want the sum to be equal to s or greater before we operate on our window and calculate the length.
+     while (windowSum >=s) // if our window has hit the desired window length step into this loop
+        calculate the length of the window, compare that to the min length, keep the smallest out of the two
+        take out of the Sum, the element at the window windowStart
+        move the windowStart up
+
+check if our length is still infinity if it is return 0
+return minLength
+
+
+*/
+
+const smallestSubArraySumS = (arr, s) => {
+
+  let windowSum = 0;
+  let minLength = Infinity;
+  let windowStart = 0;
+
+  for (windowEnd = 0; windowEnd < arr.length; windowEnd++) {
+    windowSum += arr[windowEnd]; // add the next element
+    // when windowSum is equal or more than s we want to calculate the length
+    while (windowSum >= s) {
+      minLength = Math.min(minLength, windowEnd - windowStart + 1); // calculate length, keep smallest
+      windowSum -= arr[windowStart]; //take out the windowStart element
+      windowStart += 1; // move the window
+    }
+  }
+
+  if (minLength === Infinity) { // if we didn't find a sum = s
+    return 0;
+  }
+  return minLength;
+}
+
+console.log(smallestSubArraySumS([2, 1, 5, 2, 3, 2],7));
+```
 ### 4. Longest Substring with K Distinct Characters (medium)
 ### 5. Fruits into Baskets (medium)
 ### 6. No-repeat Substring (hard)
