@@ -2,11 +2,11 @@
 
  ```git pull --rebase upstream main```
 
-# Crispina's Solutions
+# Crispina's Solutions - JavaScript
+
+## Arrays
 
 ## Question #1 Google Interview Question Two Sum (Easy)
-
-## JavaScript
 
 ```
 var twoSum = function(nums, target) {
@@ -109,7 +109,7 @@ const getTrappedRainwater = function(heights) {
 
 console.log(getTrappedRainwater(elevationArray));
 ```
-
+## Strings
 ## Question #4 Backspace String Compare (Easy)
 ```// Optimal solution
 const string1 = "ab#z"
@@ -285,7 +285,7 @@ const validPalindrome = function(s) {
 -------------------------------------------------------
 
 ## Homework 2nd set of problems
-
+## Linked Lists
 ## Question 7a, Reverse a Linked List
 https://leetcode.com/problems/reverse-linked-list
 
@@ -412,4 +412,69 @@ var reverseBetween = function(head, left, right) {
 };
 
 ```
+## Question #8: Merge Multi-Level Doubly Linked List (Medium)
+## Question #9: Cycle Detection (Medium)
 
+## Stacks
+## Question #10: Valid Parentheses (Easy)
+## Question #11: Minimum Brackets To Remove To Make Valid (Medium)
+
+## Queues
+## Question #12: Implement Queue With Stacks (Easy)
+
+## Recursion
+## Question #13: Kth Largest Element (Medium)
+```
+const kthLargest = (arr, k) => {
+  arr.sort((a,b) => a - b);
+  if(k === 1) return Math.max(...arr);
+  else return kthLargest(arr.slice(0, -1), k - 1);
+}
+
+console.log(kthLargest([100, 3, 4, 5, 6, 2], 4));
+```
+## Recursion / Binary Search
+## Question #14: Start And End Of Target (Medium)
+
+Non-Recursive Binary Search:
+```
+function binaryS (arr, target) {
+  let low = 0;
+  let high = arr.length - 1;
+
+  while (low <= high) {
+    let mid = Math.floor((high + low)/2);
+    let guess = arr[mid];
+
+    if(guess === target) return mid;
+    else if(guess > target) high = mid - 1;
+    else if(guess < target) low = mid + 1;
+  }
+  return -1
+}
+
+console.log(binaryS([1, 2, 3, 4, 5, 6, 7], 5));
+```
+With Recursion:
+```
+const binarySearchRecursive = (arr, target) => {
+
+  let low = 0;
+  let high = arr.length - 1;
+
+  const recursive = (low, high, arr, target) => {
+    let mid = Math.floor((low + high)/ 2);
+    let guess = arr[mid];
+    if(low <= high) {
+      if(guess === target) return mid;
+      else if (guess < target) {
+        return recursive(mid + 1, high, arr, target);
+      } else if (guess > target){
+        return recursive(low, mid - 1, arr, target); 
+      }
+    }  
+    return -1;
+  }
+  return recursive(low, high, arr, target);
+}
+```
