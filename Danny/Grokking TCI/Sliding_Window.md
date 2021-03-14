@@ -86,3 +86,39 @@ const longest_substring_with_k_distinct = function(str, k) {
   return longestSubstr;
 };
 ```
+
+## Fruit Into Baskets
+Given an array of characters where each character represents a fruit tree, you are given two baskets, and your goal is to put maximum number of fruits in each basket. The only restriction is that each basket can have only one type of fruit.
+
+Same as previous problem with K=2, and therefore requiring constant space.
+
+Time: O(N) | Space: O(1)
+```js
+const fruits_into_baskets = function(fruits) {
+  if (fruits.length < 1) return -1;
+  let maxFruits = 1;
+  let left = 0;
+  let right = 0;
+  const fruitOccurrences = { [fruits[right]]: 1 };
+
+  while (right < fruits.length && left <= right) {
+    // how many fruits are in the basket?
+    const numFruits = Object.keys(fruitOccurrences).length;
+    if (numFruits > 2) {
+      const fruitToDecr = fruits[left]
+      fruitOccurrences[fruitToDecr]--;
+      if (fruitOccurrences[fruitToDecr] === 0) delete fruitOccurrences[fruitToDecr];
+      left++;
+      // valid: evaluate max Fruits
+    } else {
+      const currentFruits = right - left + 1;
+      maxFruits = Math.max(maxFruits, currentFruits)
+      right++;
+      const nextFruit = fruits[right];
+      fruitOccurrences[nextFruit] = (fruitOccurrences[nextFruit] || 0) + 1;
+    }
+
+  }
+  return maxFruits;
+};
+```
