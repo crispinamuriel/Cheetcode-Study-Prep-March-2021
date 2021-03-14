@@ -15,7 +15,7 @@ keep a windowSum
 keep a minLength at Infinity (So we always have something bigger to compare when we compare our lengths)
 keep a windowStart
 
-for(windowEnd
+for(windowEnd)
 inside our for loop we want to add elements to our Sum
 the instruction says 'shrink the window as small as possible until the windowSum is smaller than s'
 what it really means is make sure, as you're adding to the sum, that sum stays where we want it, we want the sum to be equal to s or greater before we operate on our window and calculate the length.
