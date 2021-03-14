@@ -48,6 +48,89 @@ This course categorizes coding interview probllems into a set of 16 patterns. Ea
 ## Pattern 6: In-place Reversal of a LinkedList
 
 ## Pattern 7: Tree Breadth First Search
+ ### Binary Tree (Level Order Traversal)
+
+ ```
+ const Deque = require('./collections/deque'); //http://www.collectionsjs.com
+
+/*Explaination:
+
+There are 3 containers, the result, the queue, and the current level
+loop through the queue
+for each node:
+     point at curr node
+     push the curr.val into our currLevel container
+     if currentNode.left, push it into the queue
+     if currentNode.right, push it into the queue
+
+   push current level into the result
+
+return result
+ */
+
+class TreeNode {
+  constructor(val) {
+    this.val = val;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+
+function traverse(root) {
+
+  result = [];
+
+  if (root === null) {
+    return result;
+  }
+
+  const queue = new Deque();
+
+  queue.push(root);
+
+  while (queue.length > 0) {
+
+    // keep note of how many nodes are in this level
+    const levelSize = queue.length;
+
+    // container for this level
+    currentLevel = [];
+
+
+    // for loop to do these operations for each node in level
+    for (i = 0; i < levelSize; i++) {
+
+      // shift off the front of the queue (this does not break us out of the while loop)
+      currentNode = queue.shift();
+
+      // add the node to the current level
+      currentLevel.push(currentNode.val);
+
+      // insert the children of current node in the queue
+      if (currentNode.left !== null) {
+        queue.push(currentNode.left);
+      }
+      if (currentNode.right !== null) {
+        queue.push(currentNode.right);
+      }
+    }
+    result.push(currentLevel);
+  }
+
+  return result;
+}
+
+
+const root = new TreeNode(12);
+root.left = new TreeNode(7);
+root.right = new TreeNode(1);
+root.left.left = new TreeNode(9);
+root.right.left = new TreeNode(10);
+root.right.right = new TreeNode(5);
+console.log(`Level order traversal: ${traverse(root)}`);
+
+ ```
 
 ## Pattern 8: Tree Depth First Search
 
