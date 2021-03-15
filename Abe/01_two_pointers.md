@@ -2,7 +2,7 @@
 
 ## Remove duplicates
 
- ```python
+```python
 def remove_duplicates(arr):
   # index of the next non-duplicate element
   next_non_duplicate = 1
