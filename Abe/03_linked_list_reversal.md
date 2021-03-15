@@ -1,7 +1,5 @@
 ## Reverse a linked list
 
-
-
 ```python
 def reverse(head):
   previous, current, next = None, head, None
