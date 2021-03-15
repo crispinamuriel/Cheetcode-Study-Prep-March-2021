@@ -1,9 +1,11 @@
 
+# Notes on Apendix Videos:
+
+## Appendix: Big O - Section 37:
+
+
+
 **Personal notes please ignore**
-
-
-
-
 # Udemy Z2M Course Questions
 ## Twosum
 

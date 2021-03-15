@@ -452,3 +452,281 @@ class MyQueue {
   }
 }
 ```
+
+# 13 Kth Largest Element (Medium)
+
+```javascript
+const swap = function (array, i, j) {
+  const temp = array[i];
+  array[i] = array[j];
+  array[j] = temp;
+};
+
+const getPartition = function (nums, left, right) {
+  let i = left;
+
+  for (let j = left; j <= right; j++) {
+    if (nums[j] <= nums[right]) {
+      swap(nums, i, j);
+      i++;
+    }
+  }
+  return i - 1;
+};
+
+const quickSort = function (nums, left, right) {
+  if (left < right) {
+    const partitionIndex = getPartition(nums, left, right);
+
+    quickSort(nums, left, partitionIndex - 1);
+    quickSort(nums, partitionIndex + 1, right);
+  }
+};
+
+var findKthLargest = function (nums, k) {
+  const indexToFind = nums.length - k;
+  quickSort(nums, 0, nums.length - 1);
+  return nums[indexToFind];
+};
+```
+
+# Start And End Of Target (Medium)
+
+```javascript
+const binarySearch = (nums, left, right, target) => {
+  while (left <= right) {
+    const mid = Math.floor((left + right) / 2);
+    const foundVal = nums[mid];
+    if (foundVal === target) {
+      return mid;
+    } else if (foundVal < target) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
+    }
+  }
+
+  return -1;
+};
+
+const searchRange = function (nums, target) {
+  if (nums.length < 1) return [-1, -1];
+  const firstPos = binarySearch(nums, 0, nums.length - 1, target);
+
+  if (firstPos === -1) return [-1, -1];
+
+  let endPos = firstPos,
+    startPos = firstPos,
+    temp1,
+    temp2;
+
+  while (startPos !== -1) {
+    temp1 = startPos;
+    startPos = binarySearch(nums, 0, startPos - 1, target);
+  }
+  startPos = temp1;
+
+  while (endPos !== -1) {
+    temp2 = endPos;
+    endPos = binarySearch(nums, endPos + 1, nums.length - 1, target);
+  }
+  endPos = temp2;
+
+  return [startPos, endPos];
+};
+```
+
+# Question #15 Maximum Depth Of Binary Tree (Easy)
+
+```javascript
+var maxDepth = function (root, currentDepth) {
+  if (!node) {
+    return currentDepth;
+  }
+  currentDepth++;
+  return Math.max(
+    maxDepth(node.right, currentDepth),
+    maxDepth(node.left, currentDepth)
+  );
+};
+```
+
+# Question #16 Level Order Of Binary Tree (Medium)
+
+```javascript
+//recursive
+const getAllLevels = (root, level, data) => {
+  if (!root) return;
+  if (level >= data.length) data.push([]);
+  data[level].push(root.val);
+  getAllLevels(root.left, level + 1, data);
+  getAllLevels(root.right, level + 1, data);
+};
+var levelOrder = function (root) {
+  let data = [];
+  getAllLevels(root, 0, data);
+  return data;
+};
+```
+
+```javascript
+// iterative approach
+var levelOrder = function (root) {
+  if (root == null) return [];
+
+  const res = [];
+  const queue = [root];
+
+  while (queue.length) {
+    const level = [];
+    let s = queue.length;
+    for (let i = 0; i < s; i++) {
+      const node = queue.shift();
+      level.push(node.val);
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
+    }
+    res.push(level);
+  }
+  return res;
+};
+```
+
+# Question #17 Right Side View of Tree (Medium)
+
+```javascript
+// BFS
+var rightSideView = function (root) {
+  if (root == null) return [];
+
+  const result = [];
+  let queue = [root];
+  while (queue.length) {
+    let levelLength = queue.length;
+    let currentLevel = [];
+    let current;
+    for (let i = 0; i < levelLength; i++) {
+      current = queue.shift();
+      currentLevel.push(current.val);
+      if (current.left) queue.push(current.left);
+      if (current.right) queue.push(current.right);
+    }
+    result.push(current.val);
+  }
+  return result;
+};
+```
+
+```javascript
+//DFS
+const dfs = (node, currentLevel, result) => {
+  if (!node) return;
+  if (currentLevel >= result.length) {
+    result.push(node.val);
+  }
+
+  if (node.right) {
+    dfs(node.right, currentLevel + 1, result);
+  }
+
+  if (node.left) {
+    dfs(node.left, currentLevel + 1, result);
+  }
+};
+var rightSideView = function (root) {
+  const result = [];
+
+  dfs(root, 0, result);
+  return result;
+};
+```
+
+# Question #18 Number Of Nodes In Complete Tree (Medium)
+
+```javascript
+const getTreeHeight = function (root) {
+  let height = 0;
+  while (root.left !== null) {
+    height++;
+    root = root.left;
+  }
+
+  return height;
+};
+
+const nodeExists = function (idxToFind, height, node) {
+  let left = 0,
+    right = Math.pow(2, height) - 1,
+    count = 0;
+
+  while (count < height) {
+    const midOfNode = Math.ceil((left + right) / 2);
+
+    if (idxToFind >= midOfNode) {
+      node = node.right;
+      left = midOfNode;
+    } else {
+      node = node.left;
+      right = midOfNode - 1;
+    }
+
+    count++;
+  }
+
+  return node !== null;
+};
+
+const countNodes = function (root) {
+  if (!root) return 0;
+
+  const height = getTreeHeight(root);
+
+  if (height === 0) return 1;
+
+  const upperCount = Math.pow(2, height) - 1;
+
+  let left = 0,
+    right = upperCount;
+
+  while (left < right) {
+    const idxToFind = Math.ceil((left + right) / 2);
+
+    if (nodeExists(idxToFind, height, root)) {
+      left = idxToFind;
+    } else {
+      right = idxToFind - 1;
+    }
+  }
+
+  return upperCount + left + 1;
+};
+```
+
+# Question #19 Validate Binary Search Tree (Medium)
+
+```javascript
+const dfs = function (node, min, max) {
+  if (node.val <= min || node.val >= max) {
+    return false;
+  }
+
+  if (node.left) {
+    if (!dfs(node.left, min, node.val)) {
+      return false;
+    }
+  }
+
+  if (node.right) {
+    if (!dfs(node.right, node.val, max)) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+const isValidBST = function (root) {
+  if (!root) return true;
+  return dfs(root, -Infinity, Infinity);
+};
+```

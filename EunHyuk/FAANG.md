@@ -165,7 +165,7 @@ const lengthOfLongestSubstring = function (s) {
 
 ```javascript
 var isValidPalindrome = function (s) {
-  let s = s.replace(/[^A-Za-z0-9]/g, " ").toLowerCase();
+  let s = s.replace(/[^A-Za-z0-9]/g, "").toLowerCase();
 
   let left = 0;
   let right = s.length - 1;
@@ -216,6 +216,8 @@ var validSubPalindrome = function (s, start, end) {
 ## Question #7a Reverse Linked List (Easy)
 
 ```Javascript
+//Create your own Node
+
 var reverseList = function (head) {
    let prevNode = null;
 
@@ -299,12 +301,38 @@ var isValid = function(s) {
     }
     return stack.length === 0;
 };
+
+//time: O(n)
+//space: O(n)
 ```
 
 ## Question #11 Minimum Brackets To Remove To Make Valid (Medium)
 
 ```Javascript
+const minRemoveToMakeValid = function(str) {
+    const res = str.split('');
+    const stack = [];
 
+    for (let i = 0; i < res.length; i++) {
+        if (res[i] === '(') {
+            stack.push(i);
+        } else if (res[i] === ')' && stack.length) {
+            stack.pop();
+        } else if (res[i] === ')') {
+            res[i] = ''
+        }
+    }
+
+    while (stack.length) {
+        const curChar = stack.pop();
+        res[curChar] = '';
+    }
+
+    return res.join('');
+};
+
+//time: O(n)
+//space: O(n)
 ```
 
 ## Question #12 Implement Queue With Stacks (Easy)
@@ -344,4 +372,95 @@ class QueueWithStacks {
 }
 
 //Space Complexity = N
+```
+
+## Question #13 Kth Largest Element (Medium)
+
+```Javascript
+var findKthLargest = function(nums, k) {
+    let sorted = nums.sort(function(a,b) {
+        return a - b
+    })
+    let kthIdx = nums.length - k
+    return nums[kthIdx]
+};
+
+//Time Complexity =
+//Space Complexity =
+```
+
+## Question #14 Start And End Of Target (Medium)
+
+```Javascript
+const binarySearch = function(nums, left, right, target) {
+  while(left <= right) {
+    const mid = Math.floor((left + right)/2)
+    const foundValue = nums[mid]
+    if(foundValue === target) {
+      return mid
+    } else if(foundValue < target) {
+      left = mid + 1
+    } else {
+      right = mid - 1
+    }
+  }
+  return -1
+}
+
+const searchRange = function(nums, target) {
+  if(nums.length < 1) return [-1, -1];
+
+  const firstPos = binarySearch(nums, 0, sums.length - 1, target)
+
+  if(firstPos === -1) return [-1, -1];
+
+  let endPos = firstPos
+  let startPos = firstPos
+  let temp1
+  let temp2
+
+  while(startPos !== -1) {
+    temp1 = startPos;
+    startPos = binarySearch(nums, 0, startPos - 1, target)
+  }
+  startPos = temp1;
+
+  while(endPos !== -1) {
+    temp2 = endPos;
+    endPos = binarySearc(nums, endPos + 1, nums.length - 1, target)
+  }
+  endPos = temp2;
+
+  return [startPos, endPos]
+}
+
+//Time Complexity = O(logN)
+//Space Complexity = O(1)
+```
+
+## Question #15 Maximum Depth Of Binary Tree (Easy)
+
+```Javascript
+
+
+//Time Complexity =
+//Space Complexity =
+```
+
+## Question #16 Level Order Of Binary Tree (Medium)
+
+```Javascript
+
+
+//Time Complexity =
+//Space Complexity =
+```
+
+## Question #17 Right Side View of Tree (Medium)
+
+```Javascript
+
+
+//Time Complexity =
+//Space Complexity =
 ```

@@ -2,25 +2,16 @@
 
 ```Javascript
 const twoSum = (nums, target) => {
-  if (nums.length < 2) return null;
+  let hash = {};
 
-  let p1 = 0;
-  let p2 = 1;
-
-  while (p2 < nums.length) {
-    let diff = target - nums[p1];
-
-    if (nums[p2] === diff) return [p1, p2];
-
-    p2++;
-
-    if (p2 === nums.length - 1 && nums[p2] !== diff) {
-      p1++;
-      p2 = p1 + 1;
-    }
+  for (let i = 0; i < nums.length; i++) {
+      if (hash[nums[i]] >= 0) {
+          return [hash[nums[i]], i];
+      } else {
+          const diff = target - nums[i];
+          hash[diff] = i;
+      }
   }
-
-  return null;
 };
 ```
 
@@ -192,11 +183,13 @@ const reverseLL = (head) => {
 ## Question #7b M, N Reversals (Medium)
 
 ```Javascript
+
 ```
 
 ## Question #8 Merge Multi Level Singly Linked List (Medium)
 
 ```Javascript
+
 ```
 
 ## Question #9 Cycle Detection (Medium)
@@ -213,4 +206,67 @@ const has_cycle = (head) => {
   }
   return false;
 }
+```
+
+## Question #10 Valid Parentheses (Easy)
+
+```Javascript
+const isValid = (str) => {
+  if (str.length === 0) return false;
+
+  let parens = {
+    '(': ')',
+    '[': ']',
+    '{': '}',
+  };
+  let stack = [];
+
+  for (let bracket of str) {
+    if (bracket in parens) {
+      stack.push(bracket);
+    } else {
+      let leftBracket = stack.pop();
+      if (parens[leftBracket] !== bracket) return false;
+    }
+  }
+  if (stack.length > 0) return false;
+  return true;
+};
+```
+
+## Question #11 Minimum Brackets To Remove To Make Valid (Medium)
+
+```Javascript
+const minRemoveToMakeValid = (str) => {
+  let res = str.split('');
+  let stack = [];
+
+  for (let i = 0; i < res.length; i++) {
+    if (res[i] === '(') {
+      stack.push(i);
+    } else if (res[i] === ')' && stack.length) {
+      stack.pop();
+    } else if (res[i] === ')') {
+      res[i] = '';
+    }
+  }
+
+  while (stack.length) {
+    let currIdx = stack.pop();
+    res[currIdx] = '';
+  }
+
+  return res.join('');
+};
+```
+
+## Question #15 Maximum Depth Of Binary Tree (Easy)
+
+```Javascript
+const maxDepth = (root, currentDepth = 0) => {
+  if (!root) return currentDepth;
+  currentDepth++;
+  
+  return Math.max(maxDepth(root.left, currentDepth), maxDepth(root.right, currentDepth))
+};
 ```

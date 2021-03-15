@@ -1,8 +1,18 @@
 # Two pointers
 
+# Basic problem:
+
 ## Pair with Target Sum (Two sum)
 
 ```javascript
+/*
+usually have two pointers 
+check if we have met requirement
+depending on constrains one will contract else other well shrink
+helpful for finding a pair, triplet or subarray 
+  can be sorted or unosrted
+  array or linkedlist 
+*/
 // running time: O(N) and O(N) with a hash table
 // running time: O(N) and O(1)
 const pair_with_targetsum = function (arr, target_sum) {
@@ -20,6 +30,8 @@ const pair_with_targetsum = function (arr, target_sum) {
   return [];
 };
 ```
+
+---
 
 ## Remove Duplicates
 
