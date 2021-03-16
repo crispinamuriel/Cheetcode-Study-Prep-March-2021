@@ -14,6 +14,9 @@
 12. [Valid Parentheses](#Valid-Parentheses)
 13. [Minimum Brackets To Remove](#Minimum-Brackets-To-Remove)
 14. [Implement Queue with Stacks](#Implement-Queue-with-Stacks)
+13. [Maximum Depth of A Binary Tree](#Max-Depth-of-A-Binary-Tree)
+14. [Level Order of Binary Tree](#Level-Order-Binary-Tree)
+
 
 ## Two Sum (EASY)
 https://gist.github.com/vtomchak/f521d41b424119afd7e8c45f651f1828
@@ -421,4 +424,49 @@ class queueWithStacks {
    return this.in.length === 0 && this.out.length === 0
   }
 }
+```
+## Max Depth of A Binary Tree
+```javascript
+var maxDepth = function(node, currentDepth) {
+    if (!node) {
+      return currentDepth;
+    }
+
+    currentDepth++;
+
+    return Math.max(maxDepth(node.right, currentDepth), maxDepth(node.left, currentDepth));
+};
+```
+## Level Order Binary Tree
+```javascript
+const levelOrder = function(root) {
+  if(!root) return [];
+  const result = [];
+  const queue = [root];
+
+  while(queue.length) {
+    const currentLevelValues = [];
+    let length = queue.length, count = 0;
+
+    while(count < length) {
+      const currentNode = queue.shift();
+
+      currentLevelValues.push(currentNode.value);
+
+      if(currentNode.left) {
+        queue.push(currentNode.left)
+      }
+
+      if(currentNode.right) {
+        queue.push(currentNode.right)
+      }
+
+      count++;
+    }
+
+    result.push(currentLevelValues);
+  }
+
+  return result;
+};
 ```

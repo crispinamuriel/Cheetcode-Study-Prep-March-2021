@@ -1,4 +1,4 @@
-## Mastering 1. Two Sum
+## 1. Two Sum
 
 ```js
 // Time: O(N) | Space: O(N)
@@ -15,7 +15,7 @@ const twoSum = function(nums, target) {
 };
 ```
 
-## Mastering 4. Backspace String Compare
+## 4. Backspace String Compare
 
 ```js
 // Brute Force: Time: O(N^2) | Space: O(1)
@@ -92,6 +92,42 @@ const reverseBetween = function(head, left, right) {
 };
 ```
 
+## Mastering 13. Kth Largest Element
+Given an integer array nums and an integer k, return the kth largest element in the array.
+
+Recursive Solution.
+Time: O(log(N)) | Space: O(log(N))
+```js
+const findKthLargest = function(nums, k) {
+  if (nums.length <= 1) return nums[0];
+  let pivotIdx = 0;
+  let idx = nums.length-1;
+  let iterLeft = true;
+  let elemsSeen = 1;
+  while (elemsSeen <= nums.length) {
+      const elem = nums[idx];
+      elemsSeen++;
+      const shouldSwap = (elem < nums[pivotIdx] && iterLeft) || (elem > nums[pivotIdx] && !iterLeft);
+      if (shouldSwap) {
+          let tempIdx = idx;
+          nums[idx] = nums[pivotIdx];
+          nums[pivotIdx] = elem;
+          idx = pivotIdx
+          pivotIdx = tempIdx;
+          iterLeft = !iterLeft;
+      }
+      idx = iterLeft ? idx-1 : idx+1;
+  }
+  if (nums.length-k === pivotIdx) return nums[pivotIdx];
+  else if (k > pivotIdx) {
+      k -= (nums.length-pivotIdx)
+      return findKthLargest(nums.slice(0, pivotIdx), k)
+  } else {
+      return findKthLargest(nums.slice(pivotIdx+1), k)
+  }
+};
+```
+
 ## Linked List Construction
 
 ```js
@@ -131,6 +167,84 @@ class Node {
     this.next = null;
   }
 }
+```
+
+## Grokking: Maximum Sum Subarray of Size K
+Time: O(N) | Space: O(1)
+```js
+const max_sub_array_of_size_k = function(k, arr) {
+  let greatestRunningSum = -Infinity;
+  let currentSum = 0;
+  let left = 0;
+  let right = k-1;
+  // calculate current sum
+  let i = left;
+  while (i <= right) {
+    currentSum += arr[i];
+    i++;
+  }
+  while (right < arr.length-1) {
+    greatestRunningSum = Math.max(currentSum, greatestRunningSum)
+    left++;
+    right++;
+    currentSum = currentSum - arr[left-1] + arr[right];
+  }
+
+  return Math.max(currentSum, greatestRunningSum);
+};
+```
+
+## Grokking: Smallest Subarray with a Given Sum
+Time: O(N)
+Space: O(1)
+```js
+function subArray(array,s){
+  let left = 0
+  let right = 0
+  let smallestSize = Infinity
+  let sum = array[0]
+  while (right <= array.length-1 && left <= right){
+      if (sum >= s){
+        let currSize = right - left+1
+        smallestSize = Math.min(smallestSize,currSize)
+        sum -= array[left]
+        left++
+      } else {
+        right++
+        sum += array[right]
+      }
+  }
+  return smallestSize
+}
+```
+
+## Grokking: Longest Substring with K Distinct Characters
+Time: O(N)
+Space: O(K) where K is the number of chars we're tracking
+```js
+const longest_substring_with_k_distinct = function(str, k) {
+  let longestSubstr = 0;
+  let left = 0;
+  let right = 0;
+  const hashMap = {
+    [str[0]]: 1
+  };
+  while (right < str.length && left <= right) {
+    // valid substr
+    if (Object.keys(hashMap).length <= k) {
+      longestSubstr = Math.max(longestSubstr, right-left+1);
+      right++;
+      hashMap[str[right]] = (hashMap[str[right]] || 0) + 1;
+    } // invalid substr
+    else {
+      hashMap[str[left]]--;
+      if (hashMap[str[left]] === 0) delete hashMap[str[left]];
+      left++;
+    }
+  }
+
+  return longestSubstr;
+};
 ```
 
 ## Grokking 20. Merger Two Sorted Lists
@@ -293,6 +407,40 @@ function reverseNodes(head) {
   }
   return prev;
 }
+```
+
+## Grokking: Order Agnostic Binary Search
+Return the Index of Element 'key' in a sorted array - array can be sorted asc or desc.
+
+Iterative Solution.
+Time: O(log(N)) | Space: O(log(N))
+```js
+const binary_search = function(arr, key) {
+  let start = 0;
+  let end = arr.length-1;
+  let isAcc = arr[start] < arr[end];
+  while (start <= end){
+    let middle = Math.floor(start + (end - start) / 2);
+    if(arr[middle] === key){
+        return middle;
+    }
+    else if (isAcc) {
+        if(key < arr[middle]){
+          end = middle-1;
+        } else {
+          start = middle+1;
+        }
+    }
+    else {
+      if(key < arr[ middle]){
+        start = middle+1;
+      } else {
+        end = middle-1;
+      }
+    }
+  }
+  return -1;
+};
 ```
 
 # Leetcode

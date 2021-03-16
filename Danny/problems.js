@@ -282,8 +282,8 @@ function reverseStr(str, begin, end) {
 
 const str = 'the sky is blue'
 // console.log(reverseWordsInStr(str));
-console.log(reverseStr('reverse', 0, 7))
-console.log(reverseStr('andersonpaak', 2, 8))
+// console.log(reverseStr('reverse', 0, 7))
+// console.log(reverseStr('andersonpaak', 2, 8))
 
 // Asteroid Collision, Basic Calculator II, Valid Parenth
 
@@ -308,4 +308,158 @@ var asteroidCollision = function(asteroids) {
       }
   }
   return stack
+};
+
+// Longest Substr with K Distinct Chars
+
+const longest_substring_with_k_distinct = function(str, k) {
+  let longestSubstr = 0;
+  let left = 0;
+  let right = 0;
+  const hashMap = {
+    [str[0]]: 1
+  };
+  while (right < str.length && left <= right) {
+    if (Object.keys(hashMap).length <= k) {
+      longestSubstr = Math.max(longestSubstr, right-left+1);
+      // increment right and update hash
+      right++;
+      hashMap[str[right]] = (hashMap[str[right]] || 0) + 1;
+    } // invalid substr
+    else {
+      // increment left and udpate hash
+      hashMap[str[left]]--;
+      if (hashMap[str[left]] === 0) delete hashMap[str[left]];
+      left++;
+    }
+  }
+
+  return longestSubstr;
+};
+
+// console.log(longest_substring_with_k_distinct('aabbacd', 2)) // 5
+// console.log(longest_substring_with_k_distinct('aabbbcbc', 2)) // 6
+// console.log(longest_substring_with_k_distinct('xghsafe', 3)) // 3
+
+// Thu March 11
+
+// MASTERING: Recursion
+// QUICK SORT
+
+const quickSort = function(nums) {
+  if (nums.length <= 1) return nums;
+  // choose a pivot - left most element of array/subarray
+  let pivotIdx = 0;
+  // ref to current index
+  let idx = nums.length-1;
+  // ref to your direction to iterate
+  let iterLeft = true;
+  // track how many elements youve seen in this iteration
+  let elemsSeen = 1; // increment with ea elem we see
+  while (elemsSeen <= nums.length) {
+      const elem = nums[idx];
+      elemsSeen++;
+      // for each elem compare elem to pivot
+      // if elem is on the wrong side of the pivot, switch it with the pivot
+      const shouldSwap = (elem < nums[pivotIdx] && iterLeft) || (elem > nums[pivotIdx] && !iterLeft);
+      if (shouldSwap) {
+          let tempIdx = idx;
+          nums[idx] = nums[pivotIdx];
+          nums[pivotIdx] = elem;
+          // switch the pivotIdx and idx we're iterating over
+          idx = pivotIdx
+          pivotIdx = tempIdx;
+          // change the direction
+          iterLeft = !iterLeft;
+      }
+      idx = iterLeft ? idx-1 : idx+1;
+  }
+  // while loop done. pivot is in the middle - at the correct idx
+  // return quickSort nums to the left, pivot, quickSort of nums to the right
+  return [...quickSort(nums.slice(0, pivotIdx)), nums[pivotIdx], ...quickSort(nums.slice(pivotIdx+1, nums.length))]
+}
+// 20 lines of code
+// const quickSort = function(nums) {
+//   if (nums.length <= 1) return nums;
+//   let pivotIdx = 0;
+//   let idx = nums.length-1;
+//   let iterLeft = true;
+//   let elemsSeen = 1;
+//   while (elemsSeen <= nums.length) {
+//       const elem = nums[idx];
+//       elemsSeen++;
+//       const shouldSwap = (elem < nums[pivotIdx] && iterLeft) || (elem > nums[pivotIdx] && !iterLeft);
+//       if (shouldSwap) {
+//           let tempIdx = idx;
+//           nums[idx] = nums[pivotIdx];
+//           nums[pivotIdx] = elem;
+//           idx = pivotIdx
+//           pivotIdx = tempIdx;
+//           iterLeft = !iterLeft;
+//       }
+//       idx = iterLeft ? idx-1 : idx+1;
+//   }
+//   return [...quickSort(nums.slice(0, pivotIdx)), nums[pivotIdx], ...quickSort(nums.slice(pivotIdx+1, nums.length))]
+// }
+
+
+// VARIATION: Kth LARGEST ELEMENT IN ARRAY
+const findKthLargest = function(nums, k) {
+  if (nums.length <= 1) return nums[0];
+  let pivotIdx = 0;
+  let idx = nums.length-1;
+  let iterLeft = true;
+  let elemsSeen = 1;
+  while (elemsSeen <= nums.length) {
+      const elem = nums[idx];
+      elemsSeen++;
+      const shouldSwap = (elem < nums[pivotIdx] && iterLeft) || (elem > nums[pivotIdx] && !iterLeft);
+      if (shouldSwap) {
+          let tempIdx = idx;
+          nums[idx] = nums[pivotIdx];
+          nums[pivotIdx] = elem;
+          idx = pivotIdx
+          pivotIdx = tempIdx;
+          iterLeft = !iterLeft;
+      }
+      idx = iterLeft ? idx-1 : idx+1;
+  }
+  if (nums.length-k === pivotIdx) return nums[pivotIdx];
+  else if (k > pivotIdx) {
+      k -= (nums.length-pivotIdx)
+      return findKthLargest(nums.slice(0, pivotIdx), k)
+  } else {
+      return findKthLargest(nums.slice(pivotIdx+1), k)
+  }
+};
+
+// GROKKING: ORDER AGNOSTIC BINARY SEARCH
+
+// ITERATIVE
+
+const binary_search = function(arr, key) {
+  let start = 0;
+  let end = arr.length-1;
+  let isAcc = arr[start] < arr[end];
+  while (start <= end){
+    let middle = Math.floor(start + (end - start) / 2);
+    if(arr[middle] === key){
+        return middle;
+    }
+    else if (isAcc) {
+        if(key < arr[middle]){
+          end = middle-1;
+        } else {
+          start = middle+1;
+        }
+    }
+    else {
+      if(key < arr[ middle]){
+        start = middle+1;
+      } else {
+        end = middle-1;
+      }
+    }
+  }
+  return -1;
 };
