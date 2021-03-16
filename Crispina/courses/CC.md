@@ -1,6 +1,3 @@
-// Currently working through these problems, not README.md
-
-
 # Clean Code Readme
 
 ## Two Sum
@@ -122,6 +119,8 @@ two.add(3);
 
 ## Valid Palinddrome
 
+ https://oj.leetcode.com/problems/valid-palindrome/
+
 given a string, determin if it is a  palindrome, considering only alphanumeric ccaracters andd ignoring cases.
 
 ```
@@ -146,5 +145,7 @@ function isPalindrome(s) {
 ```
 
 ## Implement strstr()
+
+https://leetcode.com/problems/implement-strstr/
 
 Implement strstr() Returns the index of the first occurence of needle in haystack or -1 if needle is  not  part  of haystacck
