@@ -190,6 +190,8 @@ var backspaceCompare = function (S, T) {
 Time: O(n);
 Space: O(1);
 
+## Solution 1
+
 ```js
 var lengthOfLongestSubstring = function (s) {
   if (s.length <= 1) {
@@ -214,6 +216,25 @@ var lengthOfLongestSubstring = function (s) {
     }
   }
   return longest;
+};
+```
+
+## Solution 2
+
+```js
+var lengthOfLongestSubstring = function (s) {
+  let maxLength = 0;
+  let seen = {};
+  let left = 0;
+  for (let right = 0; right < s.length; right++) {
+    let currentLetter = s[right];
+    if (currentLetter in seen && seen[currentLetter] >= left) {
+      left = seen[currentLetter] + 1;
+    }
+    seen[currentLetter] = right;
+    maxLength = Math.max(maxLength, right - left + 1);
+  }
+  return maxLength;
 };
 ```
 
@@ -250,44 +271,7 @@ var validPalindrome = function (s) {
 };
 ```
 
-# Problem 7 - Basic Linked List reversal
-
-Time: O(n);
-Space: O(1);
-
-1. Construct a Linked List using JS class syntax
-
-```js
-class Node {
-  constructor(value, next=null){
-    this.value = value;
-    this.next = next;
-  }
-
-let head = new Node(2);
-head.next = new Node(4);
-head.next.next = new Node(6);
-head.next.next.next = new Node(8);
-head.next.next.next.next = new Node(10);
-```
-
-2. Write a reverse function
-
-```js
-const reverse = function (head) {
-  let current = head;
-  let prev = null;
-  while (current !== null) {
-    let temp = current.next;
-    current.next = prev;
-    prev = current;
-    current = temp;
-  }
-  return prev;
-};
-```
-
-# Problem 8 - Implement strStr (indexOf in JS)
+# Problem 7 - Implement strStr (indexOf in JS)
 
 Time: O(n); Space: O(n);
 
@@ -313,78 +297,4 @@ var strStr = function (haystack, needle) {
   }
   return -1;
 };
-```
-
-# Sliding Window - Intro
-
-Given an array, find the average of all contiguous subarrays of size ‘K’ in it.
-
-```js
-          |     |
-[1, 4, 5, 7, 9, 22] K = 3;
- 0  1  2  3  4  5
-
-
-function find_averages_of_subarrays(K, arr) {
-  const result = [];
-  let windowSum = 0;
-  let windowStart = 0;
-  for (let windowEnd = 0; windowEnd < arr.length; windowEnd++) {
-    windowSum += arr[windowEnd]; // add the next element
-    // slide the window, we don't need to slide if we've not hit the required window size of 'k'
-    if (windowEnd >= K - 1) {
-      result.push(windowSum / K); // calculate the average
-      windowSum -= arr[windowStart]; // subtract the element going out
-      windowStart += 1; // slide the window ahead
-    }
-  }
-
-  return result;
-}
-```
-
-# Order-agonstic binary search
-
-Given a sorted array of numbers, find if a given number ‘key’ is present in the array. Though we know that the array is sorted, we don’t know if it’s sorted in ascending or descending order. You should assume that the array can have duplicates.
-
-Write a function to return the index of the ‘key’ if it is present in the array, otherwise return -1.
-
-!!NB
-The safest way to find the middle of two numbers without getting an integer overflow is as follows:
-
-middle = start + (end-start)/2
-
-```js
-function binary_search(arr, key) {
-  let start = 0;
-  let end = arr.length - 1;
-  const isAscending = arr[start] < arr[end];
-  while (start <= end) {
-    // calculate the middle of the current range
-    mid = Math.floor(start + (end - start) / 2);
-
-    if (key === arr[mid]) {
-      return mid;
-    }
-    if (isAscending) {
-      // ascending order
-      if (key < arr[mid]) {
-        end = mid - 1; // the 'key' can be in the first half
-      } else {
-        // key > arr[mid]
-        start = mid + 1; // the 'key' can be in the second half
-      }
-    } else {
-      // descending order
-      if (key > arr[mid]) {
-        end = mid - 1; // the 'key' can be in the first half
-      } else {
-        // key < arr[mid]
-        start = mid + 1; // the 'key' can be in the second half
-      }
-    }
-  }
-
-  return -1; // element not found
-}
 ```

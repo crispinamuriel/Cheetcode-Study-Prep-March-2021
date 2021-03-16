@@ -22,7 +22,7 @@ function hasPath(root, sum) {
   }
 
   // recursively call to traverse the left and right sub-tree
-  // return true if any of the two recursive call return true
+  // return true if either of the two recursive calls returns true
   return (
     hasPath(root.left, sum - root.val) || hasPath(root.right, sum - root.val)
   );
