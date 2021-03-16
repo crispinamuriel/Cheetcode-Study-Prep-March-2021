@@ -1,5 +1,6 @@
 # Binary search template
 
+```python
     i = 0
     j = len(nums)-1 # 
     
@@ -13,3 +14,4 @@
             j = mid-1
             
     return -1
+    ```
