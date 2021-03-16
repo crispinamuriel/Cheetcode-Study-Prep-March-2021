@@ -180,18 +180,6 @@ const reverseLL = (head) => {
 };
 ```
 
-## Question #7b M, N Reversals (Medium)
-
-```Javascript
-
-```
-
-## Question #8 Merge Multi Level Singly Linked List (Medium)
-
-```Javascript
-
-```
-
 ## Question #9 Cycle Detection (Medium)
 
 ```Javascript
@@ -269,4 +257,41 @@ const maxDepth = (root, currentDepth = 0) => {
   
   return Math.max(maxDepth(root.left, currentDepth), maxDepth(root.right, currentDepth))
 };
+```
+
+## Find Range
+```Javascript
+function find_range(arr, key) {
+  let result = [-1, -1];
+  result[0] = searchRange(arr, key, false);
+  if (result[0] !== -1) { // no need to search, if 'key' is not present in the input array
+    result[1] = searchRange(arr, key, true);
+  }
+
+  return result;
+}
+
+// modified Binary Search
+function searchRange(arr, key, findMaxIndex) {
+  let keyIndex = -1;
+  let start = 0;
+  let end = arr.length - 1;
+  while (start <= end) {
+    let mid = Math.floor(start + (end - start) / 2);
+    if (key < arr[mid]) {
+      end = mid - 1;
+    } else if (key > arr[mid]) {
+      start = mid + 1;
+    } else { // key === arr[mid]
+      keyIndex = mid;
+      if (findMaxIndex) {
+        start = mid + 1; // search ahead to find the last index of 'key'
+      } else {
+        end = mid - 1; // search behind to find the first index of 'key'
+      }
+    }
+  }
+
+  return keyIndex;
+}
 ```

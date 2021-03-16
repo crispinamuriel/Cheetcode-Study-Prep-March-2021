@@ -1,19 +1,28 @@
+## Two Pointers
+```
+```
+
 ## Pair with Target Sum (easy)
 Given an array of sorted numbers and a target sum, find a pair in the array whose sum is equal to the given target.
 
 ```Javascript
-const pair_with_target_sum = (arr, targetSum) => {
-  let hash = {};
+function pair_with_target_sum(arr, targetSum) {
+  let left = 0,
+    right = arr.length - 1;
+  while (left < right) {
+    const currentSum = arr[left] + arr[right];
+    if (currentSum === targetSum) {
+      return [left, right];
+    }
 
-  for (let i = 0; i < arr.length; i++) {
-      let diff = targetSum - arr[i];
-      if (diff in hash) {
-          return [hash[diff], i]
-      }
-      hash[arr[i]] = i;
+    if (targetSum > currentSum) {
+      left += 1; // we need a pair with a bigger sum
+    } else {
+      right -= 1; // we need a pair with a smaller sum
+    }
   }
   return [-1, -1];
-};
+}
 ```
 
 ## Remove Duplicates (easy)
