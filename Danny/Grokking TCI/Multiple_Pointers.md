@@ -172,3 +172,37 @@ function search_pair(arr, targetSum, left, triplets) {
   }
 }
 ```
+
+## Triplets With Smaller Sum
+Given an array arr of unsorted numbers and a target sum, count all triplets in it such that arr[i] + arr[j] + arr[k] < target where i, j, and k are three different indices. Write a function to return the count of such triplets.
+First try: Time: O(N^2) | Space: O(1)
+
+```js
+const triplet_with_smaller_sum = function(arr, target) {
+  let count = 0;
+  arr.sort((a, b) => a - b);
+
+  for (let i = 0; i < arr.length-2; i++) {
+    count += find_triplets(arr, i+1, target-arr[i])
+  }
+  return count;
+};
+
+// Iteration in this solution feels brute force
+const find_triplets = function(arr, left, target) {
+  let count = 0;
+  let right = arr.length-1;
+  while (left < right) {
+    const sum = arr[left] + arr[right];
+    if (sum >= target) {
+      right--;
+    } else {
+      // Any uniterated indices b/w 'left' & 'right' will be valid triplets for 'right' pointer
+      count += right-left;
+      left++;
+      right = arr.length-1;
+    }
+  }
+  return count;
+}
+```
