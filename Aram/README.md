@@ -52,7 +52,7 @@ function maxArea(heights) {
 
 ```JavaScript
 function trap(heights) {
-    
+
 }
 ```
 
@@ -87,6 +87,31 @@ function backSpaceCompare(S, T) {
 ## Question #5 Longest Substring Without Repeating Characters (Medium)
 
 ## Time: O(n) --- Space: O(n)
+
+```JavaScript
+var lengthOfLongestSubstring = function(s) {
+    let hash = {}
+    let start = 0
+    let maxLength = 0
+    let arr = s.split('')
+
+    for (let i = 0; i < s.length; i++) {
+        let current = hash[arr[i]]
+        if (current !== null && start <= current) {
+            start = current + 1
+        } else {
+            maxLength = Math.max(maxLength, i - start + 1)
+        }
+
+        hash[arr[i]] = i
+    }
+
+    return maxLength
+
+};
+
+
+```
 
 ```JavaScript
 function substringCheck(s) {
@@ -360,7 +385,7 @@ const isValid = (s) => {
         "]": "[",
         "}": "{"
     }
-    var stack = []
+    let stack = []
     for(let i = 0; i < s.length; i++) {
         if(s[i]==='(' || s[i]==='[' || s[i]==='{'){
             stack.push(s[i])
