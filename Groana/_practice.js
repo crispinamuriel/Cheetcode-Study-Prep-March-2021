@@ -10,7 +10,7 @@ const diffBetweenTwoStrings = (source, target) => {
   } else {
     let ans1 = diffBetweenTwoStrings(source.slice(1), target);
     let ans2 = diffBetweenTwoStrings(source, target.slice(1));
-    
+
     if (ans1.length <= ans2.length) {
       return '-' + source[0] + '' + ans1;
     } else {
@@ -20,5 +20,5 @@ const diffBetweenTwoStrings = (source, target) => {
 
 }
 
-
 console.log(diffBetweenTwoStrings("ABCDEFG", "ABDFFGH"))
+
