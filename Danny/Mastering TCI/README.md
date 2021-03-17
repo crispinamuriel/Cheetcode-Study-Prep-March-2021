@@ -138,3 +138,30 @@ const findKthLargest = function(nums, k) {
   }
 };
 ```
+
+## 19. Validate Binary Search Tree
+Given the root of a binary tree, determine if it is a valid binary search tree (BST).
+
+A valid BST is defined as follows:
+
+* The left subtree of a node contains only nodes with keys less than the node's key.
+* The right subtree of a node contains only nodes with keys greater than the node's key.
+* Both the left and right subtrees must also be binary search trees.
+
+Time: O(N) | Space: O(N)
+```js
+var isValidBST = function(root) {
+
+    const helper  = (current, max = Infinity, min = -Infinity) => {
+        if (current === null ) return true;
+
+        if(current.val < max && current.val > min ){
+            return helper(current.left, current.val, min) && helper(current.right, max, current.val)
+        }  else {
+            return false
+        }
+    }
+    return helper(root)
+
+};
+```
