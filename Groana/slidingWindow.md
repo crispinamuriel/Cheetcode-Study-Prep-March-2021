@@ -1,3 +1,23 @@
+## Sliding Window
+```Javascript
+function max_sub_array_of_size_k(k, arr) {
+  let maxSum = 0;
+  let  windowSum = 0;
+  let  windowStart = 0;
+
+  for (let window_end = 0; window_end < arr.length; window_end++) {
+    windowSum += arr[window_end]; 
+
+    if (window_end >= k - 1) {
+      maxSum = Math.max(maxSum, windowSum);
+      windowSum -= arr[windowStart]; 
+      windowStart += 1; 
+    }
+  }
+  return maxSum;
+}
+```
+
 ## Maximum Sum Subarray of Size K (easy)
 Given an array of positive numbers and a positive number ‘k,’ find the maximum sum of any contiguous subarray of size ‘k’.
 
@@ -119,11 +139,14 @@ const non_repeat_substring = function(str) {
   let left = 0;
   let maxLength = 0;
   let hash = {};
+
   for (let right = 0; right < str.length; right++) {
     let currChar = str[right];
+
     if (currChar in hash) {
       left = Math.max(left, hash[currChar] + 1)
     }
+    
     hash[currChar] = right;
     maxLength = Math.max(maxLength, right - left + 1)
   }

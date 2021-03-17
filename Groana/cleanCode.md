@@ -1,4 +1,9 @@
 ## Question #6 Reverse Words in a String
+Given an input string s, reverse the string word by word.
+For example, given s = "the sky is blue", return "blue is sky the".
+example 1: "the sky is blue"
+example 2: " the sky is  blue "
+example 3: " "
 
 ```Javascript
 const reverseWords = (str) => {
@@ -15,6 +20,7 @@ const reverseWords = (str) => {
 ```
 
 ## Question #8 String to Integer (atoi)
+Implement atoi to convert a string to an integer.
 
 ```Javascript
 const atoi = (str) => {
@@ -36,6 +42,7 @@ const atoi = (str) => {
 ```
 
 ## Question #9 Valid Number
+ Validate if a given string is numeric.
 
 ```Javascript
 const validNum = (str) => {
