@@ -9,16 +9,20 @@ Explanation: Subarray with maximum sum is [5, 1, 3].
 const max_sub_array_of_size_k = function(k, arr) {
   let maxSum = 0
   let windowSum = 0
-  let left = 0
-  let right = 0
-  while (right < arr.length){
-    windowSum += arr[right] 
-    if (right >= k-1){  //correct size window
-      maxSum = Math.max(windowSum,maxSum)
-      windowSum -= arr[left] 
-      left++
+
+  let windowStart = 0
+  let windowEnd = 0
+
+  //Window is valid as long as it's not beyond array
+  while (windowEnd < arr.length){
+    windowSum += arr[windowEnd] 
+    if (windowEnd >= k-1){  //window is size K
+      maxSum = Math.max(windowSum,maxSum)  //window is size K so store the sum
+      //after storing the max sum we can now shrink the window
+      windowSum -= arr[windowStart] 
+      windowStart++
     }
-    right++
+    windowEnd++
   }
   return maxSum
 };
