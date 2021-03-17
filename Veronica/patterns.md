@@ -6,6 +6,8 @@
 4. [Sliding Window](#Sliding-Window)
 5. [Merge Intervals](#Merge-Intervals)
 6. [Modified Binary Search](#Modified-Binary-Search)
+7. [Tree Breadth First Search](#Tree-Breadth-First-Search)
+7. [Tree Depth First Search](#Tree-Depth-First-Search)
 
 # Two Pointers
 ```javascript
@@ -191,4 +193,72 @@ function length_of_longest_substring(str, k) {
 ```
 # Merge Intervals
 # Modified Binary Search
+# Tree Breadth First Search
+```javascript
+/*
+WHEN TO USE: any problem that involves the traversal of a tree in a level-by-level order,
+when its likely the node you are searching for is nearby,
+when finding the minimum or maximum depth
+Approach:
+we use a QUEUE to keep track of the nodes of a level before we jump to the next level
+
+note: space complexity of the algorithm will be O(W) where 'W' is the maximum number of nodes on any level
+*/
+function traverse(root) {
+  result = [];
+  if (root === null) {
+    return result;
+  }
+
+  const queue = [root];
+  while (queue.length > 0) {
+    const levelSize = queue.length;
+    currentLevel = [];
+    for (i = 0; i < levelSize; i++) {
+      currentNode = queue.shift();
+      // add the node to the current level
+      currentLevel.push(currentNode.val);
+      // insert the children of current node in the queue
+      if (currentNode.left !== null) {
+        queue.push(currentNode.left);
+      }
+      if (currentNode.right !== null) {
+        queue.push(currentNode.right);
+      }
+    }
+    result.push(currentLevel);
+  }
+
+  return result;
+}
+
+```
+# Tree Depth First Search
+```javascript
+/*
+use recursion (or stack for iterative approach) to keep track of all prevcious (parent) nodes while traversing
+WHEN TO USE: root-to-leaf path
+Approach:
+1. start at root
+2. if current node is NOT leaf:
+ - process node (i.e. add value to total, add to sequence, substact from total, etc)
+ - make recursice calls for each child
+3. when leaf is found test if condition is met:
+yes-> stop, no -> continue
+*/
+function hasPath(root, sum) {
+  if (root === null) {
+    return false;
+  }
+
+  // if the current node is a leaf and its value is equal to the sum, we've found a path
+  if (root.val === sum && root.left === null && root.right === null) {
+    return true;
+  }
+
+  // recursively call to traverse the left and right sub-tree
+  // return true if any of the two recursive call return true
+  return hasPath(root.left, sum - root.val) || hasPath(root.right, sum - root.val);
+}
+```
 

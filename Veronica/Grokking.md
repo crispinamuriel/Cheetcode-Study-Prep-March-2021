@@ -16,6 +16,7 @@
 1. [Max sub array of size K](#Max-sub-array-of-size-K)
 2. [Smallest SubArray with Given Sum S](#Smallest-SubArray-with-Given-Sum-S)
 3. [Longest Substring With K Distinct Characters](#Longest-Substring-With-K-Distinct-Characters)
+3. [Fruit Basket](#Fruit-Basket)
 4. [Length of Longest Substring](#Length-of-Longest-Substring)
 5. [Length of Longest Substring with 1s and 0s](#Length-of-Longest-Substring-with-1s-and-0s)
 6. [Problem 1: Permutation in a String (hard)](#Permutation-in-a-String-(hard))
@@ -28,7 +29,8 @@
 2. [Ceiling of a Number (medium)](#Ceiling-of-a-Number-(medium))
 2. [Rotation Count (medium)](#Rotation-Count-(medium))
 
-
+[Tree Breadth First Search](#Tree-Breadth-First-Search)
+1. Zig Zag
 # Two Pointers
 ## Pair with Target Sum (easy)
 ```javascript
@@ -285,6 +287,32 @@ function non_repeat_substring(str) {
     maxLength = Math.max(maxLength, windowEnd - windowStart + 1);
   }
   return maxLength;
+}
+```
+## Fruit Basket
+```javascript
+function fruitBasket(arr){
+  let start = 0
+  let freqMap = {}
+  let maxLength = 0
+  for (let end = 0; end < arr.length; end++){
+    let rightChar = arr[end]
+    let leftChar = arr[start]
+    if(!freqMap[rightChar]){
+      freqMap[rightChar] = 0
+    }
+    freqMap[rightChar] =+ 1
+
+    while( Object.keys(freqMap).length > 2){
+      freqMap[leftChar] -= 1
+      if(freqMap[leftChar] === 0){
+        delete freqMap[leftChar]
+      }
+start++
+    }
+    maxLength = Math.max(maxLength, end-start+1)
+  }
+   return maxLength
 }
 ```
 ## Length of Longest Substring
@@ -544,4 +572,104 @@ function count_rotations(arr) {
   }
   return 0; // the array has not been rotated
 }
+```
+# Tree Breadth First Search
+## Zig Zag
+```javascript
+
+class TreeNode {
+  constructor(val) {
+    this.val = val;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+function traverse(root) {
+  result = [];
+  if (root === null) {
+    return result;
+  }
+
+  const queue = new Deque();
+  queue.push(root);
+  leftToRight = true;
+  while (queue.length > 0) {
+    levelSize = queue.length;
+    currentLevel = new Deque();
+    for (i = 0; i < levelSize; i++) {
+      currentNode = queue.shift();
+
+      // add the node to the current level based on the traverse direction
+      if (leftToRight) {
+        currentLevel.push(currentNode.val);
+      } else {
+        currentLevel.unshift(currentNode.val);
+      }
+
+      // insert the children of current node in the queue
+      if (currentNode.left !== null) {
+        queue.push(currentNode.left);
+      }
+      if (currentNode.right !== null) {
+        queue.push(currentNode.right);
+      }
+    }
+    result.push(currentLevel.toArray());
+    // reverse the traversal direction
+    leftToRight = !leftToRight;
+  }
+
+  return result;
+}
+```
+
+## Level Averages
+```javascript
+class TreeNode {
+
+  constructor(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+  }
+};
+
+const find_level_averages = function(root) {
+  let result = [];
+  let queue = [root]
+
+  while(queue.length > 0){
+    let currLength = queue.length
+
+    let currSum = 0
+    for(let i = 0; i < currLength; i++){
+      let currVal = queue.shift()
+      currSum += currVal.value
+      if(currVal.left !== null){
+        queue.push(currVal.left)
+      }
+      if(currVal.right !== null){
+        queue.push(currVal.right)
+      }
+    }
+    result.push(currSum/currLength)
+  }
+
+
+
+  return result;
+};
+
+
+var root = new TreeNode(12)
+root.left = new TreeNode(7)
+root.right = new TreeNode(1)
+root.left.left = new TreeNode(9)
+root.left.right = new TreeNode(2)
+root.right.left = new TreeNode(10)
+root.right.right = new TreeNode(5)
+
+console.log(`Level averages are: ${find_level_averages(root)}`)
+
 ```
