@@ -1,3 +1,9 @@
+# Problem 1 - Two Sum (optimized with hash map)
+
+Time: O(n);
+Space: O(n);
+
+```js
 var twoSum = function (nums, target) {
   let result = [];
   let map = {};
@@ -12,7 +18,78 @@ var twoSum = function (nums, target) {
   }
   return result;
 };
+```
 
+# Problem 1 - Two Sum (for a sorted array)
+
+Time: O(n);
+Space: O(1);
+
+```js
+var twoSum = function (sortedNums, target) {
+  let result = [];
+  let left = 0;
+  let right = sortedNums.length - 1;
+  let sum = sortedNums[left] + sortedNums[right];
+  while (left < right) {
+    if (sum > target) {
+      right--;
+    } else if (sum < target) {
+      left++;
+    } else {
+      result.push(left, right);
+    }
+  }
+  return result;
+};
+```
+
+# Problem 1 - Two Sum (DS design)
+
+Design and implement a TwoSum class. It should support the following operations: add and find.
+
+add(input) – Add the number input to an internal data structure.
+
+find(value) – Find if there exists any pair of numbers which sum is equal to the value.
+
+For example,
+add(1); add(3); add(5); find(4) => true; find(7) => false
+
+```js
+class TwoSum {
+  constructor(numbers = []) {
+    this.numbers = numbers;
+  }
+  add(num) {
+    //O(1) space b/c in JS arrays are dynamic
+
+    return this.numbers.push(num);
+  }
+  find(target) {
+    //O(n) space with hash map
+    //O(n) time - for loop
+
+    let map = {};
+    for (let i = 0; i < this.numbers.length; i++) {
+      let currentNum = this.numbers[i];
+      let difference = target - currentNum;
+      if (difference in map) {
+        return true;
+      } else {
+        map[currentNum] = i;
+      }
+    }
+    return false;
+  }
+}
+```
+
+# Problem 2 - Container With Most Water
+
+Time: O(n);
+Space: O(1);
+
+```js
 var maxArea = function (height) {
   let maxArea = 0;
   let left = 0;
@@ -30,7 +107,14 @@ var maxArea = function (height) {
   }
   return maxArea;
 };
+```
 
+# Problem 3 - Trap rain water
+
+Time: O(n);
+Space: O(1);
+
+```js
 var trap = function (height) {
   let totalWater = 0;
   let maxLeft = 0;
@@ -56,7 +140,14 @@ var trap = function (height) {
   }
   return totalWater;
 };
+```
 
+# Problem 4 - Backspace string compare
+
+Time: O(n + m);
+Space: O(1);
+
+```js
 var backspaceCompare = function (S, T) {
   let sPointer = S.length - 1;
   let tPointer = T.length - 1;
@@ -92,7 +183,16 @@ var backspaceCompare = function (S, T) {
   }
   return true;
 };
+```
 
+# Problem 5 - Longest substring without repeating characters
+
+Time: O(n);
+Space: O(1);
+
+## Solution 1
+
+```js
 var lengthOfLongestSubstring = function (s) {
   if (s.length <= 1) {
     return s.length;
@@ -117,7 +217,33 @@ var lengthOfLongestSubstring = function (s) {
   }
   return longest;
 };
+```
 
+## Solution 2
+
+```js
+var lengthOfLongestSubstring = function (s) {
+  let maxLength = 0;
+  let seen = {};
+  let left = 0;
+  for (let right = 0; right < s.length; right++) {
+    let currentLetter = s[right];
+    if (currentLetter in seen && seen[currentLetter] >= left) {
+      left = seen[currentLetter] + 1;
+    }
+    seen[currentLetter] = right;
+    maxLength = Math.max(maxLength, right - left + 1);
+  }
+  return maxLength;
+};
+```
+
+# Problem 6 - Almost Palindrome
+
+Time: O(n);
+Space: O(1);
+
+```js
 var validPalindrome = function (s) {
   const isValidSubPalindrome = (s, left, right) => {
     while (left < right) {
@@ -143,3 +269,32 @@ var validPalindrome = function (s) {
   }
   return true;
 };
+```
+
+# Problem 7 - Implement strStr (indexOf in JS)
+
+Time: O(n); Space: O(n);
+
+```js
+var strStr = function (haystack, needle) {
+  if (needle.length === 0) {
+    return 0;
+  }
+  if (haystack.length < needle.length) {
+    return -1;
+  }
+  if (haystack.length === needle.length && haystack === needle) {
+    return 0;
+  }
+  for (let i = 0; i <= haystack.length - needle.length; i++) {
+    let currentChar = haystack[i];
+    if (currentChar === needle[0]) {
+      let subStr = haystack.slice(i, i + needle.length);
+      if (subStr === needle) {
+        return i;
+      }
+    }
+  }
+  return -1;
+};
+```
