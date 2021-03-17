@@ -4,9 +4,10 @@
 
 Number() => turns a string into a number
 
+.slice(1) => removes the first element of a string, the second optional parameter is the ending index BEFORE which to end extraction
+
 ## LinkedList Class
 A Linked List with a cycle
-
 ```Javascript
 class Node {
   constructor(value, next = null) {
@@ -39,3 +40,29 @@ class TreeNode {
   }
 }
 ```
+
+## Heap
+```Javascript
+const Heap = require('./collections/heap'); //http://www.collectionsjs.com
+```
+
+```Javascript
+let parent = Math.floor((idx - 1)/2);
+let leftChild = (idx * 2) + 1;
+let rightChild = (idx * 2) + 2;
+```
+
+```Javascript
+const pq = new PriorityQueue();
+pq.push(15);
+pq.push(12);
+pq.push(50);
+pq.push(7);
+pq.push(40);
+pq.push(22);
+
+while(!pq.isEmpty()) {
+  console.log(pq.pop());
+}
+```
+
