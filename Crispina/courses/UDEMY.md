@@ -137,3 +137,38 @@ The key here is that the dynamic variable is the exponent and not the base
 
 We can use a hashmap to store, or remember values we've already seen.
 Hashmap Lookup is an O(1) operation.
+
+/*
+Paul Erdős was a mathematician who published over 1,500 academic papers. The collaborative distance a person is from Erdős is called an "Erdős number".
+
+For example:
+Paul Erdős has a number of 0.
+Anyone who wrote a paper with Erdős has a number of 1
+Anyone who wrote a paper with someone who has a number of 1 (and did not write a paper with Erdős himself) has a number of 2
+and so on.
+
+We have some data of papers and the people who collaborated on these papers and we want to be able to figure out, given a name, what their Erdős number is. How can we do that?
+
+Example:
+
+{
+  Piranian : 1,
+  Herzog: 1,
+  Stewart: 2
+}
+
+Paper ID    Authors
+{
+000231  :    Erdős, Piranian, Herzog
+010221  :    Herzog, Stewart
+142918  :    Stewart
+176103  :    Chan, Berne, Stewart, Asensio, Cornwell }
+
+From just this data:
+Erdős has a number of 0
+Piranian and Herzog have a number of 1 (through Erdős)
+Stewart has a number of 2 (through Herzog)
+Chan, Berne, Asensio, Cornwell have a number of 3 (through Stewart)
+*/
+
+
