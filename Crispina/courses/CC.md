@@ -1,6 +1,6 @@
 # Clean Code Readme
 
-## Two Sum
+## 1. Two Sum
 
 https://leetcode.com/problems/two-sum/
 
@@ -33,7 +33,7 @@ var twoSum = function(nums, target) {
 ```
 
 
-## Two Sum II
+## 2. Two Sum II
 https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
 
 Optimal Solution - Binary Search - O(n log n) runtime, O(1) space complexity
@@ -92,7 +92,7 @@ var twoSum = function(numbers, target) {
 };
 ```
 
-## Two Sum III
+## 3. Two Sum III
 
 implement TwoSum class
 
@@ -117,7 +117,7 @@ two.find(2);
 two.add(3);
 ```
 
-## Valid Palinddrome
+## 4. Valid Palindrome
 
  https://oj.leetcode.com/problems/valid-palindrome/
 
@@ -144,8 +144,55 @@ function isPalindrome(s) {
 
 ```
 
-## Implement strstr()
+## 5. Implement strstr()
 
 https://leetcode.com/problems/implement-strstr/
 
 Implement strstr() Returns the index of the first occurence of needle in haystack or -1 if needle is  not  part  of haystacck
+
+```
+// Implement strstr().
+// Solution:
+// O(nm) runtime, O(1) space – Brute force:
+
+const strstr = function (haystack, needle) {
+  // return the starting index of the needle
+  for (let i = 0; i <= haystack.length-needle.length; i++) {
+    // j is needle index
+    let n = 0, h = i;
+    while (haystack[h] === needle[n]) {
+      h++;
+      n++;
+      if (n === needle.length) return i;
+    }
+  }
+
+  // else return -1
+  return -1
+}
+
+console.log(strstr('ccabaer', 'aba')) // 2
+console.log(strstr('ccabaer', 'aca')) // -1
+console.log(strstr('cdabaej', 'ej')) // 5
+```
+
+## 6. Reverse Words in a String
+```
+const reverseWords = (s) => {
+  let result = '';
+  let wordEnd = s.length;
+
+  for(let i = s.length -1; i >= 0; i--) {
+      let wordBegin = s[i];
+      if(wordBegin == ' ') {
+        result += s.slice(i + 1, wordEnd) + " ";
+        wordEnd = i;
+      } else if (i === 0) {
+        result += s.slice(i, wordEnd)
+      }
+  }
+  return result;
+}
+
+console.log(reverseWords("the sky is blue"));
+```
