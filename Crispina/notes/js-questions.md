@@ -52,3 +52,8 @@ Non-primitive types
 > When JavaScript sees that the operands of the expression x + y are of different types ( one being a number type and the other being a string type ) , it converts the number type to the string type and then performs the operation. Since after conversion, both the variables are of string type, the ‘ + ‘ operator outputs the concatenated string “33” in the first example and “24Hello” in the second example.
 
 > **Note - Type coercion also takes place when using the ‘ - ‘ operator, but the difference while using ‘ - ‘ operator is that, a string is converted to a number and then subtraction takes place.
+
+4. What is an array?
+ https://gatech.box.com/s/xkbhcwknq9awz66l9jds88iz7hke3yjk
+
+5. What is the difference between Arrays and Linked List? https://gatech.box.com/s/cx0v4l7aye1roa0nolujzlf8paikxshi

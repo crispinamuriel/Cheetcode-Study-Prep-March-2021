@@ -19,30 +19,32 @@ for(windowEnd)
   }
 } // return
 */
-
-
-const findAverageSub = (arr, k) => {
+```
+## Find Max SubArray
+```
+function find_averages_of_subarrays(K, arr) {
+  // create result array returned at end to hold averages
   const result = [];
-  let windowSum = 0.0;
-  let windowStart = 0;
-
-  for(let windowEnd = 0; windowEnd < arr.length; windowEnd++) {
-    windowSum += arr[windowEnd];
-    if(windowEnd >= k - 1) {
-      result.push(windowSum / k);
-      windowSum -= arr[windowStart];
-      windowStart++;
+  // loop through from 0, to arr.length - k +1 to optimize this for loop!
+  // We do not need to go to the very end of the array only up to where the window can fit
+  for (let i = 0; i < arr.length - K + 1; i++) {
+    // find sum of next 'K' elements
+    sum = 0.0;
+    for (let j = i; j < i + K; j++) {  // loop from windowStart (which is moving above forloop) to windowEnd
+      sum += arr[j]; //add value of each element in the window to our sum
     }
+    result.push(sum / K); // calculate average
   }
+
   return result;
 }
 
 
-const result = findAverageSub([1, 3, 2, 6, -1, 4, 1, 8, 2], 5);
+const result = find_averages_of_subarrays(5, [1, 3, 2, 6, -1, 4, 1, 8, 2]);
 console.log(`Averages of subarrays of size K: ${result}`);
 ```
 
-## Find Max SubArray
+
 
 ```
 function max_sub_array_of_size_k(k, arr) {
